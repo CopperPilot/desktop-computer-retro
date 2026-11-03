@@ -1,0 +1,454 @@
+schema_version: rea-hardware/spec/v1
+product:
+  slug: mouse
+  name: Single-button rectangular optical USB mouse
+  summary: "Classic rectangular single-button wired USB-C optical desktop mouse (62x97x37 mm) in beige with a wide taupe primary click button cap, bottom 2D optical navigation sensor window, bottom firmware boot button, and north-edge USB-C port"
+  category: computer mouse
+view:
+  up: [0, 0, 1]
+  front: [0, -1, 0]
+inputs:
+  images:
+    - inputs/front.jpg
+    - inputs/three_quarter_dark.jpg
+    - inputs/three_quarter_light.jpg
+  views:
+    front: inputs/three_quarter_dark.jpg
+  prompt: inputs/prompt.md
+envelope:
+  width_mm: 62.0
+  height_mm: 97.0
+  depth_mm: 37.0
+  corner_radius_mm: 4.0
+  derivation: "Module envelope 62.0 x 97.0 x 37.0 mm specified by system contract and classic single-button rectangular mouse geometry; 4.0 mm plan-view corner radius and button proportions measured from inputs/three_quarter_dark.jpg and inputs/front.jpg."
+  front_origin_world_mm: [-5.0, 3.0, 12.4]
+fidelity:
+  out_of_scope:
+    - mechanical trackball mechanism (replaced by 2D optical navigation sensor per prompt)
+    - embossed lower-left brand logo recess
+  dimensions:
+    - {name: overall_width, kind: overall_width, value_mm: 62.0, tol_mm: 1.5, source: "prompt specification (62.0 x 97.0 x 37.0 mm)"}
+    - {name: overall_height, kind: overall_height, value_mm: 37.0, tol_mm: 1.5, source: "prompt specification (37.0 mm height along view.up [0,0,1])"}
+    - {name: overall_depth, kind: overall_depth, value_mm: 97.0, tol_mm: 1.5, source: "prompt specification (97.0 mm depth along view.front [0,-1,0])"}
+    - {name: corner_radius, kind: corner_radius, value_mm: 4.0, tol_mm: 1.5, source: "measured plan-view corner radius in inputs/three_quarter_dark.jpg"}
+    - {name: center_thickness, kind: center_thickness, value_mm: 97.0, tol_mm: 2.0, source: "measured center length along view.front [0,-1,0]"}
+    - {name: edge_thickness, kind: edge_thickness, value_mm: 95.0, tol_mm: 3.0, source: "chamfered perimeter edge length 1.5 mm inside view outline"}
+  must_match:
+    - id: F_BTN_PRIMARY
+      name: primary click button cap
+      kind: button
+      view: front
+      center_mm: [31.0, 18.0]
+      size_mm: [36.0, 22.0]
+      implement: pcb+case
+      source: photo
+      confidence: high
+      notes: "Wide taupe rectangular primary button cap near the north/front-top edge (+Y) on the top face (+Z)"
+    - id: P_MOUSE_DEV
+      name: north-edge USB-C device port
+      kind: port
+      view: top
+      center_mm: [31.0, 9.2]
+      size_mm: [9.5, 3.8]
+      implement: pcb+case
+      source: prompt
+      confidence: high
+      notes: "Rear/north-edge (+Y, facing the desktop) USB-C receptacle port P_MOUSE_DEV for system cable connection"
+    - id: F_OPTICAL_WIN
+      name: bottom optical sensor aperture window
+      kind: sensor
+      view: rear
+      center_mm: [31.0, 48.5]
+      size_mm: [8.0, 8.0]
+      implement: pcb+case
+      source: prompt
+      confidence: high
+      notes: "Centered bottom optical aperture window (-Z) under the 2D optical mouse navigation sensor"
+    - id: F_BTN_BOOT
+      name: bottom firmware boot/flash button
+      kind: button
+      view: rear
+      center_mm: [31.0, 72.0]
+      size_mm: [6.0, 6.0]
+      implement: pcb+case
+      source: prompt
+      confidence: high
+      notes: "Bottom-face (-Z) firmware boot/flash button for USB DFU bootloader entry"
+fab:
+  profile: jlcpcb
+  layers: 2
+  thickness_mm: 1.6
+  assembly_sides: [top, bottom]
+electrical:
+  mcu: "STM32F042K6T6 (LCSC C69216)"
+  power: "USB_VBUS from north-edge USB-C receptacle J1 (5.1k CC1/CC2 pull-downs R1/R2) -> F1 (BSMD0603-025-24V, 250 mA I_hold @ 25 C / 190 mA >= 150 mA @ 50 C, 550 mA I_trip, 24V PTC resettable fuse, R_min = 0.50 Ohm, R_1max = 3.0 Ohm) -> VBUS_FUSED -> Q2 (AO3401A, 30V 4A P-channel MOSFET reverse-polarity protection switch, R_DS(on) <= 60 mOhm @ V_GS = -4.5 V; Gate VBUS_Q2_G pulled to GND via 10k R15 and clamped to Source by 8.2V Zener D6 BZT52C8V2S so |V_GS| <= 8.7 V < 12 V abs max, completely blocking reverse polarity down to -24 V so VBUS_PROT, D1, and U3 stay at 0.00 V) -> VBUS_PROT (with D1 USBLC6-2SC6 pin 5 VBUS reference + C11 1 uF 50V local bypass used strictly for 8/20 us IEC 61000-4-2 transient ESD clamping, never as a DC crowbar) -> FB1 (BLM18PG121SN1D) -> VBUS_FB -> R11 (HP06W2F120KT5E, 1.2 Ohm 1% 500 mW 1206 high-power damping resistor, R_total,min = 1.79 Ohm, zeta_min = 0.895 > 0.707; R_total,typ = 2.39 Ohm, zeta_typ = 1.195 > 1.0) -> 5V_USB_MOUSE (C1 1 uF 50V, 51.1 mA active / <= 80 mA continuous max / 150 mA rail capability within F1 190 mA @ 50 C hold current) -> U3 ME6209A33M3G LDO (3V3_MOUSE, 3.3 V @ 51.1 mA active / <= 80 mA continuous max / up to 150 mA rail capability from 250 mA-rated U3 with worst-case post-reflow series drop 0.220 V @ 51.1 mA, 0.345 V @ 80 mA, 0.431 V < 0.50 V @ 100 mA, and F1 drop 0.450 V < 0.50 V @ 150 mA leaving V_IN(U3) >= 4.103 V with +0.437 V dropout headroom; decoupled by C2 4.7 uF 25V X5R bulk reservoir at U3/U4 and local C15 1 uF 50V X7R bulk bypass at U1.5 VDDA / U1.1 VDD per ST AN4080) -> U4 XC6206P202MR-G LDO (2V0_SENSOR, 2.0 V nominal core rail for PMW3901MB-TXQT VDD, C3 4.7 uF 16V); illumination LEDs D2/D3 switched via N-MOSFET Q1 (AO3400A) controlled by U1.PA1 (OPT_LED_EN) and U2 held in low-power reset via 10k pull-down R5 on SENSOR_NRESET until 2V0_SENSOR stabilizes for <0.25 mA USB 2.0 suspend current in both normal and DFU modes"
+  blocks:
+    - id: usb_power
+      purpose: "North-edge USB-C receptacle J1 (P_MOUSE_DEV) with 5.1k CC1/CC2 pull-downs (R1, R2), 250 mA I_hold (190 mA @ 50 C >= 150 mA) / 550 mA I_trip 24V PTC resettable fuse F1 (BSMD0603-025-24V, R_min = 0.50 Ohm, R_1max = 3.0 Ohm) feeding VBUS_FUSED, series P-channel MOSFET reverse-polarity protection switch Q2 (AO3401A, R_DS(on) <= 60 mOhm, Gate VBUS_Q2_G pulled to GND via 10k R15 and clamped to Source by 8.2V Zener D6 BZT52C8V2S) feeding VBUS_PROT, USBLC6-2SC6 transient ESD protection (D1) on D+/D- with pin 5 (VBUS reference) and 1 uF 50V local bypass (C11) connected on VBUS_PROT downstream of F1 and Q2 strictly for 8/20 us transient ESD clamping, series ferrite bead FB1 (BLM18PG121SN1D), and 1.2 Ohm 500 mW 1206 high-power hot-plug damping resistor R11 (HP06W2F120KT5E) feeding 5V_USB_MOUSE (C1 1 uF 50V), ME6209A33M3G 18V-VIN 250mA CMOS LDO (U3) generating 3V3_MOUSE (C2 4.7 uF 25V bulk reservoir + local C15 1 uF 50V VDDA/VDD bulk bypass), and XC6206P202MR-G 2.0V CMOS LDO (U4) generating 2V0_SENSOR (C3 4.7 uF, C10 100 nF)"
+      key_parts: [TYPE-C-31-M-12, BSMD0603-025-24V, AO3401A, BZT52C8V2S, USBLC6-2SC6, BLM18PG121SN1D, HP06W2F120KT5E, ME6209A33M3G, XC6206P202MR-G]
+      reference: "STM32F042xx Hardware Getting Started (AN4080) and USB Type-C Spec R2.1 Sink Configuration"
+    - id: mcu_hid
+      purpose: "STM32F042K6T6 USB 2.0 Full-Speed HID microcontroller running crystal-less USB via internal HSI48 + CRS (decoupled by 4.7 uF C2 bulk reservoir, local 1 uF C15 + 100 nF C7 + 10 nF C13 on VDDA/VDD, and 100 nF C5/C6 per ST AN4080), SPI1 master for optical sensor, PA1 (OPT_LED_EN) controlling illumination LED MOSFET switch Q1 for USB 2.0 suspend compliance, PB1 driving SENSOR_NRESET with 10k pull-down R5 holding U2 in reset during power-up/DFU, primary click switch SW1 on PA0 with ESD TVS D5, 1k R12, and 100nF C12 RC debounce, BOOT0 button SW2 with ESD TVS D4, 1k R8, 10k pull-down R3, and 100nF C14 hardware RC debounce on MCU_BOOT0 (1.0 ms hold time across bounce gaps; polled and debounced >= 20 ms on PB8 in running firmware to trigger NVIC_SystemReset() into System Memory USB DFU, or held during USB-C insertion for cold-boot hardware recovery), AN2606 UART RX pull-ups R9 (PA10/USART1_RX) and R10 (PA15/USART2_RX), SPI1_NCS pull-up R14, and SWD/NRST test points TP1-TP4"
+      key_parts: [STM32F042K6T6, PTS526SM15SMTR2LFS, PESD3V3L1BA, RH-5015]
+      reference: "ST AN2606 STM32 System Memory Boot Mode (USB DFU on PA11/PA12 with BOOT0 active-high)"
+    - id: optical_sensor
+      purpose: "PixArt PMW3901MB-TXQT 2D optical motion navigation sensor mounted on PCB bottom side over optical window, paired with a thick plano-convex aspheric SLA macro collimator lens window (sensor_window, n = 1.51, front desk-facing surface plano R1 = infinity, rear sensor-facing convex asphere R2 = -3.060 mm, center thickness t_c = 4.530 mm, effective focal length f = 6.000 mm / +166.7 D by thick-lens Lensmaker 1/f = (n - 1)*[1/R1 - 1/R2 + (n - 1)*t_c/(n*R1*R2)] = 0.51/3.060 = 1/6.000 mm^-1, front principal plane shift delta_1 = -f*(n - 1)*t_c/(n*R2) = t_c/n = 4.530/1.51 = 3.000 mm, Front Focal Distance FFD = f*[1 + (n - 1)*t_c/(n*R2)] = 6.000*(1 - 0.500) = 3.000 mm, conjugating physical desk working distance d_desk = FFD = 3.000 mm so s_o = d_desk + delta_1 = 6.000 mm = f => |s_i| = infinity >= 80 mm with a +/-0.453 mm / 0.905 mm total focus tolerance window d_desk in [2.581 mm, 3.486 mm], and integral upper SLA mechanical datum stop ring seated directly against the bottom substrate face of U2's COB-28 package with +/-0.05 mm SLA accuracy to bypass FDM shell stack-up tolerances), supplied by 2.0 V VDD (2V0_SENSOR) and 3.3 V VDDIO (3V3_MOUSE), held in low-power reset during power-up/DFU by 10k pull-down R5 on SENSOR_NRESET, with dual 630 nm red illumination LEDs D2/D3 + 220 Ohm resistors R6/R7 switched on their cathode return path (OPT_LED_K) by N-channel MOSFET Q1 (AO3400A) and 10k gate pull-down R13 driven from U1.PA1 (OPT_LED_EN)"
+      key_parts: [PMW3901MB-TXQT, KT-0603R, AO3400A]
+      reference: "PixArt PMW3901MB-TXQT Optical Motion Tracking Sensor Datasheet Application Circuit"
+  nets_must_connect:
+    - ["J1.A6", "U1.PA12"]
+    - ["J1.B6", "U1.PA12"]
+    - ["J1.A7", "U1.PA11"]
+    - ["J1.B7", "U1.PA11"]
+    - ["U2.SCLK", "U1.PA5"]
+    - ["U2.MISO", "U1.PA6"]
+    - ["U2.MOSI", "U1.PA7"]
+    - ["U2.NCS", "U1.PA4"]
+    - ["U2.MOTION", "U1.PB0"]
+    - ["U2.NRESET", "U1.PB1"]
+    - ["U1.PA1", "Q1.G"]
+  high_speed:
+    - name: USB2_DEV
+      kind: diff_pairs
+      nets: ["USB_DP", "USB_DM"]
+      diff_impedance_ohm: 90.0
+      tolerance_mm: 2.0
+      source: "USB 2.0 Specification Section 7.1.1 / STM32F042 Datasheet (90 ohm +/- 15% differential impedance)"
+board:
+  width_mm: 52.0
+  height_mm: 86.0
+  corner_radius_mm: 3.0
+  mounting_holes:
+    - {x_mm: 4.0, y_mm: 6.0, drill_mm: 2.2}
+    - {x_mm: 48.0, y_mm: 6.0, drill_mm: 2.2}
+    - {x_mm: 4.0, y_mm: 82.0, drill_mm: 2.2}
+    - {x_mm: 48.0, y_mm: 82.0, drill_mm: 2.2}
+  placement:
+    - ref: SW1
+      role: primary_button_switch
+      side: top
+      x_mm: 26.0
+      y_mm: 15.0
+      rot_deg: 0
+      tolerance_mm: 1.0
+      feature: F_BTN_PRIMARY
+    - ref: J1
+      role: usb_c
+      side: top
+      x_mm: 26.0
+      y_mm: 2.5
+      rot_deg: 180
+      tolerance_mm: 1.0
+      feature: P_MOUSE_DEV
+    - ref: U2
+      role: optical_sensor
+      side: bottom
+      x_mm: 26.0
+      y_mm: 45.5
+      rot_deg: 0
+      tolerance_mm: 1.0
+      feature: F_OPTICAL_WIN
+    - ref: SW2
+      role: boot_button_switch
+      side: bottom
+      x_mm: 26.0
+      y_mm: 69.0
+      rot_deg: 0
+      tolerance_mm: 1.0
+      feature: F_BTN_BOOT
+  max_component_height_mm:
+    top: 25.0
+    bottom: 4.5
+bom:
+  - refs: [U1]
+    role: mcu
+    mpn: STM32F042K6T6
+    lcsc: C69216
+    footprint: "lcsc:LQFP-32_L7.0-W7.0-P0.80-LS9.0-BL"
+    description: "ARM Cortex-M0 48MHz 32KB Flash USB 2.0 FS MCU with crystal-less USB CRS and DFU bootloader"
+  - refs: [U2]
+    role: optical_sensor
+    mpn: PMW3901MB-TXQT
+    lcsc: C43496881
+    footprint: "lcsc:COB-28_L6.0-W6.0-P0.65-TL-EP"
+    description: "PixArt 2D optical motion navigation sensor with SPI interface, paired with a thick plano-convex aspheric SLA macro collimator lens window sensor_window (n = 1.51, R1 = infinity, R2 = -3.060 mm, t_c = 4.530 mm, EFL f = 6.000 mm / +166.7 D, front principal plane shift delta_1 = t_c/n = 3.000 mm, Front Focal Distance FFD = 3.000 mm, conjugating physical desk working distance d_desk = FFD = 3.000 mm -> s_o = 6.000 mm = f => |s_i| = infinity >= 80 mm with a +/-0.453 mm / 0.905 mm total focus tolerance window d_desk in [2.581 mm, 3.486 mm], and integral upper SLA mechanical datum stop ring seated directly against U2's COB-28 bottom face)"
+  - refs: [U3]
+    role: ldo_3v3
+    mpn: ME6209A33M3G
+    lcsc: C83508
+    footprint: "lcsc:SOT-23-3_L2.9-W1.6-P1.90-LS2.8-BR"
+    description: "18V-VIN 250mA 3.3V +/-2% ceramic-stable CMOS low-dropout linear regulator for 3V3_MOUSE rail (3 uA Iq)"
+  - refs: [U4]
+    role: ldo_2v0
+    mpn: XC6206P202MR-G
+    lcsc: C2891260
+    footprint: "lcsc:SOT-23-3_L2.9-W1.6-P1.90-LS2.8-BR"
+    description: "2.00V +/-2% (1.96-2.04V) 120mA ceramic-stable CMOS low-dropout linear regulator for PMW3901MB-TXQT VDD core rail 2V0_SENSOR"
+  - refs: [Q1]
+    role: led_switch_mosfet
+    mpn: AO3400A
+    lcsc: C20917
+    footprint: "lcsc:SOT-23-3_L2.9-W1.3-P1.90-LS2.4-BR"
+    description: "30V 5.7A N-channel enhancement MOSFET (R_DS(on) <= 48 mOhm @ V_GS = 2.5V) switching D2/D3 cathode return net OPT_LED_K to GND under U1.PA1 (OPT_LED_EN) control for USB 2.0 suspend compliance"
+  - refs: [Q2]
+    role: vbus_rpp_pmos
+    mpn: AO3401A
+    lcsc: C15127
+    footprint: "lcsc:SOT-23_L2.9-W1.3-P1.90-LS2.4-BR"
+    description: "30V 4A P-channel enhancement MOSFET (R_DS(on) <= 60 mOhm @ V_GS = -4.5V) in series between VBUS_FUSED (Drain) and VBUS_PROT (Source) providing reverse-polarity protection ahead of D1 and U3 (Gate VBUS_Q2_G pulled to GND by R15 and clamped to Source by 8.2V Zener D6 so |V_GS| <= 8.7V < 12V abs max)"
+  - refs: [D1]
+    role: usb_esd
+    mpn: USBLC6-2SC6
+    lcsc: C2687116
+    footprint: "lcsc:SOT-23-6_L2.9-W1.6-P0.95-LS2.8-BL"
+    description: "USB 2.0 D+/D- low-capacitance 8/20 us IEC 61000-4-2 transient ESD protection array with pin 5 (VBUS reference) and C11 (1 uF 50V) connected on VBUS_PROT downstream of F1 and reverse-polarity P-MOSFET Q2 (used strictly for transient ESD clamping, never as a DC crowbar)"
+  - refs: [D6]
+    role: vbus_gate_zener
+    mpn: BZT52C8V2S
+    lcsc: C22375294
+    footprint: "lcsc:SOD-323_L1.7-W1.3-LS2.6-RD-1"
+    description: "8.2V (7.7-8.7V) 200mW SOD-323 Zener diode between Q2 Source (VBUS_PROT, Cathode) and Q2 Gate (VBUS_Q2_G, Anode) clamping |V_GS| <= 8.7V < 12V abs max on high-voltage transients (I_R <= 700 nA @ 5V)"
+  - refs: [D2, D3]
+    role: illumination_led
+    mpn: KT-0603R
+    lcsc: C2286
+    footprint: "lcsc:LED-SMD_L1.6-W0.8-R-RD"
+    description: "630nm AlGaInP red 0603 SMD LEDs on B.Cu flanking the optical aperture for surface tracking illumination, switched by Q1 during USB suspend"
+  - refs: [D4, D5]
+    role: switch_esd_tvs
+    mpn: PESD3V3L1BA
+    lcsc: C2687129
+    footprint: "lcsc:SOD-323_L1.7-W1.3-LS2.6-BI"
+    description: "Bidirectional SOD-323 ESD protection TVS diodes on user-accessible tactile switch nets BOOT0_SW (D4) and BTN_PRIMARY_SW (D5)"
+  - refs: [F1]
+    role: vbus_ptc_fuse
+    mpn: BSMD0603-025-24V
+    lcsc: C7543776
+    footprint: "lcsc:F0603"
+    description: "250 mA I_hold @ 25 C (190 mA @ 50 C >= 150 mA), 550 mA I_trip, 24 V, 40 A, 500 mW 0603 PTC resettable fuse (R_min = 0.50 Ohm, R_1max = 3.0 Ohm) between USB_VBUS and VBUS_FUSED supporting up to 150 mA continuous load with <0.50 V series drop"
+  - refs: [FB1]
+    role: vbus_ferrite_bead
+    mpn: BLM18PG121SN1D
+    lcsc: C14709
+    footprint: "lcsc:L0603"
+    description: "120 Ohm @ 100 MHz, 2.0 A, 50 mOhm DCR 0603 ferrite bead in series between VBUS_PROT and VBUS_FB"
+  - refs: [J1]
+    role: usb_c
+    mpn: TYPE-C-31-M-12
+    lcsc: C165948
+    footprint: "lcsc:USB-C_SMD-TYPE-C-31-M-12_1"
+    description: "16-pin USB Type-C receptacle on north edge (+Y)"
+  - refs: [SW1, SW2]
+    role: tactile_switch
+    mpn: PTS526SM15SMTR2LFS
+    lcsc: C2689538
+    footprint: "lcsc:SW-SMD_4P-L5.2-W5.2-P3.70-LS6.4"
+    description: "Top-actuated 5.2x5.2x1.5mm SMD tactile switches for primary click button (SW1) and bottom DFU boot button (SW2)"
+  - refs: [TP1, TP2, TP3, TP4]
+    role: test_point
+    mpn: RH-5015
+    lcsc: C5199798
+    footprint: "lcsc:SMD_RH-5015"
+    description: "SMD test points exposing SWDIO (TP1), SWCLK (TP2), MCU_NRST (TP3), and GND (TP4) for post-assembly SWD debug and recovery"
+  - refs: [R1, R2]
+    role: usb_cc_pulldown
+    mpn: 0603WAF5101T5E
+    lcsc: C23186
+    footprint: "lcsc:R0603"
+    description: "5.1kOhm 1% 0603 resistors for USB-C CC1 and CC2 sink pull-downs"
+  - refs: [R3, R4, R5, R9, R10, R13, R14, R15]
+    role: pull_resistor
+    mpn: 0603WAF1002T5E
+    lcsc: C25804
+    footprint: "lcsc:R0603"
+    description: "10kOhm 1% 0603 resistors for BOOT0 pull-down (R3), SW1 pull-up (R4), SENSOR_NRESET pull-down holding U2 in reset during power-up/DFU (R5), AN2606 UART RX pull-ups on PA10/USART1_RX (R9) and PA15/USART2_RX (R10), Q1 gate pull-down on OPT_LED_EN (R13), SPI1_NCS pull-up (R14), and Q2 gate pull-down on VBUS_Q2_G (R15)"
+  - refs: [R6, R7]
+    role: led_current_resistor
+    mpn: 0603WAF2200T5E
+    lcsc: C22962
+    footprint: "lcsc:R0603"
+    description: "220 Ohm 1% 0603 current-limiting resistors setting ~6.36 mA per illumination LED branch (D2, D3) from 3V3_MOUSE"
+  - refs: [R8, R12]
+    role: switch_series_resistor
+    mpn: 0603WAF1001T5E
+    lcsc: C21190
+    footprint: "lcsc:R0603"
+    description: "1kOhm 1% 0603 series current-limiting and RC debounce resistors on SW2 (R8 -> MCU_BOOT0) and SW1 (R12 -> BTN_PRIMARY)"
+  - refs: [R11]
+    role: vbus_damping_resistor
+    mpn: HP06W2F120KT5E
+    lcsc: C414958
+    footprint: "lcsc:R1206"
+    description: "1.2 Ohm 1% 500 mW (0.50 W) 1206 high-power thick-film damping resistor between VBUS_FB and 5V_USB_MOUSE (continuous rating 645 mA > 0.55 A F1 I_trip; P = 0.363 W <= 0.50 W at F1 I_trip = 0.55 A, 0.30 W <= 0.50 W at 0.5 A, 3.13 mW at 51.1 mA active; R_total,min = 1.79 Ohm gives zeta_min = 0.895 > 0.707 and R_total,typ = 2.39 Ohm gives zeta_typ = 1.195 > 1.0)"
+  - refs: [C1, C11, C15]
+    role: bulk_bypass_cap_1uf
+    mpn: CC0603KRX7R9BB105
+    lcsc: C559769
+    footprint: "lcsc:C0603"
+    description: "1uF 50V X7R 0603 ceramic bypass capacitors on VBUS_PROT at D1 pin 5 (C11, meeting USB 2.0 C_RPB >= 1 uF and ST USBLC6-2SC6 App Note Fig 6), filtered 5V_USB_MOUSE input of U3 (C1, total 5V C_RPB = 2.0 uF in [1, 10] uF), and local ST AN4080 Section 3.1.2 VDDA/VDD bulk bypass near U1.5/U1.1 on 3V3_MOUSE (C15)"
+  - refs: [C2]
+    role: ldo_3v3_out_cap
+    mpn: CL10A475KA8NQNC
+    lcsc: C69335
+    footprint: "lcsc:C0603"
+    description: "4.7uF 25V X5R 0603 bulk reservoir capacitor on 3V3_MOUSE rail at U3 output / U4 input per ST AN4080 Section 3.1.1 (maintaining total rail-weighted hot-plug charge at 48.22 uC <= 50 uC)"
+  - refs: [C3, C4]
+    role: sensor_bulk_cap
+    mpn: CL10A475KO8NNNC
+    lcsc: C19666
+    footprint: "lcsc:C0603"
+    description: "4.7uF 16V X5R 0603 decoupling capacitors on 2V0_SENSOR (C3) and PMW3901MB-TXQT internal regulator pin SENSOR_VREG (C4)"
+  - refs: [C5, C6, C7, C8, C9, C10, C12, C14]
+    role: decoupling_cap
+    mpn: CC0603KRX7R9BB104
+    lcsc: C14663
+    footprint: "lcsc:C0603"
+    description: "100nF 50V X7R 0603 ceramic capacitors for U1 VDD/VDDIO2/VDDA decoupling (C5-C7), MCU_NRST filter (C8), U2 VDDIO/VDD decoupling (C9, C10), SW1 RC debounce on BTN_PRIMARY (C12), and SW2 hardware RC debounce on MCU_BOOT0 (C14, 1.0 ms hold time across bounce gaps)"
+  - refs: [C13]
+    role: vdda_hf_decoupling_cap
+    mpn: CC0603KRX7R9BB103
+    lcsc: C100042
+    footprint: "lcsc:C0603"
+    description: "10nF 50V X7R 0603 high-frequency analog/oscillator decoupling capacitor on U1 VDDA (pin 5) in parallel with C7 (100nF) per ST AN4080 Section 3.1.2"
+purchased: []
+enclosure:
+  process: fdm
+  wall_mm: 2.0
+  clearance_floor_mm: 0.2
+  parts:
+    - id: bottom_shell
+      file: case/out/bottom_shell.stl
+      role: shell
+      process: fdm
+      material: PLA
+      finish: matte textured
+      color: "#e6dec8"
+      description: "Beige lower chassis shell with PCB support bosses, bottom optical sensor aperture opening, and bottom boot button opening"
+    - id: sensor_window
+      file: case/out/sensor_window.stl
+      role: window
+      process: sla
+      material: clear resin
+      finish: optically clear polished
+      color: "#d8eef5"
+      description: "Optically clear polished thick plano-convex aspheric SLA macro collimator lens window (n = 1.51, front desk-facing surface plano R1 = infinity, rear sensor-facing convex asphere R2 = -3.060 mm, center thickness t_c = 4.530 mm, EFL f = 6.000 mm / +166.7 D, front principal plane shift delta_1 = t_c/n = 3.000 mm, Front Focal Distance FFD = 3.000 mm) with integral upper SLA mechanical datum stop ring seated directly against the bottom substrate face of U2's COB-28 package (+/-0.05 mm SLA accuracy, bypassing FDM housing stack-up tolerances), collimating desk texture at d_desk = FFD = 3.000 mm (s_o = 6.000 mm = f => |s_i| = infinity >= 80 mm) across a +/-0.453 mm (0.905 mm total, d_desk in [2.581 mm, 3.486 mm]) focus tolerance window"
+    - id: boot_button
+      file: case/out/boot_button.stl
+      role: button
+      process: fdm
+      material: PLA
+      finish: matte
+      color: "#b5a995"
+      description: "Bottom-accessible firmware boot/flash button cap retained in bottom shell beneath SW2"
+    - id: primary_button
+      file: case/out/primary_button.stl
+      role: button
+      process: fdm
+      material: PLA
+      finish: matte textured
+      color: "#b5a995"
+      description: "Wide taupe rectangular primary click button cap with internal actuator post pressing SW1"
+    - id: top_shell
+      file: case/out/top_shell.stl
+      role: shell
+      process: fdm
+      material: PLA
+      finish: matte textured
+      color: "#e6dec8"
+      description: "Beige rectangular upper housing shell with chamfered perimeter, rectangular primary button opening, and north-edge USB-C port opening"
+assembly:
+  - part: bottom_shell
+    travel_mm: 0
+    held_by: base
+    note: "Base lower shell resting on desk"
+  - part: sensor_window
+    direction: [0, 0, -1]
+    travel_mm: 15
+    may_touch: [bottom_shell]
+    held_by: captured
+    note: "Optical window drops into stepped recess in bottom_shell before PCBA installation"
+  - part: boot_button
+    direction: [0, 0, -1]
+    travel_mm: 15
+    may_touch: [bottom_shell]
+    held_by: captured
+    note: "Flanged boot button cap drops into bottom_shell guide hole from inside before PCBA captures its flange"
+  - part: pcba
+    direction: [0, 0, -1]
+    travel_mm: 20
+    may_touch: [bottom_shell, boot_button]
+    held_by: captured
+    note: "PCBA lowers onto bottom_shell standoffs; bottom switch SW2 rests above boot_button and optical sensor U2 aligns over sensor_window"
+  - part: primary_button
+    direction: [0, 0, -1]
+    travel_mm: 35
+    may_touch: [pcba, bottom_shell]
+    held_by: captured
+    note: "Primary click button cap lowers onto SW1 on top of PCBA with retention flange captured by top_shell"
+  - part: top_shell
+    direction: [0, 0, -1]
+    travel_mm: 45
+    may_touch: [bottom_shell, pcba, primary_button]
+    held_by: snap
+    held_with: [bottom_shell]
+    note: "Upper shell lowers over primary_button and PCBA and snaps onto bottom_shell perimeter lip"
+actuators:
+  - id: A_PRIMARY_CLICK
+    feature: F_BTN_PRIMARY
+    case_part: primary_button
+    target: {part: pcba, ref: SW1}
+    kind: push
+    element_axis: [0, 0, -1]
+    travel_mm: 0.25
+    source: "C&K PTS526SM15SMTR2LFS datasheet: top-actuated SMD tactile switch, 0.25 mm travel"
+  - id: A_BOOT_BTN
+    feature: F_BTN_BOOT
+    case_part: boot_button
+    target: {part: pcba, ref: SW2}
+    kind: push
+    element_axis: [0, 0, 1]
+    travel_mm: 0.25
+    source: "C&K PTS526SM15SMTR2LFS datasheet: bottom-mounted SMD tactile switch actuated upward (+Z), 0.25 mm travel"
+  - id: A_OPTICAL_SENSOR
+    feature: F_OPTICAL_WIN
+    case_part: sensor_window
+    target: {part: pcba, ref: U2}
+    kind: optical
+    element_axis: [0, 0, -1]
+    range_mm: 10.0
+    source: "PixArt PMW3901MB-TXQT datasheet + thick plano-convex aspheric SLA macro collimator lens window sensor_window (n = 1.51, R1 = infinity, R2 = -3.060 mm, t_c = 4.530 mm, EFL f = 6.000 mm / +166.7 D, delta_1 = 3.000 mm, FFD = 3.000 mm, d_desk in [2.581 mm, 3.486 mm] = +/-0.453 mm focus window) with direct upper SLA mechanical datum stops against U2's COB-28 bottom face"
+requirements:
+  - id: R1
+    text: "Classic rectangular single-button wired desktop mouse (62x97x37 mm) in beige with a wide taupe rectangular primary button cap near the front-top edge"
+    how_met: "Beige FDM top_shell and bottom_shell (#e6dec8) matching 62.0 x 97.0 x 37.0 mm envelope with 36x22 mm taupe (#b5a995) primary_button cap near north (+Y) edge"
+    quantity: "62.0 x 97.0 x 37.0 mm, 1 primary button"
+  - id: R2
+    text: "Build with view: {up: [0,0,1], front: [0,-1,0]}"
+    how_met: "spec.view set to {up: [0, 0, 1], front: [0, -1, 0]} so mouse rests flat face-up on desk with north edge at +Y"
+    quantity: "up [0,0,1], front [0,-1,0]"
+  - id: R3
+    text: "2-layer PCB with a top-actuated mechanical switch under the primary click button (push actuator)"
+    how_met: "2-layer 1.6 mm PCB with top-mounted PTS526SM15SMTR2LFS tactile switch SW1 under primary_button cap (push actuator A_PRIMARY_CLICK along [0,0,-1])"
+    quantity: "2 copper layers, 0.25 mm switch travel"
+  - id: R4
+    text: "2D optical mouse navigation sensor centered over a bottom optical aperture window (optical actuator)"
+    how_met: "Bottom-mounted PixArt PMW3901MB-TXQT 2D optical navigation sensor U2 centered over bottom thick plano-convex aspheric SLA macro collimator lens window sensor_window (n = 1.51, R1 = infinity, R2 = -3.060 mm, t_c = 4.530 mm, EFL f = 6.000 mm / +166.7 D, FFD = 3.000 mm, +/-0.453 mm focus window, with direct SLA mechanical datum stops against U2's COB-28 bottom face)"
+    quantity: "1 SPI 2D optical sensor"
+  - id: R5
+    text: "USB HID MCU with 3.3 V LDO and firmware boot/flash button on the bottom face"
+    how_met: "STM32F042K6T6 USB 2.0 FS HID MCU powered by ME6209A33M3G 3.3 V CMOS LDO (3V3_MOUSE, 51.1 mA active / <= 80 mA continuous max / up to 150 mA rail capability from 250 mA-rated U3, decoupled by 4.7 uF C2 bulk reservoir and local 1 uF C15 VDDA/VDD bypass) with bottom-mounted PTS526SM15SMTR2LFS switch SW2 on BOOT0 (hardware RC debounced by 1k R8 + 10k R3 + 100nF C14; polled on PB8 in running firmware for live DFU reset or held at USB plug-in for cold-boot DFU recovery)"
+    quantity: "3.3 V @ 51.1 mA active (<= 80 mA continuous max, 150 mA rail capability; 250 mA LDO rating), 1 bottom boot button"
+  - id: R6
+    text: "Rear/north-edge (+Y, facing the desktop) USB-C receptacle (port P_MOUSE_DEV) with 5.1k CC pull-downs and 90-ohm differential USB D+/D-"
+    how_met: "TYPE-C-31-M-12 USB-C receptacle J1 at north PCB edge (rot_deg 180, facing +Y) tied to port feature P_MOUSE_DEV, with 5.1k CC1/CC2 pull-downs R1/R2, 250 mA I_hold (190 mA @ 50 C >= 150 mA) PTC fuse F1 (BSMD0603-025-24V) + series P-MOSFET reverse-polarity switch Q2 (AO3401A + 8.2V Zener D6 + 10k R15) feeding VBUS_PROT (transient ESD reference D1.5 + C11), and 90-ohm differential pair USB_DP/USB_DM"
+    quantity: "5.0 V @ 51.1 mA active (<= 80 mA continuous max, 150 mA rail capability within 250 mA F1 I_hold; 0.5 A USB port capability), 90 ohm diff pair"
+decisions:
+  - question: "Which 2D optical navigation sensor, optical relay, and supply configuration?"
+    choice: "PixArt PMW3901MB-TXQT (LCSC C43496881) paired with a thick plano-convex aspheric SLA macro collimator lens window (sensor_window: n = 1.51, R1 = infinity, R2 = -3.060 mm, t_c = 4.530 mm, EFL f = 6.000 mm / +166.7 D, front principal plane shift delta_1 = t_c/n = 3.000 mm, Front Focal Distance FFD = 3.000 mm, focus window d_desk in [2.581 mm, 3.486 mm] = +/-0.453 mm) and direct SLA mechanical datum stops against U2's COB-28 bottom face, supplied by 3.3 V VDDIO (from U3 ME6209A33M3G) and 2.0 V VDD (from U4 XC6206P202MR-G on 2V0_SENSOR) with 10k pull-down R5 on SENSOR_NRESET"
+    reason: "PMW3901MB-TXQT is the only optical navigation sensor in stock on LCSC (165 pcs); using a thick plano-convex aspheric collimator (R1 = infinity, R2 = -3.060 mm, t_c = 4.530 mm, n = 1.51) yields exact thick-lens EFL f = 6.000 mm and FFD = 3.000 mm (delta_1 = 3.000 mm), expanding the |s_i| >= 80 mm focus tolerance window by 4.1x to +/-0.453 mm (0.905 mm total, d_desk in [2.581 mm, 3.486 mm]) while direct SLA datum stops against U2's COB-28 package (+/-0.05 mm SLA accuracy) isolate the optical path from FDM shell stack-up tolerances."
+  - question: "Power budget across USB_VBUS, 5V_USB_MOUSE, 3V3_MOUSE, and 2V0_SENSOR in active and USB 2.0 suspend modes?"
+    choice: "Active: 51.1 mA nominal / <= 80 mA continuous max / 150 mA rail capability (18 mA U1 STM32F042K6T6 + 15 mA U2 VDD on 2V0_SENSOR + 5 mA U2 VDDIO on 3V3_MOUSE + 12.73 mA D2/D3 illumination LEDs + 0.33 mA R5/R13 pull-downs) through F1 (BSMD0603-025-24V, I_hold = 250 mA @ 25 C / 190 mA >= 150 mA @ 50 C, R_1max = 3.0 Ohm), Q2 (AO3401A P-MOSFET reverse-polarity switch, R_DS(on) <= 60 mOhm, Gate clamped by 8.2V Zener D6 + 10k R15), U3 ME6209A33M3G (250 mA rated, 3 uA Iq, >= +0.437 V dropout headroom even at 150 mA and post-reflow R_1max = 3.0 Ohm) and U4 XC6206P202MR-G (120 mA rated, 1 uA Iq); USB 2.0 Suspend & DFU Suspend: ~0.24 mA (<= 2.5 mA limit) with D2/D3 shut off via N-MOSFET Q1 (AO3400A, R13 pull-down) and U2 held in reset via R5 (10k pull-down on SENSOR_NRESET)"
+    reason: "Series P-MOSFET Q2 (AO3401A) ahead of VBUS_PROT blocks reverse polarity completely (0.00 V on D1 and U3) so D1 (USBLC6-2SC6) serves strictly as an 8/20 us transient ESD clamp rather than a DC crowbar; 250 mA PPTC fuse F1 (BSMD0603-025-24V, I_hold(50 C) = 190 mA >= 150 mA, R_1max = 3.0 Ohm) keeps series voltage drop <0.50 V at 100-150 mA; and pulling both OPT_LED_EN (R13) and SENSOR_NRESET (R5) to GND ensures <0.25 mA suspend current during reset, DFU bootloader, and USB suspend."
+  - question: "MCU and firmware flashing mechanism?"
+    choice: "STM32F042K6T6 (LCSC C69216) using factory System Memory USB DFU bootloader triggered by bottom BOOT0 button SW2 with hardware RC debounce C14 (100 nF on MCU_BOOT0, 1.0 ms hold time across bounce gaps; live firmware polling on PB8 debounces >= 20 ms before triggering NVIC_SystemReset() into DFU; cold-boot hardware recovery holds SW2 during USB-C insertion)"
+    reason: "STM32F042K6T6 includes crystal-less USB 2.0 FS with HSI48 + Clock Recovery System (CRS) and native ROM USB DFU bootloader on PA11/PA12 when BOOT0 is latched high on the 4th rising edge of SYSCLK after POR (held stable across contact bounce by C14 = 100 nF with R3 = 10k and R8 = 1k)."

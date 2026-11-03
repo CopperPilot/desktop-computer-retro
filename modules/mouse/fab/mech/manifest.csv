@@ -1,0 +1,6 @@
+part,files,process,material,finish,qty,bbox_mm,volume_cm3,mass_g,service
+bottom_shell,bottom_shell.stl,fdm,PLA,matte textured,1,62.0x97.0x24.6,23.92,29.7,JLC3DP FDM (PLA/PETG/ABS)
+sensor_window,sensor_window.stl,sla,clear resin,optically clear polished,1,9.2x15.6x20.9,0.68,0.8,JLC3DP SLA resin
+boot_button,boot_button.stl,fdm,PLA,matte,1,7.8x7.8x22.7,0.37,0.5,JLC3DP FDM (PLA/PETG/ABS)
+primary_button,primary_button.stl,fdm,PLA,matte textured,1,37.8x23.8x9.0,4.26,5.3,JLC3DP FDM (PLA/PETG/ABS)
+top_shell,top_shell.stl,fdm,PLA,matte textured,1,62.0x97.0x31.2,27.61,34.2,JLC3DP FDM (PLA/PETG/ABS)

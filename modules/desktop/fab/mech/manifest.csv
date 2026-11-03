@@ -1,0 +1,9 @@
+part,files,process,material,finish,qty,bbox_mm,volume_cm3,mass_g,service
+rear_bucket,rear_bucket.stl,mjf,PA12 nylon,matte textured warm beige,1,246.0x299.2x325.3,1252.81,1265.3,JLC3DP MJF PA12
+rf_vent_window,rf_vent_window.stl,fdm,polycarbonate,matte warm grey RF-transparent louvers,1,67.0x25.0x2.9,3.90,4.7,JLC3DP FDM (PLA/PETG/ABS)
+rear_buttons,rear_buttons.stl,fdm,ABS,matte dark grey,1,48.6x8.6x7.8,0.50,0.5,JLC3DP FDM (PLA/PETG/ABS)
+brightness_wheel,brightness_wheel.stl,fdm,ABS,knurled warm grey,1,40.0x40.0x23.0,12.29,12.8,JLC3DP FDM (PLA/PETG/ABS)
+display_window,display_window.stl display_window.step,cnc,PMMA acrylic,optically clear with dark border,1,166.6x126.0x2.0,41.96,50.4,JLCCNC 3-axis milling
+front_bezel,front_bezel.stl,mjf,PA12 nylon,matte textured warm beige,1,247.0x300.0x24.5,221.99,224.2,JLC3DP MJF PA12
+cm5_module,,purchased,SC1592 (CM5108032),,1,55.0x40.0x4.6,,,https://www.raspberrypi.com/products/compute-module-5/
+lcd_panel,,purchased,KD080D10-22MIPI-A1,,1,174.0x136.0x5.5,,,https://www.panelook.com/modelsearch.php?panel_size_inch=800&resolution_pixels=1024768&signal_type_category=90

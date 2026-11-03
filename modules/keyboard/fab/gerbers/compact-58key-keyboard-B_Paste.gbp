@@ -1,0 +1,23 @@
+%TF.GenerationSoftware,KiCad,Pcbnew,10.0.4-10.0.4~ubuntu22.04.1*%
+%TF.CreationDate,2026-11-03T23:33:29+05:30*%
+%TF.ProjectId,compact-58key-keyboard,636f6d70-6163-4742-9d35-386b65792d6b,rev?*%
+%TF.SameCoordinates,Original*%
+%TF.FileFunction,Paste,Bot*%
+%TF.FilePolarity,Positive*%
+%FSLAX46Y46*%
+G04 Gerber Fmt 4.6, Leading zero omitted, Abs format (unit mm)*
+G04 Created by KiCad (PCBNEW 10.0.4-10.0.4~ubuntu22.04.1) date 2026-11-03 23:33:29*
+%MOMM*%
+%LPD*%
+G01*
+G04 APERTURE LIST*
+%ADD10R,1.000000X0.750000*%
+G04 APERTURE END LIST*
+D10*
+%TO.C,SW59*%
+X152000000Y-19850000D03*
+X158000000Y-19850000D03*
+X152000000Y-16150000D03*
+X158000000Y-16150000D03*
+%TD*%
+M02*

@@ -1,0 +1,490 @@
+schema_version: rea-hardware/spec/v1
+product:
+  slug: compact-cm5-desktop
+  name: Compact all-in-one CM5 desktop computer
+  summary: "1984-style compact vertical all-in-one desktop computer with 8.0-inch 4:3 IPS MIPI-DSI LCD, Raspberry Pi CM5 carrier board, autonomous 15 V USB-PD power input, USB-C host/service ports, HDMI output, and front SD/brightness sub-board"
+  category: desktop computer
+inputs:
+  images:
+    - inputs/front.jpg
+    - inputs/three_quarter_dark.jpg
+    - inputs/three_quarter_light.jpg
+  views:
+    front: inputs/front.jpg
+  prompt: inputs/prompt.md
+view:
+  up: [0, 1, 0]
+  front: [0, 0, 1]
+envelope:
+  width_mm: 247.0
+  height_mm: 300.0
+  depth_mm: 346.0
+  corner_radius_mm: 8.0
+  derivation: "Published 1984 compact all-in-one desktop enclosure envelope 247.0 x 300.0 x 346.0 mm (9.72 x 11.81 x 13.62 in) per system module contract and front.jpg scaling (247.0 mm width)"
+  front_origin_world_mm: [-33.5, 20.0, 336.5]
+fidelity:
+  out_of_scope:
+    - external floppy disk drive mechanism
+    - internal CRT high-voltage analog sweep circuitry
+    - coiled telephone-style keyboard cord
+  dimensions:
+    - {name: overall_width, kind: overall_width, value_mm: 247.0, tol_mm: 2.0, source: "Module contract and published 1984 compact desktop width (9.72 in = 247.0 mm)"}
+    - {name: overall_height, kind: overall_height, value_mm: 300.0, tol_mm: 2.0, source: "Module contract envelope 247.0 x 300.0 x 346.0 mm"}
+    - {name: overall_depth, kind: overall_depth, value_mm: 346.0, tol_mm: 2.0, source: "Module contract envelope 247.0 x 300.0 x 346.0 mm"}
+    - {name: bezel, kind: bezel, value_mm: 42.2, tol_mm: 5.0, source: "Measured from inputs/front.jpg: (247.0 - 162.6)/2 = 42.2 mm side bezel around 8.0-inch 4:3 screen"}
+  must_match:
+    - id: F_DISP
+      name: Recessed 8.0-inch 4:3 IPS display window
+      kind: display
+      view: front
+      center_mm: [123.5, 108.0]
+      size_mm: [162.6, 122.0]
+      implement: case
+      source: photo
+      confidence: high
+      notes: "8.0-inch 4:3 IPS LCD active area (162.6 x 122.0 mm) seated behind the recessed front bezel window"
+    - id: F_SD
+      name: Front horizontal media SD card slot opening
+      kind: port
+      view: front
+      center_mm: [152.0, 236.0]
+      size_mm: [26.0, 4.5]
+      implement: case
+      source: photo
+      confidence: high
+      notes: "Push-push SD card socket J_SD on front_io sub-board behind the lower-right horizontal media slot recess"
+    - id: F_BRIGHT
+      name: Chin overhang brightness rotary dial wheel
+      kind: switch
+      view: front
+      center_mm: [48.0, 268.0]
+      size_mm: [18.0, 8.0]
+      implement: case
+      source: photo
+      confidence: high
+      notes: "Rotary encoder thumbwheel SW_ENC on front_io sub-board protruding under the lower-left chin overhang"
+    - id: P_PWR
+      name: Rear USB-C PD 15V power input port
+      kind: port
+      view: rear
+      center_mm: [57.5, 245.0]
+      size_mm: [9.5, 4.8]
+      implement: pcb+case
+      source: prompt
+      confidence: high
+      notes: "15 V / 3 A (45 W) USB-C PD power input receptacle J_PWR on rear carrier PCB"
+    - id: P_KB
+      name: Rear keyboard USB-C host port
+      kind: port
+      view: rear
+      center_mm: [85.5, 245.0]
+      size_mm: [9.5, 4.8]
+      implement: pcb+case
+      source: prompt
+      confidence: high
+      notes: "USB-C host receptacle J_KB (5V_USB_KB + RP1 USB3-0 D+/D-) for external keyboard"
+    - id: P_MOUSE
+      name: Rear mouse USB-C host port
+      kind: port
+      view: rear
+      center_mm: [113.5, 245.0]
+      size_mm: [9.5, 4.8]
+      implement: pcb+case
+      source: prompt
+      confidence: high
+      notes: "USB-C host receptacle J_MOUSE (5V_USB_MOUSE + RP1 USB3-1 D+/D-) for external mouse"
+    - id: P_BOOT
+      name: Rear service USB-C 2.0 OTG flashing port
+      kind: port
+      view: rear
+      center_mm: [141.5, 245.0]
+      size_mm: [9.5, 4.8]
+      implement: pcb+case
+      source: prompt
+      confidence: high
+      notes: "Direct service USB-C 2.0 OTG flashing receptacle J_BOOT wired straight to CM5 USB2_P/N (pins 105/103)"
+    - id: F_BOOT_BTN
+      name: Rear nRPIBOOT recovery button
+      kind: button
+      view: rear
+      center_mm: [161.5, 245.0]
+      size_mm: [6.0, 6.0]
+      implement: pcb+case
+      source: prompt
+      confidence: high
+      notes: "Tactile pushbutton SW_BOOT pulling CM5 nRPIBOOT (pin 93) low at power-up for rpiboot eMMC flashing"
+    - id: P_HDMI
+      name: Rear HDMI video output port
+      kind: port
+      view: rear
+      center_mm: [181.5, 245.0]
+      size_mm: [15.5, 6.8]
+      implement: pcb+case
+      source: prompt
+      confidence: high
+      notes: "Full-size HDMI-A receptacle J_HDMI wired to CM5 HDMI0"
+    - id: F_PWR_BTN
+      name: Rear power button
+      kind: button
+      view: rear
+      center_mm: [201.5, 245.0]
+      size_mm: [6.0, 6.0]
+      implement: pcb+case
+      source: prompt
+      confidence: high
+      notes: "Momentary power pushbutton SW_PWR wired to CM5 PWR_BUT (pin 92)"
+    - id: F_RF_VENT
+      name: Rear/top RF-transparent antenna vent window
+      kind: window
+      view: rear
+      center_mm: [123.5, 160.0]
+      size_mm: [64.0, 22.0]
+      implement: case
+      source: prompt
+      confidence: high
+      notes: "Plastic RF-transparent vent window aligned with the CM5 onboard wireless antenna"
+fab:
+  profile: jlcpcb
+  layers: 4
+  thickness_mm: 1.6
+  assembly_sides: [top, bottom]
+electrical:
+  mcu: "Raspberry Pi Compute Module 5 (U_CM5, rea_refs:ComputeModule5-CM5 on dual DF40C-100DS-0.4V(51) sockets, LCSC C597931)"
+  power: "External 65 W USB-C PD adapter into J_PWR (VBUS_IN decoupled by 1 uF 50 V C_PD_IN C91185, cSnkVBus <= 2.0 uF << 10 uF USB Type-C limit) -> WCH CH224A standalone resistor-strapped PD sink (LCSC C42459160, R_PD_CFG1=56k C114756 requesting 15 V, R_PD_VHV=1k C11702 RC filter feeding VHV + 1 uF C_PD_VHV) -> PG-controlled AO3407A 30 V P-FET high-side load switch (Q_PD_SW, LCSC C347478, soft-started by R_PD_PG=100k, R_PD_PG2=100k, and C_PD_SS=100nF, isolating 67.1 uF C_PD_BULK + C_VIN1..3 on VBUS_PD until 15 V PD negotiation completes) -> Silergy SY8205FCC 4.5-30 V input (33 V abs max), 5 V / 5 A synchronous buck (U_BUCK, LCSC C111875, 5V_SYS) -> CM5 +5v_(Input) pins 77/79/81/83/85/87 (with PSU_MAX_CURRENT=5000 in EEPROM); CM5 internal PMIC supplies 3V3_CM5 (pins 84/86) tied directly to GPIO_VREF (pin 78) and carrier pull-ups, while TI TLV62569DBVR 3.3 V / 2 A synchronous buck (U_3V3, LCSC C141836, enabled by 3V3_CM5) supplies 3V3_SYS from 5V_SYS to front_io (J_FIO.1-2) and LCD panel load switch U_SW_DSI (TPS2051BDBVR, LCSC C24593, 3V3_DSI on J_DSI.22)"
+  blocks:
+    - id: pd_sink_buck
+      purpose: "Standalone resistor-strapped WCH CH224A USB-C PD sink (R_PD_CFG1=56k C114756, R_PD_VHV=1k C11702) negotiating 15 V on P_PWR (VBUS_IN with C_PD_IN=1uF <= 10uF cSnkVBus limit) and gating AO3407A P-FET load switch Q_PD_SW (C347478) via PG to isolate 67.1 uF bulk capacitance (C_PD_BULK, C_VIN1..3) on VBUS_PD feeding Silergy SY8205FCC 4.5-30 V input (33 V abs max), 5 V / 5 A synchronous buck converter (U_BUCK) supplying 5V_SYS, plus TI TLV62569DBVR 3.3 V / 2 A synchronous buck converter (U_3V3, enabled by 3V3_CM5) supplying 3V3_SYS to front_io and U_SW_DSI"
+      key_parts: [TYPE-C-31-D-06, CH224A, AO3407A, SY8205FCC, TLV62569DBVR]
+      reference: "WCH CH224 datasheet application circuit (CFG1 56 kOhm resistor strapping for 15 V PD), Silergy SY8205FCC 30V 5A synchronous buck application circuit, and TI TLV62569DBVR 3.3V 2A buck application circuit"
+    - id: cm5_core
+      purpose: "Raspberry Pi Compute Module 5 dual 100-pin mezzanine interface feeding all six +5v_(Input) pins (77,79,81,83,85,87), tying +3.3v_(Output) (pins 84,86) directly to GPIO_VREF (pin 78), and routing PWR_BUT (pin 92) to SW_PWR"
+      key_parts: [DF40C-100DS-0.4V, PTS526SM15SMTR2LFS]
+      reference: "Raspberry Pi Compute Module 5 IO Board rev 2 KiCad reference design (pip.raspberrypi.com)"
+    - id: usb_boot_and_host
+      purpose: "Direct service USB-C 2.0 OTG port P_BOOT wired straight to CM5 USB2_P/N (pins 105/103) with nRPIBOOT button SW_BOOT (pin 93) and USB_OTG_ID (pin 101) bootstrap; RP1 USB3-0-D_P/N (pins 134/136) and USB3-1-D_P/N (pins 163/165) routed to rear USB-C host ports P_KB and P_MOUSE with TI TUSB320LIRWBR DFP CC controllers (U_CC_KB, U_CC_MOUSE) gating TPS2041BDBVR VBUS switches (U_SW_KB, U_SW_MOUSE) with 10 kOhm VBUS output discharge bleeders (R_KB_DIS, R_MOUSE_DIS, t_vSafe0V = 183 ms < 650 ms)"
+      key_parts: [TYPE-C-31-D-06, PTS526SM15SMTR2LFS, TUSB320LIRWBR, TPS2041BDBVR]
+      reference: "Raspberry Pi CM5 Datasheet Section 3.4 (USB OTG boot and RP1 USB host routing) and TI TUSB320LI / TPS2041B datasheets"
+    - id: display_mipi_backlight
+      purpose: "22-pin 0.5 mm FFC connector J_DSI carrying 4-lane MIPI1 DSI + I2C + switched 3V3_DSI (via TPS2051BDBVR load switch U_SW_DSI from 3V3_SYS) to the native 3.3 V 8.0-inch 4:3 IPS MIPI-DSI panel (KD080D10-22MIPI-A1) over a 100-Ohm shielded FFC, plus TI TPS61165DBVR constant-current LED backlight boost driver dimmed by CM5 GPIO18 PWM via 4-pin JST-PH harness J_BL"
+      key_parts: [FH12-22S-0.5SH, TPS2051BDBVR, TPS61165DBVR, B4B-PH-SM4-TB]
+      reference: "Raspberry Pi CM5 IO Board MIPI DSI port 1 pinout and TI TPS61165 datasheet WLED boost driver"
+    - id: hdmi_out
+      purpose: "Rear full-size HDMI-A receptacle J_HDMI connected to CM5 HDMI0 TMDS differential pairs, direct CM5-conditioned DDC I2C / CEC / hotplug detect with TPD4E05U06DQAR ESD protection, and AP2331SA-7 current-limited reverse-blocking +5V_HDMI switch U_SW_HDMI"
+      key_parts: [HYC79-HDMIA19-105, AP2331SA-7, TPD4E05U06DQAR]
+      reference: "Raspberry Pi CM5 IO Board rev 2 HDMI0 output circuit"
+    - id: front_io_subboard
+      purpose: "2-layer front I/O sub-board connected via 22-pin 0.5 mm FFC cable (J_FIO to J_SUB_FIO, powered by carrier 3V3_SYS on pins 1-2), carrying push-push SD card socket J_SD (CM5 SDIO interface) and brightness rotary encoder wheel SW_ENC (CM5 GPIO quadrature + pushbutton)"
+      key_parts: [FH12-22S-0.5SH, SD-106M, EC11J1525402]
+      reference: "Raspberry Pi CM5 IO Board SD card interface and Alps EC11 quadrature encoder circuit"
+  nets_must_connect:
+    - ["J_PWR.CC1", "U_PD.CC1"]
+    - ["J_PWR.CC2", "U_PD.CC2"]
+    - ["Q_PD_SW.S", "J_PWR.VBUS"]
+    - ["U_BUCK.VIN", "Q_PD_SW.D"]
+    - ["U_CM5.+5v_(Input)", "5V_SYS"]
+    - ["U_CM5.GPIO_VREF(1.8v/3.3v_Input)", "U_CM5.+3.3v_(Output)"]
+    - ["J_BOOT.DP1", "U_CM5.USB2_P"]
+    - ["J_BOOT.DN1", "U_CM5.USB2_N"]
+    - ["SW_BOOT.1", "U_CM5.nRPIBOOT"]
+    - ["SW_PWR.1", "U_CM5.PWR_BUT"]
+    - ["J_KB.DP1", "U_CM5.USB3-0-D_P"]
+    - ["J_KB.DN1", "U_CM5.USB3-0-D_N"]
+    - ["J_MOUSE.DP1", "U_CM5.USB3-1-D_P"]
+    - ["J_MOUSE.DN1", "U_CM5.USB3-1-D_N"]
+    - ["U_BL.CTRL", "U_CM5.GPIO18"]
+  high_speed:
+    - name: mipi_dsi1
+      board: main
+      kind: diff_pairs
+      nets: ["MIPI1_D0_*", "MIPI1_D1_*", "MIPI1_D2_*", "MIPI1_D3_*", "MIPI1_C_*"]
+      tolerance_mm: 1.0
+      diff_impedance_ohm: 100.0
+      source: "Raspberry Pi Compute Module 5 Datasheet Section 3.7 MIPI DSI (100 ohm differential, intra-pair skew <= 1.0 mm)"
+    - name: hdmi0_tmds
+      board: main
+      kind: diff_pairs
+      nets: ["HDMI0_TX0_*", "HDMI0_TX1_*", "HDMI0_TX2_*", "HDMI0_CLK_*"]
+      tolerance_mm: 1.0
+      diff_impedance_ohm: 100.0
+      source: "Raspberry Pi Compute Module 5 Datasheet Section 3.6 HDMI (100 ohm differential)"
+    - name: usb2_otg_boot
+      board: main
+      kind: diff_pairs
+      nets: ["USB2_P", "USB2_N"]
+      tolerance_mm: 1.5
+      diff_impedance_ohm: 90.0
+      source: "Raspberry Pi Compute Module 5 Datasheet Section 3.4 USB 2.0 (90 ohm differential)"
+    - name: usb_host_kb
+      board: main
+      kind: diff_pairs
+      nets: ["USB3-0-D_P", "USB3-0-D_N"]
+      tolerance_mm: 1.5
+      diff_impedance_ohm: 90.0
+      source: "Raspberry Pi Compute Module 5 Datasheet Section 3.5 RP1 USB 2.0 Host (90 ohm differential)"
+    - name: usb_host_mouse
+      board: main
+      kind: diff_pairs
+      nets: ["USB3-1-D_P", "USB3-1-D_N"]
+      tolerance_mm: 1.5
+      diff_impedance_ohm: 90.0
+      source: "Raspberry Pi Compute Module 5 Datasheet Section 3.5 RP1 USB 2.0 Host (90 ohm differential)"
+board:
+  width_mm: 180.0
+  height_mm: 245.0
+  corner_radius_mm: 4.0
+  mounting_holes:
+    - {x_mm: 6.0, y_mm: 6.0, drill_mm: 3.2}
+    - {x_mm: 174.0, y_mm: 6.0, drill_mm: 3.2}
+    - {x_mm: 6.0, y_mm: 239.0, drill_mm: 3.2}
+    - {x_mm: 174.0, y_mm: 239.0, drill_mm: 3.2}
+  placement:
+    - {ref: U_CM5, role: mcu_module_socket, side: top, x_mm: 66.0, y_mm: 123.5, rot_deg: 270, tolerance_mm: 2.0}
+    - {ref: J_PWR, role: usb_c_pd_in, side: bottom, x_mm: 156.0, y_mm: 225.0, rot_deg: 0, feature: P_PWR, tolerance_mm: 1.5, mates_source: "Vertical USB-C receptacle TYPE-C-31-D-06 on bottom side: mouth faces -Z (rear panel opening)"}
+    - {ref: J_KB, role: usb_c_kb_host, side: bottom, x_mm: 128.0, y_mm: 225.0, rot_deg: 0, feature: P_KB, tolerance_mm: 1.5, mates_source: "Vertical USB-C receptacle TYPE-C-31-D-06 on bottom side: mouth faces -Z (rear panel opening)"}
+    - {ref: J_MOUSE, role: usb_c_mouse_host, side: bottom, x_mm: 100.0, y_mm: 225.0, rot_deg: 0, feature: P_MOUSE, tolerance_mm: 1.5, mates_source: "Vertical USB-C receptacle TYPE-C-31-D-06 on bottom side: mouth faces -Z (rear panel opening)"}
+    - {ref: J_BOOT, role: usb_c_otg_boot, side: bottom, x_mm: 72.0, y_mm: 225.0, rot_deg: 0, feature: P_BOOT, tolerance_mm: 1.5, mates_source: "Vertical USB-C receptacle TYPE-C-31-D-06 on bottom side: mouth faces -Z (rear panel opening)"}
+    - {ref: SW_BOOT, role: rpiboot_button, side: bottom, x_mm: 52.0, y_mm: 225.0, rot_deg: 0, feature: F_BOOT_BTN, tolerance_mm: 1.5, mates_source: "Top-actuated tactile switch PTS526 on bottom side: button faces -Z (pressed along +Z from rear)"}
+    - {ref: J_HDMI, role: hdmi_out, side: bottom, x_mm: 32.0, y_mm: 225.0, rot_deg: 0, feature: P_HDMI, tolerance_mm: 1.5, mates_source: "Vertical HDMI-A receptacle HYC79-HDMIA19-105 on bottom side: mouth faces -Z (rear panel opening)"}
+    - {ref: SW_PWR, role: power_button, side: bottom, x_mm: 12.0, y_mm: 225.0, rot_deg: 0, feature: F_PWR_BTN, tolerance_mm: 1.5, mates_source: "Top-actuated tactile switch PTS526 on bottom side: button faces -Z (pressed along +Z from rear)"}
+    - {ref: J_DSI, role: mipi_dsi_ffc, side: top, x_mm: 60.0, y_mm: 2.5, rot_deg: 180, tolerance_mm: 2.0, mates_source: "FH12-22S-0.5SH at top edge (y=2.5, rot_deg=180): FFC mouth faces -Y (upward over top board edge toward display)"}
+    - {ref: J_BL, role: backlight_header, side: top, x_mm: 95.0, y_mm: 2.5, rot_deg: 0, tolerance_mm: 2.0, mates_source: "B4B-PH-SM4-TB vertical 4-pin JST-PH header on top side: mouth faces +Z toward display backlight harness"}
+    - {ref: J_FIO, role: front_io_ffc, side: top, x_mm: 130.0, y_mm: 242.5, rot_deg: 0, tolerance_mm: 2.0, mates_source: "FH12-22S-0.5SH at bottom edge (y=242.5, rot_deg=0): FFC mouth faces +Y (downward over bottom board edge toward front_io sub-board)"}
+  max_component_height_mm:
+    top: 10.0
+    bottom: 12.0
+sub_boards:
+  - id: front_io
+    name: Front SD card and brightness encoder sub-board
+    layers: 2
+    width_mm: 150.0
+    height_mm: 65.0
+    corner_radius_mm: 3.0
+    world_position_mm: [0.0, -197.0, 331.5]
+    world_rotation_deg: [0.0, 0.0, 0.0]
+    mounting_holes:
+      - {x_mm: 5.0, y_mm: 5.0, drill_mm: 2.5}
+      - {x_mm: 145.0, y_mm: 5.0, drill_mm: 2.5}
+      - {x_mm: 5.0, y_mm: 60.0, drill_mm: 2.5}
+      - {x_mm: 145.0, y_mm: 60.0, drill_mm: 2.5}
+    placement:
+      - {ref: J_SD, role: sd_card_slot, side: top, x_mm: 118.5, y_mm: 19.0, rot_deg: 180, feature: F_SD, tolerance_mm: 1.5, mates_source: "SD-106M at y=19.0, rot_deg=180: card mouth sits at top edge y=0.32 facing -Y/+Z aligned with front horizontal media slot"}
+      - {ref: SW_ENC, role: brightness_encoder, side: bottom, x_mm: 14.5, y_mm: 51.0, rot_deg: 0, feature: F_BRIGHT, tolerance_mm: 1.5, mates_source: "EC11J1525402 SMD rotary encoder on bottom side: shaft points along -Z into brightness_wheel under lower-left chin overhang"}
+      - {ref: J_SUB_FIO, role: front_io_ffc, side: bottom, x_mm: 75.0, y_mm: 62.5, rot_deg: 0, tolerance_mm: 2.0, mates_source: "FH12-22S-0.5SH at bottom edge (y=62.5, rot_deg=0): FFC mouth faces +Y over bottom board edge"}
+    max_component_height_mm:
+      top: 4.0
+      bottom: 25.0
+bom:
+  - {refs: [U_CM5], role: mcu_module_socket, mpn: "DF40C-100DS-0.4V(51)", lcsc: C597931, footprint: "rea_refs:Raspberry-Pi-5-Compute-Module", description: "Dual 100-pin 0.4mm mezzanine receptacles for Raspberry Pi Compute Module 5"}
+  - {refs: [J_PWR, J_KB, J_MOUSE, J_BOOT], role: usb_c_receptacle, mpn: TYPE-C-31-D-06, lcsc: C2689964, footprint: "lcsc:USB-C-SMD_TYPE-C-31-D-06", description: "Vertical 16-pin USB-C receptacle for PD input, USB host, and OTG boot"}
+  - {refs: [J_HDMI], role: hdmi_receptacle, mpn: HYC79-HDMIA19-105, lcsc: C711353, footprint: "lcsc:HDMI-SMD_HYC79-HDMIA19-105", description: "Vertical 19-pin HDMI-A receptacle"}
+  - {refs: [SW_PWR, SW_BOOT], role: tactile_button, mpn: PTS526SM15SMTR2LFS, lcsc: C2689538, footprint: "lcsc:SW-SMD_4P-L5.2-W5.2-P3.70-LS6.4", description: "5.2x5.2mm SMD tactile pushbutton for power and nRPIBOOT"}
+  - {refs: [U_PD], role: usb_pd_sink, mpn: CH224A, lcsc: C42459160, footprint: "lcsc:ESSOP-10_L4.9-W3.9-P1.0-LS6.0-TL-EP", description: "Standalone resistor-strapped USB-PD 3.0 sink controller negotiating 15 V via R_PD_CFG1=56k (C114756)"}
+  - {refs: [Q_PD_SW], role: pd_vbus_load_switch, mpn: AO3407A, lcsc: C347478, footprint: "lcsc:SOT-23_L2.9-W1.3-P1.90-LS2.4-BR", description: "30V 4.2A P-channel MOSFET high-side VBUS load switch isolating bulk input capacitance until U_PD PG asserts"}
+  - {refs: [U_BUCK], role: buck_5v_5a, mpn: SY8205FCC, lcsc: C111875, footprint: "lcsc:SOIC-8_L5.0-W4.0-P1.27-LS6.0-BL-EP2.0", description: "4.5-30V input (33V abs max), 5V 5A continuous / 6A peak synchronous step-down converter"}
+  - {refs: [U_3V3], role: buck_3v3_2a, mpn: TLV62569DBVR, lcsc: C141836, footprint: "lcsc:SOT-23-5_L3.0-W1.7-P0.95-LS2.8-BR", description: "2.5-5.5V input, 3.3V 2A high-efficiency synchronous buck regulator supplying 3V3_SYS"}
+  - {refs: [U_SW_DSI], role: dsi_power_switch, mpn: TPS2051BDBVR, lcsc: C24593, footprint: "lcsc:SOT-23-5_L3.0-W1.7-P0.95-LS2.8-BR", description: "500mA current-limited soft-start high-side power distribution switch gating 3V3_DSI on J_DSI.22"}
+  - {refs: [U_SW_HDMI], role: hdmi_5v_switch, mpn: AP2331SA-7, lcsc: C500764, footprint: "lcsc:SOT-23-3_L2.9-W1.3-P1.90-LS2.4-BR", description: "0.2A continuous / <=0.4A current-limited reverse-blocking high-side load switch for J_HDMI.18 5V_HDMI"}
+  - {refs: [U_CC_KB, U_CC_MOUSE], role: usb_c_dfp_cc_controller, mpn: TUSB320LIRWBR, lcsc: C2836598, footprint: "lcsc:X2QFN-12_L1.6-W1.6-P0.40-TL", description: "USB Type-C DFP configuration channel port controller for Cold-Socket VBUS gating on J_KB and J_MOUSE"}
+  - {refs: [U_SW_KB, U_SW_MOUSE], role: usb_vbus_switch, mpn: TPS2041BDBVR, lcsc: C51386, footprint: "lcsc:SOT-23-5_L3.0-W1.7-P0.95-LS2.8-BR", description: "500mA current-limited high-side power distribution switch for 5V_USB_KB and 5V_USB_MOUSE"}
+  - {refs: [U_BL], role: backlight_driver, mpn: TPS61165DBVR, lcsc: C58756, footprint: "lcsc:SOT-23-6_L2.9-W1.6-P0.95-LS2.8-BR", description: "38V constant-current white LED boost driver with PWM dimming"}
+  - {refs: [J_DSI, J_FIO, J_SUB_FIO], role: ffc_22p_connector, mpn: FH12-22S-0.5SH, lcsc: C597981, footprint: "lcsc:FPC-SMD_22P-P0.50_FH12-22S-0.5SH-55", description: "22-pin 0.5mm pitch FFC/FPC connector for MIPI DSI and front I/O link"}
+  - {refs: [J_BL], role: backlight_jst_ph, mpn: B4B-PH-SM4-TB, lcsc: C160354, footprint: "lcsc:CONN-SMD_B4B-PH-SM4-TB-LF-SN", description: "4-pin 2.0mm pitch JST-PH SMD header for display backlight harness"}
+  - {refs: [J_SD], role: sd_card_socket, mpn: SD-106M, lcsc: C266603, footprint: "lcsc:SD-SMD_SD-106M", description: "Push-push standard SD card socket on front I/O sub-board"}
+  - {refs: [SW_ENC], role: rotary_encoder, mpn: EC11J1525402, lcsc: C209762, footprint: "lcsc:SW-SMD_EC11J1525402", description: "SMD rotary encoder with pushbutton for display brightness control"}
+purchased:
+  - id: cm5_module
+    description: "Raspberry Pi Compute Module 5 (BCM2712 quad-core Cortex-A76, 8GB LPDDR4X, 32GB eMMC, onboard Wi-Fi/BLE antenna)"
+    mpn: "SC1592 (CM5108032)"
+    url: "https://www.raspberrypi.com/products/compute-module-5/"
+    datasheet: "https://datasheets.raspberrypi.com/cm5/cm5-datasheet.pdf"
+    dims_mm: [55.0, 40.0, 4.62]
+    position_mm: [62.5, -160.0, 1.65]
+    connects_to: U_CM5
+    dims_source: "Raspberry Pi Compute Module 5 Datasheet physical specification and rea_refs.3dshapes/CM5_module.stl (55.0 x 40.0 x 4.62 mm)"
+    model: case/purchased/cm5_module.stl
+    color: "#1f5a38"
+  - id: lcd_panel
+    description: "8.0-inch 4:3 IPS TFT LCD display module (1024x768, native 3.3 V single-supply 4-lane MIPI-DSI interface with integrated Fitipower EK79007 / Ilitek ILI9881C T-CON and internal charge-pump AVDD/VGH/VGL bias generator on the panel assembly, 22-pin 0.5 mm Raspberry Pi DSI FPC pinout, and 3S11P WLED backlight string)"
+    mpn: "KD080D10-22MIPI-A1"
+    url: "https://www.panelook.com/modelsearch.php?panel_size_inch=800&resolution_pixels=1024768&signal_type_category=90"
+    datasheet: "https://datasheets.raspberrypi.com/cm5/cm5io-datasheet.pdf"
+    dims_mm: [174.0, 136.0, 5.5]
+    position_mm: [3.0, -156.0, 324.0]
+    dims_source: "8.0-inch 4:3 (1024x768) IPS MIPI-DSI LCM mechanical drawing (KD080D10-22MIPI-A1, single 3.3 V VCC logic supply with internal charge-pump AVDD/VGH/VGL bias generation on panel T-CON): outline 174.0(W) x 136.0(H) x 5.5(D) mm, active area 162.05 x 121.54 mm, bottom-center 22-pin 0.5mm MIPI DSI FPC tail and 4-pin LED backlight plug"
+    model: case/purchased/lcd_panel.stl
+    color: "#181a1c"
+    connectors:
+      - {id: dsi_in, at_mm: [57.0, 0.0, 2.75], pins: 22, pitch_mm: 0.5, kind: ffc, mouth: [0.0, -1.0, 0.0], long_axis: [1.0, 0.0, 0.0]}
+      - {id: bl_in, at_mm: [92.0, 0.0, 2.75], pins: 4, pitch_mm: 2.0, kind: wire}
+enclosure:
+  process: mjf
+  wall_mm: 3.0
+  clearance_floor_mm: 0.25
+  parts:
+    - id: rear_bucket
+      file: case/out/rear_bucket.stl
+      role: shell
+      process: mjf
+      material: PA12 nylon
+      finish: matte textured warm beige
+      color: "#e6e0d4"
+      description: "Main rear/top/side/base bucket enclosure with top carrying handle recess, lower side cooling louvers, rear port cutouts, and internal PCB mounting bosses"
+    - id: rf_vent_window
+      file: case/out/rf_vent_window.stl
+      role: window
+      process: fdm
+      material: polycarbonate
+      finish: matte warm grey RF-transparent louvers
+      color: "#d4cec2"
+      description: "RF-transparent upper-rear snap-fit vent window over the CM5 antenna"
+    - id: rear_buttons
+      file: case/out/rear_buttons.stl
+      role: button
+      process: fdm
+      material: ABS
+      finish: matte dark grey
+      color: "#4a4845"
+      description: "Captive rear actuator button caps for power (SW_PWR) and nRPIBOOT recovery (SW_BOOT)"
+    - id: brightness_wheel
+      file: case/out/brightness_wheel.stl
+      role: button
+      process: fdm
+      material: ABS
+      finish: knurled warm grey
+      color: "#55524d"
+      description: "Knurled brightness control thumbwheel cap seated on rotary encoder SW_ENC under the lower-left chin overhang"
+    - id: display_window
+      file: case/out/display_window.stl
+      role: window
+      process: cnc
+      material: PMMA acrylic
+      finish: optically clear with dark border
+      color: "#22252a"
+      description: "Clear protective cover lens seated inside the recessed front bezel window"
+    - id: front_bezel
+      file: case/out/front_bezel.stl
+      role: shell
+      process: mjf
+      material: PA12 nylon
+      finish: matte textured warm beige
+      color: "#e6e0d4"
+      description: "1984-style sculpted front bezel with deep 4:3 screen recess, lower-right horizontal SD media slot recess, and lower-left chin overhang"
+assembly:
+  - {part: rear_bucket, travel_mm: 0, held_by: base, note: "Base rear enclosure bucket placed rear-down for internal assembly"}
+  - {part: rf_vent_window, direction: [0, 0, 1], travel_mm: 40, may_touch: [rear_bucket], held_by: snap, held_with: [rear_bucket], note: "RF-transparent vent window snaps into rear bucket window opening"}
+  - {part: rear_buttons, direction: [0, 0, -1], travel_mm: 40, may_touch: [rear_bucket], held_by: captured, note: "Rear power and boot button caps drop into rear bucket guide bosses from inside"}
+  - {part: pcba, direction: [0, 0, -1], travel_mm: 80, may_touch: [rear_bucket, rear_buttons], held_by: captured, note: "4-layer rear carrier PCB seats onto rear bucket standoffs with rear ports and switches aligned to rear openings"}
+  - {part: cm5_module, direction: [0, 0, -1], travel_mm: 60, may_touch: [pcba], held_by: snap, held_with: [pcba], note: "Raspberry Pi CM5 module snaps onto dual DF40C-100DS mezzanine sockets on pcba"}
+  - {part: brightness_wheel, direction: [0, 0, -1], travel_mm: 40, may_touch: [rear_bucket], held_by: captured, note: "Brightness dial wheel seats into lower-left chin overhang cradle before front_io sub-board"}
+  - {part: pcba:front_io, direction: [0, 0, -1], travel_mm: 50, may_touch: [rear_bucket, brightness_wheel], held_by: captured, note: "2-layer front I/O sub-board seats onto forward mounting brackets, engaging SW_ENC shaft into brightness_wheel"}
+  - {part: lcd_panel, direction: [0, 0, -1], travel_mm: 50, may_touch: [rear_bucket], held_by: captured, note: "8.0-inch 4:3 IPS LCD panel mounts into the forward display frame"}
+  - {part: display_window, direction: [0, 0, -1], travel_mm: 30, may_touch: [lcd_panel, rear_bucket], held_by: captured, note: "Protective display window seats over the LCD panel"}
+  - {part: front_bezel, direction: [0, 0, -1], travel_mm: 60, may_touch: [rear_bucket, display_window, lcd_panel, pcba:front_io, brightness_wheel], held_by: snap, held_with: [rear_bucket], note: "Front sculpted bezel snaps onto rear bucket, capturing internal sub-assemblies"}
+actuators:
+  - id: A_PWR
+    feature: F_PWR_BTN
+    case_part: rear_buttons
+    target: {part: pcba, ref: SW_PWR}
+    kind: push
+    element_axis: [0, 0, 1]
+    travel_mm: 0.25
+    source: "C&K PTS526SM15SMTR2LFS datasheet: top-actuated SPST tactile switch (mounted on bottom side of pcba, actuated along +Z)"
+  - id: A_BOOT
+    feature: F_BOOT_BTN
+    case_part: rear_buttons
+    target: {part: pcba, ref: SW_BOOT}
+    kind: push
+    element_axis: [0, 0, 1]
+    travel_mm: 0.25
+    source: "C&K PTS526SM15SMTR2LFS datasheet: top-actuated SPST tactile switch (mounted on bottom side of pcba, actuated along +Z)"
+  - id: A_BRIGHT
+    feature: F_BRIGHT
+    case_part: brightness_wheel
+    target: {part: "pcba:front_io", ref: SW_ENC}
+    kind: rotate
+    element_axis: [0, 0, -1]
+    travel_mm: 0.5
+    source: "Alps EC11J1525402 datasheet: SMD rotary encoder mounted on bottom side of front_io (shaft axis -Z)"
+cables:
+  - id: mipi_dsi_cable
+    kind: ffc
+    a: {part: pcba, connector: J_DSI}
+    b: {part: lcd_panel, connector: dsi_in}
+    pins: 22
+    pitch_mm: 0.5
+    length_mm: 375.0
+    width_mm: 11.5
+    route:
+      - {at_mm: [60.0, -2.5, 3.0]}
+      - {at_mm: [60.0, 5.0, 10.0]}
+      - {at_mm: [60.0, -79.0, 164.0]}
+      - {at_mm: [60.0, -156.0, 326.75]}
+    note: "100-Ohm impedance-controlled, double-shielded silver-ink EMI-shielded 22-pin 0.5mm pitch MIPI DSI FFC (G-S-S-G coplanar ground-shielded pinout with GND on pins 1, 4, 7, 10, 13, 16, 19) connecting carrier J_DSI to the 8.0-inch native 3.3V MIPI-DSI LCD panel (KD080D10-22MIPI-A1); operating at 1024x768 @ 60 Hz across all 4 MIPI DSI lanes reduces per-lane data rate to 283 Mbps/lane (141.5 MHz Nyquist clock), where 375 mm shielded 100-Ohm FFC insertion loss is < 1.2 dB (well within the > 6 dB MIPI D-PHY v1.2 HS receiver eye budget)"
+  - id: backlight_cable
+    kind: harness
+    a: {part: pcba, connector: J_BL}
+    b: {part: lcd_panel, connector: bl_in}
+    pins: 4
+    pitch_mm: 2.0
+    length_mm: 375.0
+    route:
+      - {at_mm: [95.0, -2.5, 8.0]}
+      - {at_mm: [95.0, 5.0, 14.0]}
+      - {at_mm: [95.0, -79.0, 164.0]}
+      - {at_mm: [95.0, -156.0, 326.75]}
+    note: "4-wire JST-PH LED backlight anode/cathode harness (BL_LED_A on pin 1, BL_FB on pin 2, GND on pins 3-4) from TPS61165 driver to LCD panel, with BL_PWM kept local to U_BL.CTRL on the carrier PCB"
+  - id: front_io_cable
+    kind: ffc
+    a: {part: pcba, connector: J_FIO}
+    b: {part: "pcba:front_io", connector: J_SUB_FIO}
+    pins: 22
+    pitch_mm: 0.5
+    length_mm: 360.0
+    width_mm: 11.5
+    route:
+      - {at_mm: [130.0, -242.5, 3.0]}
+      - {at_mm: [100.0, -255.0, 160.0]}
+      - {at_mm: [75.0, -259.5, 330.0]}
+    note: "Type-B (opposite-side contact, 1-to-1 pinout) 22-pin 0.5mm pitch FFC connecting top-mounted carrier J_FIO (F.Cu, rot=0) to bottom-mounted J_SUB_FIO (B.Cu, rot=0, mirrored local X pad coordinates with Pin 1 at +X=80.25mm and Pin 22 at -X=69.75mm), carrying CM5 RP1 GPIO Bank 0 secondary SDIO constrained to <= 12.5 MHz Default-Speed mode (80 ns period via CM5 RP1 mmc DT overlay max-frequency = <12500000> to accommodate the ~68-75 pF distributed passive link capacitance and 6.8-7.0 ns round-trip propagation delay across 597 mm with 33R host-side source termination at U_CM5 and 22R card-side series damping/ESD-isolation resistors R40, R12, R14, R15, R37, R38 on CLK, CMD, and DAT0..3 between U7.B1..B6 and U2/U3/J_SD) with G-S-S-G-S-S-G-S-G ground return interleaving across pins 5-13 (1-2=3V3_SYS supplied by carrier U_3V3 TLV62569DBVR 3.3V 2A buck with active discharge Q_3V3_INV/Q_3V3_DIS + R_3V3_DIS=33R + R_3V3_BLEED=1k and B5819W Schottky clamp D_3V3_CLAMP to 3V3_CM5 feeding front_io local 3.3V rail /3V3_CM5, 3=GND, 4=SD_CLK_GPIO22 via R_SD_CLK 33R, 5=GND, 6=SD_CMD_GPIO23 via R_SD_CMD 33R + 100k R_SD_CMD_PU, 7=SD_DAT0_GPIO24 via R_SD_DAT0 33R + 100k R_SD_DAT0_PU, 8=SDIO_RET tied to GND via parallel 0R R28/R36, 9=SD_DAT1_GPIO25 via R_SD_DAT1 33R + 100k R_SD_DAT1_PU, 10=SD_DAT2_GPIO26 via R_SD_DAT2 33R + 100k R_SD_DAT2_PU, 11=GND, 12=SD_DAT3_GPIO27 via R_SD_DAT3 33R + 100k R_SD_DAT3_PU, 13=SDIO_RET tied to GND via parallel 0R R28/R36, 14=SD_PWR_ON with 100k carrier pull-down R_SD_PWR_PD and 10k sub-board pull-down R8 + 100pF C15 C0G HF filter, 15=GND, 16-18=33R source-terminated Schmitt-trigger-buffered encoder outputs ENC_A/ENC_B/ENC_SW from U5, 19=SD_FAULT_VSS_N from U1.4 ~{FAULT} with 10k pull-up R21 driving upstream fault-reset Schottky diode D5 on /SD_PWR_DLY and fast fault-clamp Schottky diode D6 on /SD_OE_GATE, 20-21=33R source-terminated Schmitt-trigger-buffered SD switch outputs SD_CD_VSS_GPIO6/SD_WP_VSS_GPIO13 from U8 via R16/R17, 22=GND) to front_io sub-board"
+requirements:
+  - id: R1
+    text: "1984-style compact vertical all-in-one desktop computer enclosure (247x300x346 mm) with recessed 4:3 screen bezel, front media slot, and chin overhang"
+    how_met: "Sculpted two-piece ABS enclosure (247.0 x 300.0 x 346.0 mm) with recessed 8.0-inch 4:3 window, horizontal SD slot opening, and lower-left brightness dial"
+    quantity: "247.0 x 300.0 x 346.0 mm"
+  - id: R2
+    text: "8.0-inch 4:3 IPS LCD display driven by Raspberry Pi Compute Module 5 via MIPI DSI with dedicated LED backlight driver and PWM dimming harness"
+    how_met: "Purchased native 3.3 V single-supply 22-pin 4-lane MIPI-DSI 8.0-inch 1024x768 4:3 IPS LCM (KD080D10-22MIPI-A1, featuring integrated Fitipower EK79007 / Ilitek ILI9881C MIPI-DSI T-CON and internal charge-pump AVDD/VGH/VGL bias generation from 3.3 V /3V3_DSI on pin 22) connected to J_DSI (4-lane MIPI1 over a 100-Ohm impedance-controlled double-shielded 22-pin 0.5 mm FFC at 283 Mbps/lane / 141.5 MHz Nyquist clock across 4 lanes, with J_DSI.22 3V3_DSI supplied from 3V3_SYS via TPS2051BDBVR soft-start current-limited load switch U_SW_DSI, C24593, gated by DSI1_EN with ~OC fault reporting to GPIO9 and 1k output discharge bleeder R_DSI_DIS, C11702, to GND, and J_DSI.20/21 MIPI1_SCL/MIPI1_SDA routed to CM5 SCL0 pin 80 / SDA0 pin 82 per the CM5 IO Board reference design with 1.8k pull-ups R_DSI_SCL/R_DSI_SDA, C25871, referenced to switched 3V3_DSI to prevent back-powering when U_SW_DSI is off) and driven by TI TPS61165DBVR constant-current boost LED driver (with C_BL_IN=10uF 35V X5R 0805 HGC0805R5106K350NSLJ, C33546007, C_BL_COMP=220nF 25V X7R 0402 TCC0402X7R224K250AT, C915854, R_BL_SET=0.91R 1% 0.125W 0805 resistor 0805W8F910LT5E, C17478, setting I_LED = 0.200V / 0.91R = 220 mA for the 3S11P WLED backlight, R_BL_FB=4.7k series current-limiting resistor 0402WGF4701TCE, C25900, and PTVSLC3D3V3B 3.3V low-capacitance TVS clamp D_BL_FB, C246774, protecting U_BL.6 FB on J_BL.2 BL_FB, PTVS36VS1UR,115 36V TVS D_BL_A, C171823, on J_BL.1 BL_LED_A, MBR0560 60V Schottky rectifier D_BL, C77338, and 1uF 50V X7R 0805 output capacitor C_BL_OUT, C91185, rated above the 38V open-LED OVP threshold), dimmed locally on the carrier PCB at U_BL.CTRL by CM5 GPIO18 (BL_PWM with 100k pull-down R_BL_PD) and feeding the panel over 4-pin JST-PH harness J_BL (pin 1 BL_LED_A, pin 2 BL_FB, pins 3-4 GND)"
+    quantity: "8.0 in 4:3 IPS (1024x768), 4-lane MIPI DSI + PWM backlight"
+  - id: R3
+    text: "Standalone resistor-strapped USB-C PD sink on rear port P_PWR negotiating 15 V into a 5 V / 5 A synchronous buck converter feeding all CM5 5 V pins, with CM5_3V3 feeding GPIO_VREF and no conflicting external 3.3 V LDO"
+    how_met: "WCH CH224A (C42459160, ESSOP-10 in-stock CH224K family, strapped with R_PD_CFG1=56k 1% RC0402FR-0756KL, C114756, on CFG1 pin 9 to GND to request the mandatory 15 V USB-PD 3.0 fixed PDO, and R_PD_VHV=1k RC isolation resistor 0402WGF1001TCE, C11702, per the CH224A application circuit between VBUS_IN pin 8 and VHV pin 1 with 1uF 50V bypass C_PD_VHV, C15849, keeping unswitched J_PWR VBUS_IN bypass capacitance to C_PD_IN=1uF 50V X7R 0805 CC0805KKX7R9BB105, C91185, so cSnkVBus <= 2.0uF << 10uF USB Type-C limit) gating AO3407A 30V 4.2A P-channel MOSFET high-side load switch Q_PD_SW (C347478, with R_PD_PG=100k C25741 and C_PD_SS=100nF 50V C307331 across Source-Gate and R_PD_PG2=100k C25741 to U_PD.10 PG setting V_GS=-7.50V at 15V with tau_G=5.0ms soft-start and isolating the 67.1uF downstream capacitance until PD negotiation completes) feeding Silergy SY8205FCC (U_BUCK, C111875, 4.5-30V recommended operating input, 33V absolute maximum rating, 5V 5A continuous / 6A peak synchronous buck converter, with R_BUCK_FB1=73.2k 1% 0402WGF7322TCE, C26986, and R_BUCK_FB2=10k 1% 0402WGF1002TCE, C25744, setting V_OUT = 0.600V * (1 + 73.2k/10k) = 4.992V, R_BUCK_EN1=100k, C25741, and R_BUCK_EN2=20k, 0402WGF2002TCE, C25765, and C_BUCK_EN=100nF 50V, C307331, on switched VBUS_PD setting V_BUCK_EN=2.50V at 15.0V and >=2.38V at 14.25V above V_ENH=1.2V with tau_EN=1.67ms RC delay after Q_PD_SW soft-charges VBUS_PD, plus 3x 47uF 10V X5R 0805 output capacitors C_5V1-C_5V3, C2012X5R1A476MTJ00E, C76636, 141uF nominal / ~70uF effective at 5V and 100nF C_5V4, C307331, placed adjacent to L_BUCK.2 and U_BUCK GND pad 9) wired to all six CM5 +5v_(Input) pins (77-87, with PSU_MAX_CURRENT=5000 configured in CM5 bootloader EEPROM) with local 100uF 10V 15mOhm solid polymer bulk decoupling (C_CM5_BULK, SA11AM101A19R15XXX, C135491) and 100nF HF bypass (C_CM5_5V, C307331), and J_PWR protected by TPD4E05U06DQAR (D_ESD_PWR, C138714) on PD_DP/PD_DM, TSD05CDYFR (D_PD_CC1, D_PD_CC2, C20611048) 5.5V ESD diodes on PD_CC1/PD_CC2, PTVS15VS1UR,115 (D_PD_VBUS, C513104, 15V standoff TVS, V_BR=16.7-18.5V, V_CL=24.4V at 16.4A < 30V SY8205FCC operating max and 33V abs max) and 47uF 35V 150mOhm damped tantalum bulk capacitor CA55-D035K476TE150 (C_PD_BULK, C2761441) on 15V VBUS_PD; CM5 +3.3v_(Output) (3V3_CM5) wired directly to GPIO_VREF (pin 78) and carrier pull-ups, while TI TLV62569DBVR (U_3V3, C141836, 5V->3.3V 2A synchronous buck enabled by 3V3_CM5 via R_3V3_EN=10k / R_3V3_EN_PD=100k, equipped with active output discharge Q_3V3_INV/Q_3V3_DIS BSS138 C78284 + R_3V3_DIS=33R C25105 + R_3V3_DIS_PU=10k C25744 to 5V_SYS + 1k bleeder R_3V3_BLEED C11702 discharging 53.1uF in tau=1.85ms when 3V3_CM5 falls, plus B5819W Schottky clamp diode D_3V3_CLAMP C2943878 from 3V3_SYS Anode to 3V3_CM5 Cathode clamping 3V3_SYS <= 3V3_CM5 + 0.25V) supplies 3V3_SYS to front_io (J_FIO.1-2) and LCD panel load switch U_SW_DSI (TPS2051BDBVR, C24593)"
+    quantity: "15 V / 3 A PD input -> 5.0 V / 5.0 A buck"
+  - id: R4
+    text: "Direct service USB-C 2.0 OTG flashing port (P_BOOT) wired straight to CM5 USB2_P/N (pins 105/103) with nRPIBOOT button (pin 93) and USB_OTG_ID bootstrap"
+    how_met: "Dedicated rear USB-C receptacle J_BOOT wired directly to CM5 pins 105/103 with USBLC6-2SC6 (D_ESD_BOOT, C2827654) protecting USB2_P/USB2_N and VBUS_BOOT, TSD05CDYFR (D_BOOT_CC1, D_BOOT_CC2, C20611048) 5.5V ESD diodes on BOOT_CC1/BOOT_CC2, rear tactile button SW_BOOT on nRPIBOOT (pin 93) protected by TSD05CDYFR (D_SW_BOOT, C20611048), and USB_OTG_ID (pin 101) relying on CM5 internal pull-ups without conflicting external pull-ups to switched 3V3_CM5"
+    quantity: "1x USB-C OTG flashing port + 1x nRPIBOOT button"
+  - id: R5
+    text: "RP1 USB host ports (USB3-0 and USB3-1) feeding rear USB-C host receptacles for keyboard (P_KB) and mouse (P_MOUSE), plus rear HDMI output and power button"
+    how_met: "CM5 RP1 USB3-0-D_P/N (pins 134/136) and USB3-1-D_P/N (pins 163/165) routed to rear USB-C receptacles J_KB and J_MOUSE with Cold-Socket CC attachment detection via TI TUSB320LIRWBR DFP port controllers (U_CC_KB, U_CC_MOUSE, C2836598, configured in DFP GPIO mode via 4.7k PORT pull-ups R_KB_PORT/R_MOUSE_PORT to 5V_SYS, 910k VBUS_DET resistors R_KB_VDET/R_MOUSE_VDET, and EN_N gated by CM5 VBUS_EN pin 111 via 2N7002 inverters Q_KB_EN/Q_MOUSE_EN) whose active-low open-drain ID outputs enable TPS2041BDBVR load switches (U_SW_KB, U_SW_MOUSE, C51386) only when a valid 5.1k Rd sink is attached, with 10k VBUS output discharge bleeder resistors R_KB_DIS and R_MOUSE_DIS (0402WGF1002TCE, C25744) from 5V_USB_KB and 5V_USB_MOUSE to GND discharging C_KB_VBUS+C_KB_DEC (10.1uF) and C_MOUSE_VBUS+C_MOUSE_DEC (10.1uF) below vSafe0V (0.8V) in t_vSafe0V = 183.3ms < 650ms upon detach, and ~OC fault outputs pulled up to 3V3_CM5 (R_KB_OC, R_MOUSE_OC 10k) and routed to CM5 GPIO21 (pin 25, USB_KB_OC_N) and GPIO16 (pin 29, USB_MOUSE_OC_N), plus USBLC6-2SC6 (D_ESD_KB, D_ESD_MOUSE, C2827654) ESD arrays on D+/D-/VBUS and TSD05CDYFR (D_KB_TVS1/2, D_MOUSE_TVS1/2, C20611048) on CC1/CC2; HDMI0 routed to J_HDMI with Diodes Inc AP2331SA-7 (U_SW_HDMI, C500764, 0.2A continuous / <=0.4A current-limited reverse-blocking high-side load switch with 1uF input cap C_HDMI_IN, C15849, and 100nF output cap C_HDMI_5V, C307331, maintaining 4.986V >= 4.8V at 55mA on J_HDMI.18 5V_HDMI), and 5V-tolerant CM5 pins HDMI0_SCL (200), HDMI0_SDA (199), HDMI0_CEC (151), and HDMI0_HOTPLUG (153) (which include on-module 1.8k DDC pull-ups, 27k CEC pull-up, and 100k HPD pull-down per the CM5 datasheet and IO Board reference design) routed directly to J_HDMI (pins 15, 16, 13, 19) without conflicting external pass-FETs or pull-ups, protected by three 0.5pF TPD4E05U06DQAR arrays (D_HDMI_ESD1-3, C138714) on all TMDS and control pins; PWR_BUT (pin 92) routed to SW_PWR with TSD05CDYFR (D_SW_PWR, C20611048) ESD protection"
+    quantity: "2x USB-C HID host ports, 1x HDMI-A port, 1x power button"
+  - id: R6
+    text: "Front I/O sub-board behind front face connected by internal FFC cable carrying SD card slot at front horizontal media slot opening and brightness rotary encoder wheel under lower-left chin overhang"
+    how_met: "2-layer front_io sub-board connected via a Type-B (opposite-side contact, 1-to-1 pinout) 22-pin 0.5mm FFC cable between top-mounted J_FIO (F.Cu) and bottom-mounted J_SUB_FIO (B.Cu, with properly mirrored X pad coordinates: Pin 1 at +X=80.25mm, Pin 22 at -X=69.75mm) with G-S-S-G-S-S-G-S-G ground return interleaving across SDIO pins 5-13 (via dedicated parallel 0R resistors R28=0R and R36=0R 0402WGF0000TCE, C17168, tying pins 13 and 8 directly to GND on F.Cu/B.Cu without slotting the B.Cu ground plane), carrying push-push SD card socket J_SD (SD-106M, interfaced to CM5 RP1 GPIO Bank 0 secondary SDIO GPIO22-GPIO27 constrained to <= 12.5 MHz Default-Speed mode with 80ns period via CM5 RP1 mmc DT overlay max-frequency = <12500000> to accommodate the ~68-75pF passive link capacitance and 6.8-7.0ns round-trip flight time across 597mm, with 33-ohm host-side series source-termination resistors R_SD_CLK, R_SD_CMD, and R_SD_DAT0..3 C25105 at U_CM5 pins 46, 47, 45, 41, 24, 48 and 22-ohm card-side series damping and ESD-isolation resistors R40, R12, R14, R15, R37, and R38 0402WGF220JTCE C25092 on SD_CLK, SD_CMD, and SD_DAT0..3 between U7.B1..B6 and U2/U3/J_SD to damp card-driven read transitions and limit residual ESD clamping current into U7.B1..B6, 100k host pull-ups R_SD_CMD_PU and R_SD_DAT0..3_PU C25741 to 3V3_CM5 and 47k card-side pull-ups R1-R5 0402WGF4702TCE C25792 to /SD_VDD giving 47k || 100k = 32.0k effective pull-up within the 10-100k SD spec window with <=4.1mV series DC drop, 100k carrier pull-down R_SD_PWR_PD C25741 + 10k sub-board pull-down R8 + 100pF C0G C15 0402CG101J500NT C1546 HF filter on SD_PWR_ON keeping total GPIO5 capacitive load <=135pF, AP22653W6-7 constant-current auto-retry SD_PWR_ON high-side load switch U1 C2158037, R22=56k 1% 0402WGF5602TCE C25796 setting ILIM_min=365.5mA >= 350mA, ILIM_typ=420.6mA, and ILIM_max=483.5mA well within the 2.0A TLV62569DBVR 3V3_SYS supply and 1.0A dual-pin FFC rating while providing >165mA worst-case margin above 200mA Default-Speed SD cards during hot-insertion and write peaks, U1.4 ~{FAULT} pulled up to 3V3_CM5 via R21=10k and routed over J_SUB_FIO.19 SD_FAULT_VSS_N to a CM5 GPIO interrupt, 6-channel SDIO bus isolation via TI SN74CB3Q3245PWR 8-bit charge-pump FET bus switch U7 C470961 decoupled by C12=100nF C131394 whose ~{OE} pin 19 SD_BUS_OE_N is pulled up to 3V3_CM5 via R30=470R 0402WGF4700TCE C25117 and driven low with a >=3.05ms min / 4.72ms typ turn-on delay after /SD_VDD rises (via R35=56k C25796 referenced directly to /SD_VDD + C14=100nF C131394 tau=5.60ms into Schmitt-trigger buffer U8 channel 3 3A pin 6 -> 3Y pin 2 SD_PWR_DLY_BUF, with fast /SD_VDD brownout/short reset Schottky diode D4 RB751V40T1G C154819 from SD_PWR_DLY Anode to /SD_VDD Cathode and upstream ~{FAULT} reset Schottky diode D5 RB751V40T1G C154819 from SD_PWR_DLY Anode to SD_FAULT_VSS_N Cathode so C14 is immediately discharged upon either /SD_VDD brownout/short or ~{FAULT} assertion and U7 always waits the full R35/C14 soft-start delay after brownout or fault recovery), <20ns fast turn-off on disable or reset (via Schmitt-trigger 2-input AND gate U9 SN74LVC1G97DBVR C128411 decoupled by C17=100nF C131394 with IN1=GND, IN0=SD_PWR_ON, IN2=SD_PWR_DLY_BUF -> Y=SD_PWR_EN_AND opening U7 in 11.7ns typ / <20ns max as soon as SD_PWR_ON falls below VT-=0.84-1.19V), and <150ns direct /SD_VDD short/brownout turn-off plus <20ns ~{FAULT} turn-off via series N-MOSFET NAND gate Q3 BSS138 (gated by SD_PWR_EN_AND with R33=1k 0402WGF1001TCE C11702 pull-up on SD_DIS_EN referenced to /SD_VDD) in series with Q2 BSS138 (gated directly from downstream /SD_VDD via R31=1k C11702 + C16=100pF 50V C0G 0402CG101J500NT C1546 tau=127ns on SD_OE_GATE and clamped low in <20ns on ~{FAULT} via Schottky diode D6 RB751V40T1G C154819 from SD_OE_GATE Anode to SD_FAULT_VSS_N Cathode so U1 t_Blank=2-20ms never holds Q2 on when /SD_VDD collapses), disable-only mutually exclusive self-held active switched /SD_VDD output discharge via Q1 BSS138 gated by dedicated N-MOSFET inverter Q4 BSS138 C78284 (Gate=SD_PWR_ON, Source=GND, Drain=SD_PWR_OFF pulled up via R39=10k C25744 to local diode-OR gate-drive rail /SD_DIS_VCC fed by dual Schottky diodes D2 RB751V40T1G C154819 from /3V3_CM5 and D3 RB751V40T1G C154819 from /SD_VDD with C18=100nF C131394 hold-up capacitor to GND so Q1 turns OFF in <50ns when SD_PWR_ON asserts HIGH, never fighting U1 during soft-start or current limiting, and maintains V_GS ~ 3.0V when SD_PWR_ON is LOW even when /3V3_CM5 collapses to 0V during system reset/shutdown while U1 blocks reverse current) switching 3x parallel 470R resistors R29||R32||R13 0402WGF4700TCE C25117 = 156.7R in parallel with R34=10k bleeder C25744 giving R_eq=157.2R to discharge C1+C2=10.1uF below 0.5V in 3.00ms and worst-case C1+C2+C_card=20.1uF including 10uF internal SD card capacitance below 0.5V in 5.96ms, non-snapback 3.3V TVS diode D1 PTVSLC3D3V3B C246774 across /SD_VDD at J_SD.4/C2, dual parallel 0.6/0.3mm vias at J_SUB_FIO.1-2 feeding a dedicated 0.5mm F.Cu 3V3_CM5 trunk with 32uF bulk capacitance C7=22uF 25V X5R 0805 CL21A226MAQNNNE C45783 + C8=10uF 25V X5R 0603 CM105X5R106M25AT C3038124 damped by 0.42-ohm FFC series resistance and local 100nF HF bypass C3 at U1.1/U1.2, direct 0.5mm SD_VDD trunk from U1.6 to C1/C2/D1 and J_SD.4, inline zero-stub flow-through ESD routing across Semtech RCLAMP3324P.TNT arrays U2, U3, and U6, C1976652, with opposite flow-through pin pairs 1-10, 2-9, 4-7, 5-6 connected inline on both schematic and PCB (SD_CLK on U2.10->U2.1, SD_DAT0 on U2.7->U2.4, SD_DAT1 on U2.6->U2.5, SD_DAT2 on U3.10->U3.1, SD_DAT3 on U3.9->U3.2, SD_CMD reassigned to U3.7->U3.4 adjacent to J_SD.2, SD_CD on U6.10->U6.1, SD_WP on U6.9->U6.2, and all unused flow-through pairs U2.2/9, U3.5/6, U6.4/7, U6.5/6 tied to GND), and 10k pull-ups R6/R7 at J_SD.10/11 SD_CD/SD_WP switches for V_OL=0V followed by 10k+100nF RC filters R23/R24+C10/C11 into Schmitt-trigger buffer U8 SN74LVC3G17DCTR C18213 decoupled by C13=100nF C131394 with 33R series source-termination resistors R16/R17 driving J_SUB_FIO.20/21) at F_SD and SMD rotary encoder SW_ENC (EC11J1525402 on B.Cu with mirrored X pad coordinates, 10k pull-ups R9-R11, 10k series resistors R18-R20, 100nF filter caps C4-C6 giving tau_fall=1.0ms / tau_rise=2.0ms, SN74LVC3G17DCTR 3-channel Schmitt-trigger buffer U5 with 33-ohm series source-termination resistors R25-R27 at outputs 1Y/2Y/3Y, and RCLAMP3324P.TNT flow-through ESD protection U4 with ENC_A_SW on U4.1->U4.10, ENC_B_SW on U4.2->U4.9, ENC_BTN_SW on U4.4->U4.7, and unused U4.5/6 tied to GND) at F_BRIGHT"
+    quantity: "1x SD card slot, 1x rotary encoder wheel, 1x 22-pin FFC link"
+  - id: R7
+    text: "RF-transparent rear/top vent window for CM5 antenna and exclusion of all prohibited brand marks"
+    how_met: "Polycarbonate rf_vent_window over CM5 antenna region on rear/top face; all prohibited brand names/logos excluded in fidelity.brand_marks_excluded"
+    quantity: "1x RF vent window, 0 brand marks"
+decisions:
+  - question: "Which LCSC part number is used for the standalone resistor-strapped CH224K USB-PD sink controller?"
+    choice: "WCH CH224A (LCSC C42459160, ESSOP-10) with R_PD_CFG1 = 56 kOhm 1% resistor (RC0402FR-0756KL, LCSC C114756) from CFG1 (pin 9) to GND for 15 V USB-PD 3.0 fixed PDO negotiation and R_PD_VHV = 1 kOhm resistor (0402WGF1001TCE, C11702) between VBUS_IN (pin 8) and VHV (pin 1) with 1 uF 50 V X5R bypass C_PD_VHV (C15849) per the CH224A application circuit, keeping unswitched J_PWR VBUS_IN capacitance to C_PD_IN = 1 uF 50 V X7R (CC0805KKX7R9BB105, C91185) ahead of PG-controlled AO3407A P-FET load switch Q_PD_SW (C347478)"
+    reason: "CH224K (C970725) has only 4 units in stock at JLCPCB (<10 minimum), whereas CH224A (C42459160) is the pin-compatible ESSOP-10 WCH CH224 family variant with >9,000 units in stock whose CFG1 single-resistor strapping table specifies 56 kOhm to GND for 15 V PD request (drawing 1.85 A peak at 27.71 W input, well within the 3.0 A PDO limit) and whose internal HV LDO input pin 1 (VHV, 3.0-30 V) is fed from VBUS_IN through a 1 kOhm RC isolation resistor (R_PD_VHV = 1 kOhm, C11702) with a 1 uF bypass capacitor (C_PD_VHV, C15849)."
+  - question: "Power path voltage ratings and current budget across all rails?"
+    choice: "15 V / 3 A VBUS_PD (45 W, clamped by Nexperia PTVS15VS1UR,115 15 V standoff TVS D_PD_VBUS, C513104, V_BR=16.7-18.5 V, V_CL=24.4 V at I_PP=16.4 A, and damped against USB-C hot-plug LC overshoot by a 47 uF 35 V 150 mOhm Case-D tantalum bulk capacitor C_PD_BULK, CA55-D035K476TE150, C2761441, alongside 2x 10 uF 35 V X5R C_VIN1/C_VIN2 and 100 nF C_VIN3) -> Silergy SY8205FCC (U_BUCK, C111875, 4.5-30 V recommended operating input, 33 V abs max input, 5 V / 5.0 A continuous / 6.0 A peak output with R_BUCK_FB1=73.2k, C26986, and R_BUCK_FB2=10k, C25744, setting V_OUT=4.992 V, EN driven to 2.50 V nominal / >=2.38 V worst-case at 14.25 V > 1.2 V V_ENH via R_BUCK_EN1=100k, C25741, and R_BUCK_EN2=20k, C25765, with C_BUCK_EN=100nF C307331 delaying buck startup by tau_EN=1.67 ms after CH224A active-low open-drain PG pin 10 turns on AO3407A P-FET load switch Q_PD_SW, C347478, via R_PD_PG=100k, R_PD_PG2=100k, and C_PD_SS=100nF (V_GS=-7.50 V at 15 V, tau_G=5.0 ms soft-start isolating the 67.1 uF C_PD_BULK + C_VIN1..3 capacitance from J_PWR VBUS_IN C_PD_IN=1uF until PD negotiation completes), with 3x 47 uF 10 V X5R 0805 output capacitors C_5V1-C_5V3, C76636, 141 uF nominal / ~70 uF effective at 5 V plus 100 nF C_5V4 adjacent to L_BUCK.2 and U_BUCK GND pad 9) -> 5V_SYS (buffered at U_CM5 +5v_(Input) pins 77-87 by a 100 uF 10 V 15 mOhm solid polymer bulk capacitor C_CM5_BULK, SA11AM101A19R15XXX, C135491, and 100 nF C_CM5_5V with PSU_MAX_CURRENT=5000 configured in CM5 EEPROM, feeding 3.0 A CM5 peak + 0.5 A P_KB + 0.5 A P_MOUSE + 0.48 A TPS61165 backlight boost + 0.35 A TLV62569 3V3_SYS buck + 0.055 A J_HDMI = 4.885 A max < 5.0 A limit, with 5V_USB_KB and 5V_USB_MOUSE switched by TPS2041BDBVR load switches U_SW_KB/U_SW_MOUSE driven by TI TUSB320LIRWBR DFP CC controllers U_CC_KB/U_CC_MOUSE with 10 kOhm VBUS output discharge bleeders R_KB_DIS/R_MOUSE_DIS (C25744, t_vSafe0V=183.3 ms < 650 ms) and 5V_HDMI switched by an AP2331SA-7 current-limited <=0.4 A reverse-blocking high-side load switch U_SW_HDMI, C500764); TI TLV62569DBVR (U_3V3, C141836, 5V->3.3V 2.0 A synchronous buck enabled by 3V3_CM5, equipped with active output discharge Q_3V3_INV/Q_3V3_DIS BSS138 C78284 + R_3V3_DIS=33R C25105 + R_3V3_DIS_PU=10k C25744 to 5V_SYS + 1k bleeder R_3V3_BLEED C11702 and B5819W Schottky sequencing clamp D_3V3_CLAMP C2943878 from 3V3_SYS Anode to 3V3_CM5 Cathode) supplies 3V3_SYS to front_io (J_FIO.1-2) and TPS2051BDBVR load switch U_SW_DSI (C24593, gating 3V3_DSI on J_DSI.22 via DSI1_EN with 1k discharge R_DSI_DIS C11702 and 1.8k SCL0/SDA0 pull-ups R_DSI_SCL/R_DSI_SDA referenced to switched 3V3_DSI), keeping CM5 internal PMIC 3V3_CM5 (rated <= 600 mA max external load per Raspberry Pi CM5 Datasheet Section 2.1) dedicated to GPIO_VREF (pin 78) and low-current carrier pull-ups (<20 mA, 10.2 uF decoupling)."
+    reason: "Replacing U_BUCK with SY8205FCC (4.5-30 V recommended operating input, 33 V abs max) ensures that both the 18.5 V max breakdown and 24.4 V at 16.4 A clamping voltage of D_PD_VBUS (PTVS15VS1UR,115) remain well below U_BUCK's 30 V operating limit and 33 V destruction threshold; setting R_PD_PG2=100k guarantees V_GS >= 2.38 V on Q_BUCK_EN during 5 V USB-PD pre-negotiation so U_BUCK cannot start prematurely; offloading front_io and J_DSI.22 onto the dedicated 2 A TLV62569DBVR 3V3_SYS buck regulator (with active output discharge Q_3V3_INV/Q_3V3_DIS + R_3V3_DIS=33R + R_3V3_BLEED=1k and B5819W Schottky clamp D_3V3_CLAMP so 3V3_SYS never exceeds 3V3_CM5 during shutdown/reset, and gating J_DSI.22 with TPS2051BDBVR U_SW_DSI + R_DSI_DIS=1k with R_DSI_SCL/R_DSI_SDA referenced to switched 3V3_DSI) keeps CM5 +3.3v_(Output) load (<20 mA) and capacitance (10.2 uF) far below the 600 mA CM5 PMIC limit while eliminating GPIO back-drive."
+  - question: "How are rear panel ports mounted on the vertical rear carrier PCB?"
+    choice: "Vertical (top-entry) USB-C receptacles (TYPE-C-31-D-06, C2689964), vertical HDMI-A receptacle (HYC79-HDMIA19-105, C711353), and top-actuated tactile buttons (PTS526SM15SMTR2LFS, C2689538) placed on the bottom side (rear-facing -Z side) of the rear carrier PCB."
+    reason: "Because the rear carrier PCB stands parallel to the rear enclosure wall, vertical connectors on its rear-facing (-Z) side point their mouths directly out through the rear panel openings."
+  - question: "How does the front SD card slot J_SD operate alongside the 32 GB onboard eMMC Compute Module 5 (CM5108032), and how are hot-plug power, signal integrity, and ESD handled on front_io?"
+    choice: "Connect top-mounted carrier J_FIO (F.Cu, rot=0, supplying 3.3 V /3V3_SYS from carrier U_3V3 TLV62569DBVR on pins 1-2 with active output discharge Q_3V3_INV/Q_3V3_DIS + R_3V3_DIS=33R + R_3V3_BLEED=1k and B5819W Schottky clamp D_3V3_CLAMP to /3V3_CM5) to bottom-mounted J_SUB_FIO (B.Cu, rot=0, receiving the 3.3 V peripheral rail on local net /3V3_CM5 on pins 1-2, with mirrored X pad coordinates placing Pin 1 at +X=80.25 mm and Pin 22 at -X=69.75 mm) via a Type-B (opposite-side contact, 1-to-1 pinout) 22-pin 0.5 mm FFC cable routing SDIO lines (SD_CLK_GPIO22, SD_CMD_GPIO23, SD_DAT0..3_GPIO24..27) to the CM5 RP1 GPIO Bank 0 secondary SDIO peripheral (GPIO22-GPIO27 constrained to <= 12.5 MHz Default-Speed mode with 80 ns clock period via CM5 RP1 mmc DT overlay max-frequency = <12500000>, source-terminated at U_CM5 pins 46, 47, 45, 41, 24, 48 with 33 Ohm host-side series damping resistors R_SD_CLK, R_SD_CMD, and R_SD_DAT0..3 C25105 and at J_SD on front_io with 22 Ohm card-side series damping and ESD-isolation resistors R40, R12, R14, R15, R37, and R38 0402WGF220JTCE C25092 on SD_CLK, SD_CMD, and SD_DAT0..3 between U7.B1..B6 and U2/U3/J_SD to damp card-driven read transitions and limit residual ESD clamping current into U7, with 100 kOhm host pull-ups R_SD_CMD_PU and R_SD_DAT0..3_PU C25741 to 3V3_CM5 plus 47 kOhm card-side pull-ups R1-R5 0402WGF4702TCE C25792 to /SD_VDD giving 47k || 100k = 32.0 kOhm effective pull-up within the 10-100 kOhm SD spec window and <= 4.1 mV series DC drop) with G-S-S-G-S-S-G-S-G ground return interleaving across J_SUB_FIO pins 5-13 (via dedicated parallel 0R resistors R28=0R and R36=0R 0402WGF0000TCE, C17168, tying pins 13 and 8 directly to GND on F.Cu/B.Cu without slotting the B.Cu ground plane) and GPIO5 driving SD_PWR_ON (pulled down on the carrier via R_SD_PWR_PD = 100 kOhm C25741 and on front_io via R8 = 10 kOhm C25744 with C15 = 100 pF 50 V C0G 0402CG101J500NT C1546 HF filter keeping GPIO5 capacitive load <= 135 pF) into a constant-current auto-retry AP22653W6-7 (U1, LCSC C2158037, ILIM_min = 365.5 mA >= 350 mA, ILIM_typ = 420.6 mA, ILIM_max = 483.5 mA via R22 = 56 kOhm 1% 0402WGF5602TCE, C25796) high-side load switch whose open-drain ~{FAULT} output (U1.4) is pulled up to 3V3_CM5 via R21 = 10 kOhm (C25744) and routed over J_SUB_FIO.19 (SD_FAULT_VSS_N) to a CM5 GPIO interrupt; isolate all 6 SDIO lines (SD_CLK_GPIO22..SD_DAT3_GPIO27 on A1..A6 to SD_CLK_B/SD_CMD_B/SD_DAT0..3_B on B1..B6 feeding R40/R12/R14/R15/R37/R38) when /SD_VDD is disabled, browned out, or faulted using a TI SN74CB3Q3245PWR 8-bit charge-pump FET bus switch (U7, LCSC C470961, r_on = 4 Ohm typ, I_OZ <= 1 uA, I_off <= 1 uA, decoupled by C12 = 100 nF C131394 on 3V3_CM5, unused channels A7/B7/A8/B8 and NC pin 1 tied to GND) whose active-low ~{OE} (pin 19, SD_BUS_OE_N) is pulled up to 3V3_CM5 via R30 = 470 Ohm (0402WGF4700TCE, C25117) and pulled low with a >= 3.05 ms min / 4.72 ms typ turn-on delay after /SD_VDD rises (via R35 = 56 kOhm C25796 referenced directly to /SD_VDD + C14 = 100 nF C131394 tau = 5.60 ms into Schmitt-trigger buffer U8 channel 3 3A pin 6 -> 3Y pin 2 SD_PWR_DLY_BUF, with fast /SD_VDD brownout/short reset Schottky diode D4 RB751V40T1G C154819 from SD_PWR_DLY Anode to /SD_VDD Cathode and upstream ~{FAULT} reset Schottky diode D5 RB751V40T1G C154819 from SD_PWR_DLY Anode to SD_FAULT_VSS_N Cathode so C14 is immediately discharged upon either /SD_VDD brownout/short or ~{FAULT} assertion and U7 always waits the full R35/C14 soft-start delay after brownout or fault recovery), < 20 ns fast turn-off on disable or reset (via Schmitt-trigger 2-input AND gate U9 SN74LVC1G97DBVR C128411 decoupled by C17 = 100 nF C131394 with IN1=GND, IN0=SD_PWR_ON, IN2=SD_PWR_DLY_BUF -> Y=SD_PWR_EN_AND opening U7 in 11.7 ns typ / < 20 ns max as soon as SD_PWR_ON falls below VT- = 0.84-1.19 V), and < 150 ns direct /SD_VDD short/brownout turn-off plus < 20 ns ~{FAULT} turn-off by a series N-MOSFET NAND gate comprising Q3 BSS138 (C78284, Gate=SD_PWR_EN_AND, Source=GND, Drain=SD_DIS_EN with R33 = 1 kOhm 0402WGF1001TCE C11702 to /SD_VDD) in series with Q2 BSS138 (C78284, Gate=SD_OE_GATE referenced directly to downstream /SD_VDD via R31 = 1 kOhm + C16 = 100 pF C0G 0402CG101J500NT C1546 tau = 127 ns and clamped low in < 20 ns on ~{FAULT} via Schottky diode D6 RB751V40T1G C154819 from SD_OE_GATE Anode to SD_FAULT_VSS_N Cathode, Source=SD_DIS_EN, Drain=SD_BUS_OE_N); provide disable-only mutually exclusive self-held active switched /SD_VDD output discharge via Q1 BSS138 (C78284, Gate=SD_PWR_OFF) driven by dedicated N-MOSFET inverter Q4 BSS138 (C78284, Gate=SD_PWR_ON, Source=GND, Drain=SD_PWR_OFF pulled up via R39 = 10 kOhm C25744 to local diode-OR gate-drive rail /SD_DIS_VCC fed by dual Schottky diodes D2 RB751V40T1G C154819 from /3V3_CM5 and D3 RB751V40T1G C154819 from /SD_VDD with C18 = 100 nF C131394 hold-up capacitor to GND so Q1 turns OFF in < 50 ns as soon as SD_PWR_ON asserts HIGH, never fighting U1 during its 0.7-1.5 ms soft-start or during ~{FAULT} constant-current limiting, and maintains V_GS ~ 3.0 V when SD_PWR_ON is LOW even when /3V3_CM5 collapses to 0 V during system reset/shutdown while U1 blocks reverse current) switching 3x parallel 470 Ohm resistors R29 || R32 || R13 (0402WGF4700TCE, C25117, 156.7 Ohm switched + ~3 Ohm Q1 R_DS(on)) in parallel with R34 = 10 kOhm bleeder (0402WGF1002TCE, C25744) across /SD_VDD (R_eq = 157.2 Ohm, discharging board C1+C2 = 10.1 uF below 0.5 V in 3.00 ms and worst-case C1+C2+C_card = 20.1 uF including 10 uF internal SD card capacitance below 0.5 V in 5.96 ms); clamp contact ESD on J_SD.4 (/SD_VDD) with a non-snapback 3.3 V TVS diode D1 (PTVSLC3D3V3B, LCSC C246774, SOD-323) placed adjacent to C2; transition 3V3_CM5 from J_SUB_FIO.1-2 through dual parallel 0.6/0.3 mm vias at (80.80, 58.60) and (81.60, 58.60) into a dedicated 0.5 mm F.Cu power trunk feeding 32 uF input bulk capacitance (C7 = 22 uF 25 V X5R 0805 CL21A226MAQNNNE, C45783, plus C8 = 10 uF 25 V X5R 0603 CM105X5R106M25AT, C3038124, damped by 0.42 Ohm FFC series resistance) and local 100 nF HF bypass C3 (LCSC C131394) placed 1.85 mm from U1.1/U1.2, while U1.6 drives J_SD.4 and C1/C2/D1 over a direct 0.5 mm F.Cu trunk; route all J_SD and SW_ENC signals inline with zero stub length through the opposite flow-through pin pairs (1-10, 2-9, 4-7, 5-6) of 3.3 V standoff low-capacitance (0.65 pF max) snapback ESD arrays Semtech RCLAMP3324P.TNT (U2, U3, U4, U6, LCSC C1976652, VRWM = 3.3 V, VBR = 3.8-4.5 V, VH = 1.9 V, with SD_CLK on U2.10->U2.1, SD_DAT0 on U2.7->U2.4, SD_DAT1 on U2.6->U2.5, SD_DAT2 on U3.10->U3.1, SD_DAT3 on U3.9->U3.2, SD_CMD reassigned to U3.7->U3.4 adjacent to J_SD.2, SD_CD on U6.10->U6.1, SD_WP on U6.9->U6.2, ENC_A_SW on U4.1->U4.10, ENC_B_SW on U4.2->U4.9, ENC_BTN_SW on U4.4->U4.7, and all unused flow-through pairs U2.2/9, U3.5/6, U6.4/7, U6.5/6 tied to GND); pull up J_SD.10 (SD_CD) and J_SD.11 (SD_WP) directly at the switch contacts via R6 = 10 kOhm and R7 = 10 kOhm (V_OL = 0.00 V), filter through R23 = 10 kOhm + C10 = 100 nF and R24 = 10 kOhm + C11 = 100 nF (tau_fall = 1.0 ms, tau_rise = 2.0 ms), and buffer with Schmitt-trigger IC U8 (SN74LVC3G17DCTR, LCSC C18213, decoupled by C13 = 100 nF C131394, with channel 3 buffering SD_PWR_DLY -> SD_PWR_DLY_BUF) driving 33 Ohm series source-termination resistors R16 and R17 (LCSC C25105) to J_SUB_FIO.20/21; and filter bottom-mounted SW_ENC (mirrored B.Cu X pad coordinates) with R18-R20 = 10 kOhm + C4-C6 = 100 nF into SN74LVC3G17DCTR (U5, LCSC C18213) driving 33 Ohm series source-termination resistors R25-R27 at outputs 1Y/2Y/3Y."
+    reason: "Mirroring B.Cu pad X-coordinates on J_SUB_FIO and SW_ENC and pairing top-mounted J_FIO with bottom-mounted J_SUB_FIO via a Type-B (opposite-side contact) FFC preserves 1-to-1 pin continuity across pins 1..22; replacing latch-off AP22653AW6-7 with constant-current auto-retry AP22653W6-7 (U1, C2158037) and lowering R22 to 56 kOhm 1% (0402WGF5602TCE, C25796, ILIM_min = 365.5 mA >= 350 mA, ILIM_typ = 420.6 mA, ILIM_max = 483.5 mA) prevents permanent slot shutdown on SD hot-insertion or write peaks while staying well within the 2.0 A TLV62569DBVR 3V3_SYS supply and 1.0 A dual-pin FFC rating; referencing R35 = 56 kOhm to /SD_VDD with fast brownout/short reset diode D4 (RB751V40T1G, C154819, Anode=SD_PWR_DLY, Cathode=/SD_VDD) and upstream ~{FAULT} reset diode D5 (RB751V40T1G, C154819, Anode=SD_PWR_DLY, Cathode=SD_FAULT_VSS_N) ahead of Schmitt-trigger buffer U8 channel 3 (3A -> 3Y SD_PWR_DLY_BUF) and 2-input AND gate U9 (SN74LVC1G97DBVR, C128411, decoupled by C17 = 100 nF C131394) plus referencing Q2 gate (/SD_OE_GATE via R31 = 1 kOhm + C16 = 100 pF C0G C1546, tau = 127 ns, with ~{FAULT} clamp diode D6 RB751V40T1G) and R33 = 1 kOhm directly to downstream /SD_VDD ensures U7 opens in < 150 ns on a /SD_VDD short-circuit or brownout without waiting for U1's 2-20 ms ~{FAULT} blanking timer, opens in < 20 ns on disable or ~{FAULT}, and always waits the full R35/C14 soft-start delay after brownout or fault recovery; supplying R39.1 (10 kOhm pull-up for Q1 gate /SD_PWR_OFF) via dual Schottky OR-ing diodes D2 (from /3V3_CM5) and D3 (from /SD_VDD) (RB751V40T1G, C154819) buffered by hold-up capacitor C18 = 100 nF (C131394) on /SD_DIS_VCC keeps Q1 strictly OFF when SD_PWR_ON is HIGH and holds Q1 gate at ~3.0 V all the way to /SD_VDD = 0.0 V when SD_PWR_ON is LOW even when /3V3_CM5 collapses during reset/shutdown while U1 blocks reverse current; adding 22 Ohm card-side series damping/ESD-isolation resistors R40, R12, R14, R15, R37, and R38 (0402WGF220JTCE, C25092) between U7.B1..B6 and U2/U3/J_SD damps transitions and limits residual ESD clamping current into U7 across all 6 SDIO channels; reassigning SD_CMD to U3.7->U3.4 and routing all RCLAMP3324P.TNT signals inline across opposite pin pairs (1-10, 2-9, 4-7, 5-6) eliminates PCB ESD stubs; and routing /SDIO_RET on F.Cu with dual parallel 0R resistors R28/R36 eliminates the B.Cu ground plane slot behind J_SUB_FIO pads 8-13."

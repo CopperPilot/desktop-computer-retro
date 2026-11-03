@@ -1,0 +1,141 @@
+schema_version: rea-hardware/system/v1
+frame: desk
+product:
+  slug: compact-desktop
+  name: Compact all-in-one desktop computer with keyboard and mouse
+  summary: "1984-style compact 4:3 all-in-one desktop powered by a Raspberry Pi Compute Module 5, with a separate 58-key mechanical USB keyboard, single-button optical USB mouse, and external USB-C PD power supply"
+inputs:
+  images:
+    - inputs/front.jpg
+    - inputs/three_quarter_dark.jpg
+    - inputs/three_quarter_light.jpg
+  prompt: inputs/prompt.md
+fidelity:
+  must_match:
+    - {id: F1, name: 9-inch 4:3 CRT-style display window, kind: display, view: front, center_mm: [185, 115], size_mm: [184, 138], implement: pcb+case}
+    - {id: F2, name: front 3.5-inch media slot opening, kind: port, view: front, center_mm: [220, 235], size_mm: [95, 16], implement: pcb+case}
+    - {id: F3, name: lower-left chin brightness control wheel, kind: switch, view: front, center_mm: [105, 290], size_mm: [18, 8], implement: pcb+case}
+    - {id: F4, name: 58-key mechanical keyboard cluster, kind: button, view: top, center_mm: [185, 365], size_mm: [305, 105], implement: pcb+case}
+    - {id: F5, name: rectangular mouse primary button, kind: button, view: top, center_mm: [404, 325], size_mm: [38, 22], implement: pcb+case}
+    - {id: F6, name: rear USB-C PD power input port, kind: port, view: rear, center_mm: [120, 310], size_mm: [9.5, 3.5], implement: pcb+case}
+requirements:
+  - {id: R1, text: "compact all-in-one desktop computer like the one in these photos", how_met: "247x300x346 mm vertical beige all-in-one enclosure with recessed 4:3 display bezel, top carry handle recess, front SD/media slot, lower chin brightness control wheel, and rear I/O ports", quantity: "247 x 300 x 346 mm"}
+  - {id: R2, text: "boot a full desktop OS using a Raspberry Pi Compute Module 5 as the brain", how_met: "Raspberry Pi Compute Module 5 mounted on dual 100-pin DF40C mezzanine connectors on a 4-layer carrier PCB with MIPI DSI display drive, dedicated USB-C OTG flashing port + nRPIBOOT button, and RP1 USB host ports", quantity: "1x CM5 module"}
+  - {id: R3, text: "with its keyboard", how_met: "separate 338x148x48 mm stepped beige compact mechanical keyboard with 58 Cherry MX-style switches in a full diode matrix, sculpted keycaps with legends, and USB-C cable to desktop", quantity: "58 mechanical keys"}
+  - {id: R4, text: "and mouse", how_met: "separate 62x97x37 mm rectangular beige single-button optical USB mouse with wide taupe primary click button, optical navigation sensor with bottom window, and USB-C cable to desktop", quantity: "1 button + 2D optical sensor"}
+power:
+  source: "external certified 65 W USB-C PD wall/desk adapter (purchased) supplying 15 V DC into the desktop rear USB-C PD sink port; desktop steps 15 V down to 5 V to power the CM5, display, and USB VBUS for the keyboard and mouse"
+  rails:
+    - {name: VBUS_PD, voltage_v: 15.0, max_current_a: 3.0, from_module: psu, to_modules: [desktop]}
+    - {name: 5V_SYS, voltage_v: 5.0, max_current_a: 5.0, from_module: desktop, to_modules: [desktop]}
+    - {name: 3V3_CM5, voltage_v: 3.3, max_current_a: 1.5, from_module: desktop, to_modules: [desktop]}
+    - {name: 5V_USB_KB, voltage_v: 5.0, max_current_a: 0.5, from_module: desktop, to_modules: [keyboard]}
+    - {name: 5V_USB_MOUSE, voltage_v: 5.0, max_current_a: 0.5, from_module: desktop, to_modules: [mouse]}
+    - {name: 3V3_KB, voltage_v: 3.3, max_current_a: 0.25, from_module: keyboard, to_modules: [keyboard]}
+    - {name: 3V3_MOUSE, voltage_v: 3.3, max_current_a: 0.15, from_module: mouse, to_modules: [mouse]}
+modules:
+  - id: desktop
+    name: Compact all-in-one CM5 desktop computer
+    kind: build
+    brief: >-
+      1984-style compact vertical all-in-one desktop computer (247x300x346 mm) shown in inputs/front.jpg,
+      inputs/three_quarter_dark.jpg, and inputs/three_quarter_light.jpg. Build with view: {up: [0,0,1],
+      front: [0,-1,0]}. Houses an 8.0-inch 4:3 IPS LCD display module behind the recessed front bezel window,
+      driven by a Raspberry Pi Compute Module 5 (real 3D model from rea-hw ref cm5) via MIPI DSI with a
+      dedicated LED backlight driver + PWM dimming harness. Uses two boards: (1) a 4-layer rear carrier PCB
+      against the rear panel holding the CM5 dual DF40C-100DS mezzanine sockets, standalone resistor-strapped
+      CH224K USB-C PD sink on rear port P_PWR (negotiating 15 V into a 5 V / 5 A synchronous buck converter
+      feeding all CM5 5 V pins, while CM5_3V3 feeds GPIO_VREF with no conflicting external 3.3 V LDO), a
+      direct service USB-C 2.0 OTG flashing port (P_BOOT) wired straight to CM5 USB2_P/N (pins 105/103) with
+      an nRPIBOOT button (pin 93) and USB_OTG_ID bootstrap, RP1 USB host ports (USB3-0 and USB3-1) feeding rear
+      USB-C host receptacles for the keyboard (port P_KB) and mouse (port P_MOUSE), plus rear HDMI output and
+      power button; and (2) a front I/O sub-board right behind the front face (connected by internal FFC cable)
+      carrying the SD card slot at the front horizontal media slot opening and the brightness rotary encoder
+      wheel under the lower-left chin overhang. Include an RF-transparent rear/top vent window for the CM5
+      antenna and exclude all prohibited brand marks.
+    images:
+      - inputs/front.jpg
+      - inputs/three_quarter_dark.jpg
+      - inputs/three_quarter_light.jpg
+    envelope_mm: [247, 300, 346]
+    world_position_mm: [0, 80, 0]
+    power_from: psu
+    interfaces:
+      - {name: USB-C PD power input, to: psu, connector: "USB-C receptacle on rear panel", carries: "15 V USB-PD power (45 W)", port: P_PWR}
+      - {name: Keyboard USB host port, to: keyboard, connector: "USB-C receptacle on rear panel", carries: "5 V VBUS + USB 2.0 D+/D- HID", port: P_KB}
+      - {name: Mouse USB host port, to: mouse, connector: "USB-C receptacle on rear panel", carries: "5 V VBUS + USB 2.0 D+/D- HID", port: P_MOUSE}
+  - id: keyboard
+    name: Compact 58-key mechanical desktop keyboard
+    kind: build
+    brief: >-
+      Stepped beige/warm-grey compact 58-key mechanical desktop keyboard (338x148x48 mm) shown in front of the
+      computer in inputs/front.jpg and inputs/three_quarter_dark.jpg. Build with view: {up: [0,0,1],
+      front: [0,-1,0]}. Uses 58 Cherry MX-style mechanical keyswitches (stock Button_Switch_Keyboard:SW_Cherry_MX_*_PCB
+      footprints with 3D models generated by rea_hardware.cad.keyswitch_model()) arranged in the classic 5-row
+      58-key layout with sculpted keycaps and legends (rea_hardware.cad.keycap(width_u, legend)) and one push
+      actuator per key. Wired as a full row/column diode matrix into an RP2040 MCU (with external QSPI flash,
+      12 MHz crystal, 3.3 V LDO from 5 V VBUS, and bottom-accessible BOOTSEL flashing button). Connects to the
+      desktop via a rear-edge USB-C receptacle (port P_KB_DEV) with 5.1k CC1/CC2 pull-downs, ESD protection,
+      and 90-ohm differential USB D+/D- routing.
+    images:
+      - inputs/front.jpg
+      - inputs/three_quarter_dark.jpg
+    envelope_mm: [338, 148, 48]
+    world_position_mm: [-20, -200, 0]
+    power_from: desktop
+    interfaces:
+      - {name: USB device port, to: desktop, connector: "USB-C receptacle on rear edge (+Y)", carries: "5 V VBUS + USB 2.0 D+/D- HID", port: P_KB_DEV}
+  - id: mouse
+    name: Single-button rectangular optical USB mouse
+    kind: build
+    brief: >-
+      Classic rectangular single-button wired desktop mouse (62x97x37 mm) in beige with a wide taupe rectangular
+      primary button cap near the front-top edge, shown in inputs/front.jpg, inputs/three_quarter_dark.jpg, and
+      inputs/three_quarter_light.jpg. Build with view: {up: [0,0,1], front: [0,-1,0]}. Houses a 2-layer PCB
+      with a top-actuated mechanical switch under the primary click button (push actuator), a 2D optical mouse
+      navigation sensor centered over a bottom optical aperture window (optical actuator), a USB HID MCU with
+      3.3 V LDO and firmware boot/flash button on the bottom face, and a rear/north-edge (+Y, facing the
+      desktop) USB-C receptacle (port P_MOUSE_DEV) with 5.1k CC pull-downs and 90-ohm differential USB D+/D-.
+    images:
+      - inputs/front.jpg
+      - inputs/three_quarter_dark.jpg
+      - inputs/three_quarter_light.jpg
+    envelope_mm: [62, 97, 37]
+    world_position_mm: [210, -180, 0]
+    power_from: desktop
+    interfaces:
+      - {name: USB device port, to: desktop, connector: "USB-C receptacle on north edge (+Y)", carries: "5 V VBUS + USB 2.0 D+/D- HID", port: P_MOUSE_DEV}
+  - id: psu
+    name: 65 W USB-C PD desktop power adapter
+    kind: purchased
+    brief: "Certified external 65 W USB-C PD power adapter supplying 15 V / 3 A to the desktop rear USB-C PD input."
+    envelope_mm: [58, 58, 30]
+    world_position_mm: [-90, 325, 0]
+    mpn: "UGREEN Nexode 65W USB-C GaN PD Charger (CD244)"
+    url: "https://www.ugreen.com/products/ugreen-65w-usb-c-charger"
+cables:
+  - id: power_cable
+    kind: "USB-C PD power cable (15 V / 3 A)"
+    a: {module: psu, at_mm: [58, 29, 15]}
+    b: {module: desktop, feature: P_PWR}
+    length_mm: 1200
+  - id: keyboard_cable
+    kind: "USB-C to USB-C coiled/desk data cable"
+    a: {module: desktop, feature: P_KB}
+    b: {module: keyboard, feature: P_KB_DEV}
+    length_mm: 1000
+  - id: mouse_cable
+    kind: "USB-C to USB-C flexible mouse cord"
+    a: {module: desktop, feature: P_MOUSE}
+    b: {module: mouse, feature: P_MOUSE_DEV}
+    length_mm: 1000
+assembly:
+  - {module: desktop, travel_mm: 0}
+  - {module: keyboard, direction: [0, 0, -1], travel_mm: 80}
+  - {module: mouse, direction: [0, 0, -1], travel_mm: 60}
+  - {module: psu, direction: [0, 0, -1], travel_mm: 60}
+decisions:
+  - {question: "Single product or multi-module system?", choice: "Multi-module system (rea/system.yaml) with 3 built units (desktop, keyboard, mouse) and 1 purchased USB-C PD power supply", reason: "The all-in-one desktop, compact mechanical keyboard, and single-button mouse are physically separate enclosures sitting on a desk connected by cables, matching the Step 0 rule for a computer with a separate keyboard and mouse."}
+  - {question: "Keyboard variant across reference photos?", choice: "58-key compact mechanical keyboard from front.jpg and three_quarter_dark.jpg", reason: "Two of the three photos (including the primary front.jpg) show the original 338x148 mm 58-key tenkeyless layout without the later external drive stand or numeric keypad."}
+  - {question: "Mains power supply?", choice: "External certified 65 W USB-C PD adapter feeding a standalone resistor-strapped CH224K 15 V PD sink on the desktop rear panel", reason: "Never design mains circuitry; autonomous resistor-strapped PD sink negotiates 15 V without requiring the processor to boot first."}
+  - {question: "CM5 flashing vs user USB host ports?", choice: "Dedicated service USB-C 2.0 OTG port wired directly to CM5 USB2_P/N with nRPIBOOT button; keyboard and mouse wired to RP1 USB3-0 and USB3-1 host ports", reason: "Routing user USB ports through the CM5 OTG pair breaks rpiboot flashing; separating the OTG service port from RP1 host ports guarantees reliable OS flashing and simultaneous USB HID operation."}

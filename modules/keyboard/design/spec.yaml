@@ -1,0 +1,2867 @@
+schema_version: rea-hardware/spec/v1
+product:
+  slug: compact-58key-keyboard
+  name: Compact 58-key mechanical desktop keyboard
+  summary: Stepped beige/warm-grey 58-key Cherry MX mechanical keyboard (338x148x48 mm) with RP2040 MCU,
+    full diode matrix, sculpted keycaps, and rear USB-C device port
+  category: computer keyboard
+view:
+  up:
+  - 0
+  - 0
+  - 1
+  front:
+  - 0
+  - -1
+  - 0
+inputs:
+  images:
+  - inputs/front.jpg
+  - inputs/three_quarter_dark.jpg
+  views:
+    front: inputs/front.jpg
+  prompt: inputs/prompt.md
+envelope:
+  width_mm: 338.0
+  height_mm: 148.0
+  depth_mm: 48.0
+  corner_radius_mm: 5.0
+  derivation: Published dimensions of the classic 58-key compact desktop keyboard (M0110 class, 338 x
+    148 x 48 mm) and system module contract; 15u x 19.05 mm = 285.75 mm key well with 26.125 mm side bezels
+    = 338.0 mm width.
+  front_origin_world_mm:
+  - -14.0
+  - 2.0
+  - 34.0
+fidelity:
+  out_of_scope:
+  - recessed front-left brand logo badge on lower left bezel
+  - coiled RJ11 telephone-style keyboard cord (replaced by rear USB-C port P_KB_DEV per system spec)
+  - internal sheet-metal switch mounting plate (switches are PCB-mounted on 1.6 mm FR-4)
+  - textured injection-mold grain finish
+  dimensions:
+  - name: overall_width
+    kind: overall_width
+    value_mm: 338.0
+    tol_mm: 2.0
+    source: System module contract and M0110 published width (338 mm)
+  - name: overall_height
+    kind: overall_height
+    value_mm: 48.0
+    tol_mm: 2.0
+    source: System module contract and M0110 published height along view.up [0,0,1] (48 mm)
+  - name: overall_depth
+    kind: overall_depth
+    value_mm: 148.0
+    tol_mm: 2.0
+    source: System module contract and M0110 published depth along view.front [0,-1,0] (148 mm)
+  must_match:
+  - id: F_K01
+    name: key 01 (` ~) (1.00u)
+    kind: button
+    view: front
+    center_mm:
+    - 35.65
+    - 35.9
+    size_mm:
+    - 18.05
+    - 18.05
+    implement: pcb+case
+    source: photo
+    confidence: high
+    notes: Row 1 key '` ~', width 1.00u, stem world XY=(21.65, -33.9), sculpted keycap via rea_hardware.cad.keycap(1.0,
+      '` ~')
+  - id: F_K02
+    name: key 02 (1 !) (1.00u)
+    kind: button
+    view: front
+    center_mm:
+    - 54.7
+    - 35.9
+    size_mm:
+    - 18.05
+    - 18.05
+    implement: pcb+case
+    source: photo
+    confidence: high
+    notes: Row 1 key '1 !', width 1.00u, stem world XY=(40.7, -33.9), sculpted keycap via rea_hardware.cad.keycap(1.0,
+      '1 !')
+  - id: F_K03
+    name: key 03 (2 @) (1.00u)
+    kind: button
+    view: front
+    center_mm:
+    - 73.75
+    - 35.9
+    size_mm:
+    - 18.05
+    - 18.05
+    implement: pcb+case
+    source: photo
+    confidence: high
+    notes: Row 1 key '2 @', width 1.00u, stem world XY=(59.75, -33.9), sculpted keycap via rea_hardware.cad.keycap(1.0,
+      '2 @')
+  - id: F_K04
+    name: 'key 04 (3 #) (1.00u)'
+    kind: button
+    view: front
+    center_mm:
+    - 92.8
+    - 35.9
+    size_mm:
+    - 18.05
+    - 18.05
+    implement: pcb+case
+    source: photo
+    confidence: high
+    notes: 'Row 1 key ''3 #'', width 1.00u, stem world XY=(78.8, -33.9), sculpted keycap via rea_hardware.cad.keycap(1.0,
+      ''3 #'')'
+  - id: F_K05
+    name: key 05 (4 $) (1.00u)
+    kind: button
+    view: front
+    center_mm:
+    - 111.85
+    - 35.9
+    size_mm:
+    - 18.05
+    - 18.05
+    implement: pcb+case
+    source: photo
+    confidence: high
+    notes: Row 1 key '4 $', width 1.00u, stem world XY=(97.85, -33.9), sculpted keycap via rea_hardware.cad.keycap(1.0,
+      '4 $')
+  - id: F_K06
+    name: key 06 (5 %) (1.00u)
+    kind: button
+    view: front
+    center_mm:
+    - 130.9
+    - 35.9
+    size_mm:
+    - 18.05
+    - 18.05
+    implement: pcb+case
+    source: photo
+    confidence: high
+    notes: Row 1 key '5 %', width 1.00u, stem world XY=(116.9, -33.9), sculpted keycap via rea_hardware.cad.keycap(1.0,
+      '5 %')
+  - id: F_K07
+    name: key 07 (6 ^) (1.00u)
+    kind: button
+    view: front
+    center_mm:
+    - 149.95
+    - 35.9
+    size_mm:
+    - 18.05
+    - 18.05
+    implement: pcb+case
+    source: photo
+    confidence: high
+    notes: Row 1 key '6 ^', width 1.00u, stem world XY=(135.95, -33.9), sculpted keycap via rea_hardware.cad.keycap(1.0,
+      '6 ^')
+  - id: F_K08
+    name: key 08 (7 &) (1.00u)
+    kind: button
+    view: front
+    center_mm:
+    - 169.0
+    - 35.9
+    size_mm:
+    - 18.05
+    - 18.05
+    implement: pcb+case
+    source: photo
+    confidence: high
+    notes: Row 1 key '7 &', width 1.00u, stem world XY=(155.0, -33.9), sculpted keycap via rea_hardware.cad.keycap(1.0,
+      '7 &')
+  - id: F_K09
+    name: key 09 (8 *) (1.00u)
+    kind: button
+    view: front
+    center_mm:
+    - 188.05
+    - 35.9
+    size_mm:
+    - 18.05
+    - 18.05
+    implement: pcb+case
+    source: photo
+    confidence: high
+    notes: Row 1 key '8 *', width 1.00u, stem world XY=(174.05, -33.9), sculpted keycap via rea_hardware.cad.keycap(1.0,
+      '8 *')
+  - id: F_K10
+    name: key 10 (9 () (1.00u)
+    kind: button
+    view: front
+    center_mm:
+    - 207.1
+    - 35.9
+    size_mm:
+    - 18.05
+    - 18.05
+    implement: pcb+case
+    source: photo
+    confidence: high
+    notes: Row 1 key '9 (', width 1.00u, stem world XY=(193.1, -33.9), sculpted keycap via rea_hardware.cad.keycap(1.0,
+      '9 (')
+  - id: F_K11
+    name: key 11 (0 )) (1.00u)
+    kind: button
+    view: front
+    center_mm:
+    - 226.15
+    - 35.9
+    size_mm:
+    - 18.05
+    - 18.05
+    implement: pcb+case
+    source: photo
+    confidence: high
+    notes: Row 1 key '0 )', width 1.00u, stem world XY=(212.15, -33.9), sculpted keycap via rea_hardware.cad.keycap(1.0,
+      '0 )')
+  - id: F_K12
+    name: key 12 (- _) (1.00u)
+    kind: button
+    view: front
+    center_mm:
+    - 245.2
+    - 35.9
+    size_mm:
+    - 18.05
+    - 18.05
+    implement: pcb+case
+    source: photo
+    confidence: high
+    notes: Row 1 key '- _', width 1.00u, stem world XY=(231.2, -33.9), sculpted keycap via rea_hardware.cad.keycap(1.0,
+      '- _')
+  - id: F_K13
+    name: key 13 (= +) (1.00u)
+    kind: button
+    view: front
+    center_mm:
+    - 264.25
+    - 35.9
+    size_mm:
+    - 18.05
+    - 18.05
+    implement: pcb+case
+    source: photo
+    confidence: high
+    notes: Row 1 key '= +', width 1.00u, stem world XY=(250.25, -33.9), sculpted keycap via rea_hardware.cad.keycap(1.0,
+      '= +')
+  - id: F_K14
+    name: key 14 (Backspace) (2.00u)
+    kind: button
+    view: front
+    center_mm:
+    - 292.825
+    - 35.9
+    size_mm:
+    - 37.1
+    - 18.05
+    implement: pcb+case
+    source: photo
+    confidence: high
+    notes: Row 1 key 'Backspace', width 2.00u, stem world XY=(278.825, -33.9), sculpted keycap via rea_hardware.cad.keycap(2.0,
+      'Backspace')
+  - id: F_K15
+    name: key 15 (Tab) (1.50u)
+    kind: button
+    view: front
+    center_mm:
+    - 40.413
+    - 54.95
+    size_mm:
+    - 27.58
+    - 18.05
+    implement: pcb+case
+    source: photo
+    confidence: high
+    notes: Row 2 key 'Tab', width 1.50u, stem world XY=(26.413, -52.95), sculpted keycap via rea_hardware.cad.keycap(1.5,
+      'Tab')
+  - id: F_K16
+    name: key 16 (Q) (1.00u)
+    kind: button
+    view: front
+    center_mm:
+    - 64.225
+    - 54.95
+    size_mm:
+    - 18.05
+    - 18.05
+    implement: pcb+case
+    source: photo
+    confidence: high
+    notes: Row 2 key 'Q', width 1.00u, stem world XY=(50.225, -52.95), sculpted keycap via rea_hardware.cad.keycap(1.0,
+      'Q')
+  - id: F_K17
+    name: key 17 (W) (1.00u)
+    kind: button
+    view: front
+    center_mm:
+    - 83.275
+    - 54.95
+    size_mm:
+    - 18.05
+    - 18.05
+    implement: pcb+case
+    source: photo
+    confidence: high
+    notes: Row 2 key 'W', width 1.00u, stem world XY=(69.275, -52.95), sculpted keycap via rea_hardware.cad.keycap(1.0,
+      'W')
+  - id: F_K18
+    name: key 18 (E) (1.00u)
+    kind: button
+    view: front
+    center_mm:
+    - 102.325
+    - 54.95
+    size_mm:
+    - 18.05
+    - 18.05
+    implement: pcb+case
+    source: photo
+    confidence: high
+    notes: Row 2 key 'E', width 1.00u, stem world XY=(88.325, -52.95), sculpted keycap via rea_hardware.cad.keycap(1.0,
+      'E')
+  - id: F_K19
+    name: key 19 (R) (1.00u)
+    kind: button
+    view: front
+    center_mm:
+    - 121.375
+    - 54.95
+    size_mm:
+    - 18.05
+    - 18.05
+    implement: pcb+case
+    source: photo
+    confidence: high
+    notes: Row 2 key 'R', width 1.00u, stem world XY=(107.375, -52.95), sculpted keycap via rea_hardware.cad.keycap(1.0,
+      'R')
+  - id: F_K20
+    name: key 20 (T) (1.00u)
+    kind: button
+    view: front
+    center_mm:
+    - 140.425
+    - 54.95
+    size_mm:
+    - 18.05
+    - 18.05
+    implement: pcb+case
+    source: photo
+    confidence: high
+    notes: Row 2 key 'T', width 1.00u, stem world XY=(126.425, -52.95), sculpted keycap via rea_hardware.cad.keycap(1.0,
+      'T')
+  - id: F_K21
+    name: key 21 (Y) (1.00u)
+    kind: button
+    view: front
+    center_mm:
+    - 159.475
+    - 54.95
+    size_mm:
+    - 18.05
+    - 18.05
+    implement: pcb+case
+    source: photo
+    confidence: high
+    notes: Row 2 key 'Y', width 1.00u, stem world XY=(145.475, -52.95), sculpted keycap via rea_hardware.cad.keycap(1.0,
+      'Y')
+  - id: F_K22
+    name: key 22 (U) (1.00u)
+    kind: button
+    view: front
+    center_mm:
+    - 178.525
+    - 54.95
+    size_mm:
+    - 18.05
+    - 18.05
+    implement: pcb+case
+    source: photo
+    confidence: high
+    notes: Row 2 key 'U', width 1.00u, stem world XY=(164.525, -52.95), sculpted keycap via rea_hardware.cad.keycap(1.0,
+      'U')
+  - id: F_K23
+    name: key 23 (I) (1.00u)
+    kind: button
+    view: front
+    center_mm:
+    - 197.575
+    - 54.95
+    size_mm:
+    - 18.05
+    - 18.05
+    implement: pcb+case
+    source: photo
+    confidence: high
+    notes: Row 2 key 'I', width 1.00u, stem world XY=(183.575, -52.95), sculpted keycap via rea_hardware.cad.keycap(1.0,
+      'I')
+  - id: F_K24
+    name: key 24 (O) (1.00u)
+    kind: button
+    view: front
+    center_mm:
+    - 216.625
+    - 54.95
+    size_mm:
+    - 18.05
+    - 18.05
+    implement: pcb+case
+    source: photo
+    confidence: high
+    notes: Row 2 key 'O', width 1.00u, stem world XY=(202.625, -52.95), sculpted keycap via rea_hardware.cad.keycap(1.0,
+      'O')
+  - id: F_K25
+    name: key 25 (P) (1.00u)
+    kind: button
+    view: front
+    center_mm:
+    - 235.675
+    - 54.95
+    size_mm:
+    - 18.05
+    - 18.05
+    implement: pcb+case
+    source: photo
+    confidence: high
+    notes: Row 2 key 'P', width 1.00u, stem world XY=(221.675, -52.95), sculpted keycap via rea_hardware.cad.keycap(1.0,
+      'P')
+  - id: F_K26
+    name: key 26 ([ {) (1.00u)
+    kind: button
+    view: front
+    center_mm:
+    - 254.725
+    - 54.95
+    size_mm:
+    - 18.05
+    - 18.05
+    implement: pcb+case
+    source: photo
+    confidence: high
+    notes: Row 2 key '[ {', width 1.00u, stem world XY=(240.725, -52.95), sculpted keycap via rea_hardware.cad.keycap(1.0,
+      '[ {')
+  - id: F_K27
+    name: key 27 (] }) (1.00u)
+    kind: button
+    view: front
+    center_mm:
+    - 273.775
+    - 54.95
+    size_mm:
+    - 18.05
+    - 18.05
+    implement: pcb+case
+    source: photo
+    confidence: high
+    notes: Row 2 key '] }', width 1.00u, stem world XY=(259.775, -52.95), sculpted keycap via rea_hardware.cad.keycap(1.0,
+      '] }')
+  - id: F_K28
+    name: key 28 (\ |) (1.50u)
+    kind: button
+    view: front
+    center_mm:
+    - 297.588
+    - 54.95
+    size_mm:
+    - 27.58
+    - 18.05
+    implement: pcb+case
+    source: photo
+    confidence: high
+    notes: Row 2 key '\ |', width 1.50u, stem world XY=(283.588, -52.95), sculpted keycap via rea_hardware.cad.keycap(1.5,
+      '\\ |')
+  - id: F_K29
+    name: key 29 (Caps Lock) (1.75u)
+    kind: button
+    view: front
+    center_mm:
+    - 42.794
+    - 74.0
+    size_mm:
+    - 32.34
+    - 18.05
+    implement: pcb+case
+    source: photo
+    confidence: high
+    notes: Row 3 key 'Caps Lock', width 1.75u, stem world XY=(28.794, -72.0), sculpted keycap via rea_hardware.cad.keycap(1.75,
+      'Caps Lock')
+  - id: F_K30
+    name: key 30 (A) (1.00u)
+    kind: button
+    view: front
+    center_mm:
+    - 68.988
+    - 74.0
+    size_mm:
+    - 18.05
+    - 18.05
+    implement: pcb+case
+    source: photo
+    confidence: high
+    notes: Row 3 key 'A', width 1.00u, stem world XY=(54.988, -72.0), sculpted keycap via rea_hardware.cad.keycap(1.0,
+      'A')
+  - id: F_K31
+    name: key 31 (S) (1.00u)
+    kind: button
+    view: front
+    center_mm:
+    - 88.037
+    - 74.0
+    size_mm:
+    - 18.05
+    - 18.05
+    implement: pcb+case
+    source: photo
+    confidence: high
+    notes: Row 3 key 'S', width 1.00u, stem world XY=(74.037, -72.0), sculpted keycap via rea_hardware.cad.keycap(1.0,
+      'S')
+  - id: F_K32
+    name: key 32 (D) (1.00u)
+    kind: button
+    view: front
+    center_mm:
+    - 107.088
+    - 74.0
+    size_mm:
+    - 18.05
+    - 18.05
+    implement: pcb+case
+    source: photo
+    confidence: high
+    notes: Row 3 key 'D', width 1.00u, stem world XY=(93.088, -72.0), sculpted keycap via rea_hardware.cad.keycap(1.0,
+      'D')
+  - id: F_K33
+    name: key 33 (F) (1.00u)
+    kind: button
+    view: front
+    center_mm:
+    - 126.138
+    - 74.0
+    size_mm:
+    - 18.05
+    - 18.05
+    implement: pcb+case
+    source: photo
+    confidence: high
+    notes: Row 3 key 'F', width 1.00u, stem world XY=(112.138, -72.0), sculpted keycap via rea_hardware.cad.keycap(1.0,
+      'F')
+  - id: F_K34
+    name: key 34 (G) (1.00u)
+    kind: button
+    view: front
+    center_mm:
+    - 145.188
+    - 74.0
+    size_mm:
+    - 18.05
+    - 18.05
+    implement: pcb+case
+    source: photo
+    confidence: high
+    notes: Row 3 key 'G', width 1.00u, stem world XY=(131.188, -72.0), sculpted keycap via rea_hardware.cad.keycap(1.0,
+      'G')
+  - id: F_K35
+    name: key 35 (H) (1.00u)
+    kind: button
+    view: front
+    center_mm:
+    - 164.238
+    - 74.0
+    size_mm:
+    - 18.05
+    - 18.05
+    implement: pcb+case
+    source: photo
+    confidence: high
+    notes: Row 3 key 'H', width 1.00u, stem world XY=(150.238, -72.0), sculpted keycap via rea_hardware.cad.keycap(1.0,
+      'H')
+  - id: F_K36
+    name: key 36 (J) (1.00u)
+    kind: button
+    view: front
+    center_mm:
+    - 183.287
+    - 74.0
+    size_mm:
+    - 18.05
+    - 18.05
+    implement: pcb+case
+    source: photo
+    confidence: high
+    notes: Row 3 key 'J', width 1.00u, stem world XY=(169.287, -72.0), sculpted keycap via rea_hardware.cad.keycap(1.0,
+      'J')
+  - id: F_K37
+    name: key 37 (K) (1.00u)
+    kind: button
+    view: front
+    center_mm:
+    - 202.338
+    - 74.0
+    size_mm:
+    - 18.05
+    - 18.05
+    implement: pcb+case
+    source: photo
+    confidence: high
+    notes: Row 3 key 'K', width 1.00u, stem world XY=(188.338, -72.0), sculpted keycap via rea_hardware.cad.keycap(1.0,
+      'K')
+  - id: F_K38
+    name: key 38 (L) (1.00u)
+    kind: button
+    view: front
+    center_mm:
+    - 221.388
+    - 74.0
+    size_mm:
+    - 18.05
+    - 18.05
+    implement: pcb+case
+    source: photo
+    confidence: high
+    notes: Row 3 key 'L', width 1.00u, stem world XY=(207.388, -72.0), sculpted keycap via rea_hardware.cad.keycap(1.0,
+      'L')
+  - id: F_K39
+    name: key 39 (; :) (1.00u)
+    kind: button
+    view: front
+    center_mm:
+    - 240.438
+    - 74.0
+    size_mm:
+    - 18.05
+    - 18.05
+    implement: pcb+case
+    source: photo
+    confidence: high
+    notes: Row 3 key '; :', width 1.00u, stem world XY=(226.438, -72.0), sculpted keycap via rea_hardware.cad.keycap(1.0,
+      '; :')
+  - id: F_K40
+    name: key 40 (' ") (1.00u)
+    kind: button
+    view: front
+    center_mm:
+    - 259.488
+    - 74.0
+    size_mm:
+    - 18.05
+    - 18.05
+    implement: pcb+case
+    source: photo
+    confidence: high
+    notes: Row 3 key '' "', width 1.00u, stem world XY=(245.488, -72.0), sculpted keycap via rea_hardware.cad.keycap(1.0,
+      '\' "')
+  - id: F_K41
+    name: key 41 (Return) (2.25u)
+    kind: button
+    view: front
+    center_mm:
+    - 290.444
+    - 74.0
+    size_mm:
+    - 41.86
+    - 18.05
+    implement: pcb+case
+    source: photo
+    confidence: high
+    notes: Row 3 key 'Return', width 2.25u, stem world XY=(276.444, -72.0), sculpted keycap via rea_hardware.cad.keycap(2.25,
+      'Return')
+  - id: F_K42
+    name: key 42 (Shift) (2.25u)
+    kind: button
+    view: front
+    center_mm:
+    - 47.556
+    - 93.05
+    size_mm:
+    - 41.86
+    - 18.05
+    implement: pcb+case
+    source: photo
+    confidence: high
+    notes: Row 4 key 'Shift', width 2.25u, stem world XY=(33.556, -91.05), sculpted keycap via rea_hardware.cad.keycap(2.25,
+      'Shift')
+  - id: F_K43
+    name: key 43 (Z) (1.00u)
+    kind: button
+    view: front
+    center_mm:
+    - 78.513
+    - 93.05
+    size_mm:
+    - 18.05
+    - 18.05
+    implement: pcb+case
+    source: photo
+    confidence: high
+    notes: Row 4 key 'Z', width 1.00u, stem world XY=(64.513, -91.05), sculpted keycap via rea_hardware.cad.keycap(1.0,
+      'Z')
+  - id: F_K44
+    name: key 44 (X) (1.00u)
+    kind: button
+    view: front
+    center_mm:
+    - 97.562
+    - 93.05
+    size_mm:
+    - 18.05
+    - 18.05
+    implement: pcb+case
+    source: photo
+    confidence: high
+    notes: Row 4 key 'X', width 1.00u, stem world XY=(83.562, -91.05), sculpted keycap via rea_hardware.cad.keycap(1.0,
+      'X')
+  - id: F_K45
+    name: key 45 (C) (1.00u)
+    kind: button
+    view: front
+    center_mm:
+    - 116.612
+    - 93.05
+    size_mm:
+    - 18.05
+    - 18.05
+    implement: pcb+case
+    source: photo
+    confidence: high
+    notes: Row 4 key 'C', width 1.00u, stem world XY=(102.612, -91.05), sculpted keycap via rea_hardware.cad.keycap(1.0,
+      'C')
+  - id: F_K46
+    name: key 46 (V) (1.00u)
+    kind: button
+    view: front
+    center_mm:
+    - 135.663
+    - 93.05
+    size_mm:
+    - 18.05
+    - 18.05
+    implement: pcb+case
+    source: photo
+    confidence: high
+    notes: Row 4 key 'V', width 1.00u, stem world XY=(121.663, -91.05), sculpted keycap via rea_hardware.cad.keycap(1.0,
+      'V')
+  - id: F_K47
+    name: key 47 (B) (1.00u)
+    kind: button
+    view: front
+    center_mm:
+    - 154.713
+    - 93.05
+    size_mm:
+    - 18.05
+    - 18.05
+    implement: pcb+case
+    source: photo
+    confidence: high
+    notes: Row 4 key 'B', width 1.00u, stem world XY=(140.713, -91.05), sculpted keycap via rea_hardware.cad.keycap(1.0,
+      'B')
+  - id: F_K48
+    name: key 48 (N) (1.00u)
+    kind: button
+    view: front
+    center_mm:
+    - 173.763
+    - 93.05
+    size_mm:
+    - 18.05
+    - 18.05
+    implement: pcb+case
+    source: photo
+    confidence: high
+    notes: Row 4 key 'N', width 1.00u, stem world XY=(159.763, -91.05), sculpted keycap via rea_hardware.cad.keycap(1.0,
+      'N')
+  - id: F_K49
+    name: key 49 (M) (1.00u)
+    kind: button
+    view: front
+    center_mm:
+    - 192.812
+    - 93.05
+    size_mm:
+    - 18.05
+    - 18.05
+    implement: pcb+case
+    source: photo
+    confidence: high
+    notes: Row 4 key 'M', width 1.00u, stem world XY=(178.812, -91.05), sculpted keycap via rea_hardware.cad.keycap(1.0,
+      'M')
+  - id: F_K50
+    name: key 50 (, <) (1.00u)
+    kind: button
+    view: front
+    center_mm:
+    - 211.863
+    - 93.05
+    size_mm:
+    - 18.05
+    - 18.05
+    implement: pcb+case
+    source: photo
+    confidence: high
+    notes: Row 4 key ', <', width 1.00u, stem world XY=(197.863, -91.05), sculpted keycap via rea_hardware.cad.keycap(1.0,
+      ', <')
+  - id: F_K51
+    name: key 51 (. >) (1.00u)
+    kind: button
+    view: front
+    center_mm:
+    - 230.912
+    - 93.05
+    size_mm:
+    - 18.05
+    - 18.05
+    implement: pcb+case
+    source: photo
+    confidence: high
+    notes: Row 4 key '. >', width 1.00u, stem world XY=(216.912, -91.05), sculpted keycap via rea_hardware.cad.keycap(1.0,
+      '. >')
+  - id: F_K52
+    name: key 52 (/ ?) (1.00u)
+    kind: button
+    view: front
+    center_mm:
+    - 249.963
+    - 93.05
+    size_mm:
+    - 18.05
+    - 18.05
+    implement: pcb+case
+    source: photo
+    confidence: high
+    notes: Row 4 key '/ ?', width 1.00u, stem world XY=(235.963, -91.05), sculpted keycap via rea_hardware.cad.keycap(1.0,
+      '/ ?')
+  - id: F_K53
+    name: key 53 (Shift) (2.75u)
+    kind: button
+    view: front
+    center_mm:
+    - 285.681
+    - 93.05
+    size_mm:
+    - 51.39
+    - 18.05
+    implement: pcb+case
+    source: photo
+    confidence: high
+    notes: Row 4 key 'Shift', width 2.75u, stem world XY=(271.681, -91.05), sculpted keycap via rea_hardware.cad.keycap(2.75,
+      'Shift')
+  - id: F_K54
+    name: key 54 (Option) (1.25u)
+    kind: button
+    view: front
+    center_mm:
+    - 61.844
+    - 112.1
+    size_mm:
+    - 22.81
+    - 18.05
+    implement: pcb+case
+    source: photo
+    confidence: high
+    notes: Row 5 key 'Option', width 1.25u, stem world XY=(47.844, -110.1), sculpted keycap via rea_hardware.cad.keycap(1.25,
+      'Option')
+  - id: F_K55
+    name: key 55 (Command) (1.50u)
+    kind: button
+    view: front
+    center_mm:
+    - 88.037
+    - 112.1
+    size_mm:
+    - 27.58
+    - 18.05
+    implement: pcb+case
+    source: photo
+    confidence: high
+    notes: Row 5 key 'Command', width 1.50u, stem world XY=(74.037, -110.1), sculpted keycap via rea_hardware.cad.keycap(1.5,
+      'Command')
+  - id: F_K56
+    name: key 56 (Space) (6.25u)
+    kind: button
+    view: front
+    center_mm:
+    - 161.856
+    - 112.1
+    size_mm:
+    - 118.06
+    - 18.05
+    implement: pcb+case
+    source: photo
+    confidence: high
+    notes: Row 5 key 'Space', width 6.25u, stem world XY=(147.856, -110.1), sculpted keycap via rea_hardware.cad.keycap(6.25,
+      'Space')
+  - id: F_K57
+    name: key 57 (Enter) (1.50u)
+    kind: button
+    view: front
+    center_mm:
+    - 235.675
+    - 112.1
+    size_mm:
+    - 27.58
+    - 18.05
+    implement: pcb+case
+    source: photo
+    confidence: high
+    notes: Row 5 key 'Enter', width 1.50u, stem world XY=(221.675, -110.1), sculpted keycap via rea_hardware.cad.keycap(1.5,
+      'Enter')
+  - id: F_K58
+    name: key 58 (Option) (1.25u)
+    kind: button
+    view: front
+    center_mm:
+    - 261.869
+    - 112.1
+    size_mm:
+    - 22.81
+    - 18.05
+    implement: pcb+case
+    source: photo
+    confidence: high
+    notes: Row 5 key 'Option', width 1.25u, stem world XY=(247.869, -110.1), sculpted keycap via rea_hardware.cad.keycap(1.25,
+      'Option')
+  - id: P_KB_DEV
+    name: rear USB-C device port to desktop
+    kind: port
+    view: top
+    center_mm:
+    - 169.0
+    - 30.8
+    size_mm:
+    - 9.5
+    - 3.8
+    implement: pcb+case
+    source: prompt
+    confidence: high
+    notes: Rear-edge (+Y) USB-C receptacle (5 V VBUS + USB 2.0 D+/D- HID) at world XYZ=(155.0, 2.0, 3.2).
+      On PCB top side, rot_deg=180 points mouth toward -y_board (world +Y rear edge).
+  - id: F_BOOTSEL
+    name: bottom-accessible BOOTSEL flashing button
+    kind: button
+    view: rear
+    center_mm:
+    - 169.0
+    - 20.0
+    size_mm:
+    - 6.0
+    - 6.0
+    implement: pcb+case
+    source: prompt
+    confidence: high
+    notes: Bottom-accessible button at world XY=(155.0, -18.0) driving QSPI_SS_N low through 1k isolation
+      resistor for RP2040 USB UF2 bootloader flashing.
+fab:
+  profile: jlcpcb
+  layers: 2
+  thickness_mm: 1.6
+  assembly_sides:
+  - top
+  - bottom
+electrical:
+  mcu: RP2040 (LCSC C2040)
+  power: VBUS_RAW (from rear USB-C receptacle J1 with 5.1k CC1/CC2 pull-downs and local 100 nF high-frequency
+    ESD decoupling capacitor C17 immediately adjacent to J1 ahead of F1) -> F1 (BSMD0805-050-24V 500 mA
+    PTC resettable fuse) -> 5V_USB_KB (5.0 V up to 0.5 A with fuse-coordinated PTVS5V0S1UR-FS low-clamping
+    unidirectional TVS diode D60, USBLC6-2SC6 ESD array U4 pin 5 VBUS reference, and 2.2 uF C1 at U3)
+    -> LDL1117S33R 18V-input low-IQ SOT-223-4 LDO (U3, C435835) -> 3V3_KB (3.3 V up to 0.25 A continuous
+    with 4.7 uF C2) feeding RP2040 and W25Q128JVSIQ flash
+  blocks:
+  - id: usb_power
+    purpose: Rear-edge USB-C 2.0 receptacle (J1, port P_KB_DEV), 5.1 kOhm CC1/CC2 UFP pull-down resistors
+      (R1, R2), local 100 nF high-frequency ESD decoupling capacitor (C17) on VBUS_RAW at J1 ahead of
+      F1, USBLC6-2SC6 ESD protection (U4) placed immediately adjacent to J1 with in-line flow-through
+      routing on USB_CONN_DP/USB_CONN_DM and pin 5 (VBUS) referenced to 5V_USB_KB behind F1, 500 mA PTC
+      resettable fuse (F1, BSMD0805-050-24V), fuse-coordinated PTVS5V0S1UR-FS 5.0 V unidirectional TVS
+      diode (D60, V_CL <= 9.2 V at 43.6 A) and 2.2 uF LDO input decoupling (C1) on 5V_USB_KB downstream
+      of F1, and 18 V operating / 20 V abs-max, low-IQ (250 uA typ), low-dropout (350 mV typ at 1.2 A)
+      SOT-223-4 LDO regulator (U3, LDL1117S33R, C435835) with 4.7 uF output cap (C2) generating 3V3_KB
+      (up to 0.25 A continuous) from 5V_USB_KB
+    key_parts:
+    - TYPE-C-31-M-12 (C165948)
+    - PTVS5V0S1UR-FS (C5380694)
+    - BSMD0805-050-24V (C910822)
+    - USBLC6-2SC6 (C2827654)
+    - LDL1117S33R (C435835)
+    - 0402WGF5101TCE (C25905)
+    reference: https://datasheets.raspberrypi.com/rp2040/hardware-design-with-rp2040.pdf (Raspberry Pi
+      Hardware Design with RP2040, Section 2.1-2.3)
+  - id: mcu_core
+    purpose: RP2040 microcontroller (U1) with 12 MHz SMD3225 crystal (Y1 ABM8-272-T3, CL=10pF, ESR<=50Ohm
+      + 12 pF load caps C15/C16 + 1 kOhm damping R5), 16 MB QSPI flash W25Q128JVSIQ (U2) with 10 kOhm
+      QSPI_SS_N pull-up resistor (R7) to 3V3_KB, 10 kOhm RUN pull-up resistor (R8) to 3V3_KB, 27 Ohm USB
+      D+/D- series termination (R3, R4) adjacent to U1 pins 46/47, and bottom-side BOOTSEL button (SW59
+      + 1 kOhm R6)
+    key_parts:
+    - RP2040 (C2040)
+    - W25Q128JVSIQ (C97521)
+    - ABM8-272-T3 (C20625731)
+    - TS-1187A-B-A-B (C318884)
+    - 0402WGF1002TCE (C25744)
+    reference: https://datasheets.raspberrypi.com/rp2040/hardware-design-with-rp2040.pdf (Minimal RP2040
+      Reference Design)
+  - id: key_matrix
+    purpose: 5-row by 14-column full anti-ghosting diode keymatrix wiring all 58 Cherry MX keyswitches
+      (SW1..SW58) and 58 1N4148W SOD-123 diodes (D1..D58) to 19 RP2040 GPIOs (ROW0..ROW4 on GPIO0..GPIO4,
+      COL0..COL13 on GPIO5..GPIO18)
+    key_parts:
+    - CPG151101D06 (C49234237)
+    - 1N4148W (C81598)
+    reference: https://github.com/qmk/qmk_firmware/blob/master/docs/how_a_matrix_works.md (Standard QMK
+      COL2ROW diode matrix)
+  nets_must_connect:
+  - - J1.A5
+    - R1.1
+  - - J1.B5
+    - R2.1
+  - - U1.USB_DP
+    - R3.1
+  - - U1.USB_DM
+    - R4.1
+  - - U1.QSPI_SS
+    - U2.CS
+  - - U1.XIN
+    - Y1.1
+  high_speed:
+  - name: usb_dp_dm
+    nets:
+    - '*USB_D*'
+    - '*USB_CONN_*'
+    - '*D+*'
+    - '*D-*'
+    - '*DP*'
+    - '*DM*'
+    kind: diff_pairs
+    tolerance_mm: 1.5
+    diff_impedance_ohm: 90.0
+    source: 'RP2040 Datasheet Section 2.8.2 & USB 2.0 Specification: 90 Ohm +/-15% differential impedance'
+board:
+  width_mm: 310.0
+  height_mm: 132.0
+  corner_radius_mm: 3.0
+  mounting_holes:
+  - x_mm: 6.0
+    y_mm: 6.0
+    drill_mm: 2.2
+  - x_mm: 155.0
+    y_mm: 6.0
+    drill_mm: 2.2
+  - x_mm: 304.0
+    y_mm: 6.0
+    drill_mm: 2.2
+  - x_mm: 6.0
+    y_mm: 126.0
+    drill_mm: 2.2
+  - x_mm: 155.0
+    y_mm: 126.0
+    drill_mm: 2.2
+  - x_mm: 304.0
+    y_mm: 126.0
+    drill_mm: 2.2
+  placement:
+  - ref: SW1
+    role: key_tilde
+    side: top
+    x_mm: 24.19
+    y_mm: 28.82
+    rot_deg: 0
+    tolerance_mm: 1.0
+    feature: F_K01
+  - ref: SW2
+    role: key_1
+    side: top
+    x_mm: 43.24
+    y_mm: 28.82
+    rot_deg: 0
+    tolerance_mm: 1.0
+    feature: F_K02
+  - ref: SW3
+    role: key_2
+    side: top
+    x_mm: 62.29
+    y_mm: 28.82
+    rot_deg: 0
+    tolerance_mm: 1.0
+    feature: F_K03
+  - ref: SW4
+    role: key_3
+    side: top
+    x_mm: 81.34
+    y_mm: 28.82
+    rot_deg: 0
+    tolerance_mm: 1.0
+    feature: F_K04
+  - ref: SW5
+    role: key_4
+    side: top
+    x_mm: 100.39
+    y_mm: 28.82
+    rot_deg: 0
+    tolerance_mm: 1.0
+    feature: F_K05
+  - ref: SW6
+    role: key_5
+    side: top
+    x_mm: 119.44
+    y_mm: 28.82
+    rot_deg: 0
+    tolerance_mm: 1.0
+    feature: F_K06
+  - ref: SW7
+    role: key_6
+    side: top
+    x_mm: 138.49
+    y_mm: 28.82
+    rot_deg: 0
+    tolerance_mm: 1.0
+    feature: F_K07
+  - ref: SW8
+    role: key_7
+    side: top
+    x_mm: 157.54
+    y_mm: 28.82
+    rot_deg: 0
+    tolerance_mm: 1.0
+    feature: F_K08
+  - ref: SW9
+    role: key_8
+    side: top
+    x_mm: 176.59
+    y_mm: 28.82
+    rot_deg: 0
+    tolerance_mm: 1.0
+    feature: F_K09
+  - ref: SW10
+    role: key_9
+    side: top
+    x_mm: 195.64
+    y_mm: 28.82
+    rot_deg: 0
+    tolerance_mm: 1.0
+    feature: F_K10
+  - ref: SW11
+    role: key_0
+    side: top
+    x_mm: 214.69
+    y_mm: 28.82
+    rot_deg: 0
+    tolerance_mm: 1.0
+    feature: F_K11
+  - ref: SW12
+    role: key_minus
+    side: top
+    x_mm: 233.74
+    y_mm: 28.82
+    rot_deg: 0
+    tolerance_mm: 1.0
+    feature: F_K12
+  - ref: SW13
+    role: key_equal
+    side: top
+    x_mm: 252.79
+    y_mm: 28.82
+    rot_deg: 0
+    tolerance_mm: 1.0
+    feature: F_K13
+  - ref: SW14
+    role: key_backspace
+    side: top
+    x_mm: 281.365
+    y_mm: 28.82
+    rot_deg: 0
+    tolerance_mm: 1.0
+    feature: F_K14
+  - ref: SW15
+    role: key_tab
+    side: top
+    x_mm: 28.953
+    y_mm: 47.87
+    rot_deg: 0
+    tolerance_mm: 1.0
+    feature: F_K15
+  - ref: SW16
+    role: key_q
+    side: top
+    x_mm: 52.765
+    y_mm: 47.87
+    rot_deg: 0
+    tolerance_mm: 1.0
+    feature: F_K16
+  - ref: SW17
+    role: key_w
+    side: top
+    x_mm: 71.815
+    y_mm: 47.87
+    rot_deg: 0
+    tolerance_mm: 1.0
+    feature: F_K17
+  - ref: SW18
+    role: key_e
+    side: top
+    x_mm: 90.865
+    y_mm: 47.87
+    rot_deg: 0
+    tolerance_mm: 1.0
+    feature: F_K18
+  - ref: SW19
+    role: key_r
+    side: top
+    x_mm: 109.915
+    y_mm: 47.87
+    rot_deg: 0
+    tolerance_mm: 1.0
+    feature: F_K19
+  - ref: SW20
+    role: key_t
+    side: top
+    x_mm: 128.965
+    y_mm: 47.87
+    rot_deg: 0
+    tolerance_mm: 1.0
+    feature: F_K20
+  - ref: SW21
+    role: key_y
+    side: top
+    x_mm: 148.015
+    y_mm: 47.87
+    rot_deg: 0
+    tolerance_mm: 1.0
+    feature: F_K21
+  - ref: SW22
+    role: key_u
+    side: top
+    x_mm: 167.065
+    y_mm: 47.87
+    rot_deg: 0
+    tolerance_mm: 1.0
+    feature: F_K22
+  - ref: SW23
+    role: key_i
+    side: top
+    x_mm: 186.115
+    y_mm: 47.87
+    rot_deg: 0
+    tolerance_mm: 1.0
+    feature: F_K23
+  - ref: SW24
+    role: key_o
+    side: top
+    x_mm: 205.165
+    y_mm: 47.87
+    rot_deg: 0
+    tolerance_mm: 1.0
+    feature: F_K24
+  - ref: SW25
+    role: key_p
+    side: top
+    x_mm: 224.215
+    y_mm: 47.87
+    rot_deg: 0
+    tolerance_mm: 1.0
+    feature: F_K25
+  - ref: SW26
+    role: key_lbracket
+    side: top
+    x_mm: 243.265
+    y_mm: 47.87
+    rot_deg: 0
+    tolerance_mm: 1.0
+    feature: F_K26
+  - ref: SW27
+    role: key_rbracket
+    side: top
+    x_mm: 262.315
+    y_mm: 47.87
+    rot_deg: 0
+    tolerance_mm: 1.0
+    feature: F_K27
+  - ref: SW28
+    role: key_backslash
+    side: top
+    x_mm: 286.128
+    y_mm: 47.87
+    rot_deg: 0
+    tolerance_mm: 1.0
+    feature: F_K28
+  - ref: SW29
+    role: key_capslock
+    side: top
+    x_mm: 31.334
+    y_mm: 66.92
+    rot_deg: 0
+    tolerance_mm: 1.0
+    feature: F_K29
+  - ref: SW30
+    role: key_a
+    side: top
+    x_mm: 57.528
+    y_mm: 66.92
+    rot_deg: 0
+    tolerance_mm: 1.0
+    feature: F_K30
+  - ref: SW31
+    role: key_s
+    side: top
+    x_mm: 76.577
+    y_mm: 66.92
+    rot_deg: 0
+    tolerance_mm: 1.0
+    feature: F_K31
+  - ref: SW32
+    role: key_d
+    side: top
+    x_mm: 95.628
+    y_mm: 66.92
+    rot_deg: 0
+    tolerance_mm: 1.0
+    feature: F_K32
+  - ref: SW33
+    role: key_f
+    side: top
+    x_mm: 114.678
+    y_mm: 66.92
+    rot_deg: 0
+    tolerance_mm: 1.0
+    feature: F_K33
+  - ref: SW34
+    role: key_g
+    side: top
+    x_mm: 133.728
+    y_mm: 66.92
+    rot_deg: 0
+    tolerance_mm: 1.0
+    feature: F_K34
+  - ref: SW35
+    role: key_h
+    side: top
+    x_mm: 152.778
+    y_mm: 66.92
+    rot_deg: 0
+    tolerance_mm: 1.0
+    feature: F_K35
+  - ref: SW36
+    role: key_j
+    side: top
+    x_mm: 171.827
+    y_mm: 66.92
+    rot_deg: 0
+    tolerance_mm: 1.0
+    feature: F_K36
+  - ref: SW37
+    role: key_k
+    side: top
+    x_mm: 190.878
+    y_mm: 66.92
+    rot_deg: 0
+    tolerance_mm: 1.0
+    feature: F_K37
+  - ref: SW38
+    role: key_l
+    side: top
+    x_mm: 209.928
+    y_mm: 66.92
+    rot_deg: 0
+    tolerance_mm: 1.0
+    feature: F_K38
+  - ref: SW39
+    role: key_semicolon
+    side: top
+    x_mm: 228.978
+    y_mm: 66.92
+    rot_deg: 0
+    tolerance_mm: 1.0
+    feature: F_K39
+  - ref: SW40
+    role: key_quote
+    side: top
+    x_mm: 248.028
+    y_mm: 66.92
+    rot_deg: 0
+    tolerance_mm: 1.0
+    feature: F_K40
+  - ref: SW41
+    role: key_return
+    side: top
+    x_mm: 278.984
+    y_mm: 66.92
+    rot_deg: 0
+    tolerance_mm: 1.0
+    feature: F_K41
+  - ref: SW42
+    role: key_lshift
+    side: top
+    x_mm: 36.096
+    y_mm: 85.97
+    rot_deg: 0
+    tolerance_mm: 1.0
+    feature: F_K42
+  - ref: SW43
+    role: key_z
+    side: top
+    x_mm: 67.053
+    y_mm: 85.97
+    rot_deg: 0
+    tolerance_mm: 1.0
+    feature: F_K43
+  - ref: SW44
+    role: key_x
+    side: top
+    x_mm: 86.102
+    y_mm: 85.97
+    rot_deg: 0
+    tolerance_mm: 1.0
+    feature: F_K44
+  - ref: SW45
+    role: key_c
+    side: top
+    x_mm: 105.152
+    y_mm: 85.97
+    rot_deg: 0
+    tolerance_mm: 1.0
+    feature: F_K45
+  - ref: SW46
+    role: key_v
+    side: top
+    x_mm: 124.203
+    y_mm: 85.97
+    rot_deg: 0
+    tolerance_mm: 1.0
+    feature: F_K46
+  - ref: SW47
+    role: key_b
+    side: top
+    x_mm: 143.253
+    y_mm: 85.97
+    rot_deg: 0
+    tolerance_mm: 1.0
+    feature: F_K47
+  - ref: SW48
+    role: key_n
+    side: top
+    x_mm: 162.303
+    y_mm: 85.97
+    rot_deg: 0
+    tolerance_mm: 1.0
+    feature: F_K48
+  - ref: SW49
+    role: key_m
+    side: top
+    x_mm: 181.352
+    y_mm: 85.97
+    rot_deg: 0
+    tolerance_mm: 1.0
+    feature: F_K49
+  - ref: SW50
+    role: key_comma
+    side: top
+    x_mm: 200.403
+    y_mm: 85.97
+    rot_deg: 0
+    tolerance_mm: 1.0
+    feature: F_K50
+  - ref: SW51
+    role: key_period
+    side: top
+    x_mm: 219.452
+    y_mm: 85.97
+    rot_deg: 0
+    tolerance_mm: 1.0
+    feature: F_K51
+  - ref: SW52
+    role: key_slash
+    side: top
+    x_mm: 238.503
+    y_mm: 85.97
+    rot_deg: 0
+    tolerance_mm: 1.0
+    feature: F_K52
+  - ref: SW53
+    role: key_rshift
+    side: top
+    x_mm: 274.221
+    y_mm: 85.97
+    rot_deg: 0
+    tolerance_mm: 1.0
+    feature: F_K53
+  - ref: SW54
+    role: key_loption
+    side: top
+    x_mm: 50.384
+    y_mm: 105.02
+    rot_deg: 0
+    tolerance_mm: 1.0
+    feature: F_K54
+  - ref: SW55
+    role: key_command
+    side: top
+    x_mm: 76.577
+    y_mm: 105.02
+    rot_deg: 0
+    tolerance_mm: 1.0
+    feature: F_K55
+  - ref: SW56
+    role: key_space
+    side: top
+    x_mm: 150.396
+    y_mm: 105.02
+    rot_deg: 0
+    tolerance_mm: 1.0
+    feature: F_K56
+  - ref: SW57
+    role: key_enter
+    side: top
+    x_mm: 224.215
+    y_mm: 105.02
+    rot_deg: 0
+    tolerance_mm: 1.0
+    feature: F_K57
+  - ref: SW58
+    role: key_roption
+    side: top
+    x_mm: 250.409
+    y_mm: 105.02
+    rot_deg: 0
+    tolerance_mm: 1.0
+    feature: F_K58
+  - ref: J1
+    role: usb_c_device_port
+    side: top
+    x_mm: 155.0
+    y_mm: 3.5
+    rot_deg: 180
+    tolerance_mm: 1.5
+    feature: P_KB_DEV
+  - ref: SW59
+    role: bootsel_button
+    side: bottom
+    x_mm: 155.0
+    y_mm: 18.0
+    rot_deg: 0
+    tolerance_mm: 1.0
+    feature: F_BOOTSEL
+  max_component_height_mm:
+    top: 20.0
+    bottom: 3.0
+bom:
+- refs:
+  - SW1
+  - SW2
+  - SW3
+  - SW4
+  - SW5
+  - SW6
+  - SW7
+  - SW8
+  - SW9
+  - SW10
+  - SW11
+  - SW12
+  - SW13
+  - SW16
+  - SW17
+  - SW18
+  - SW19
+  - SW20
+  - SW21
+  - SW22
+  - SW23
+  - SW24
+  - SW25
+  - SW26
+  - SW27
+  - SW30
+  - SW31
+  - SW32
+  - SW33
+  - SW34
+  - SW35
+  - SW36
+  - SW37
+  - SW38
+  - SW39
+  - SW40
+  - SW43
+  - SW44
+  - SW45
+  - SW46
+  - SW47
+  - SW48
+  - SW49
+  - SW50
+  - SW51
+  - SW52
+  role: keyswitch_1.00u
+  mpn: CPG151101D06
+  lcsc: C49234237
+  footprint: Button_Switch_Keyboard:SW_Cherry_MX_1.00u_PCB
+  description: Kailh Brown tactile MX mechanical keyswitch (1.00u footprint) with 3D model from rea_hardware.cad.keyswitch_model()
+- refs:
+  - SW54
+  - SW58
+  role: keyswitch_1.25u
+  mpn: CPG151101D06
+  lcsc: C49234237
+  footprint: Button_Switch_Keyboard:SW_Cherry_MX_1.25u_PCB
+  description: Kailh Brown tactile MX mechanical keyswitch (1.25u footprint) with 3D model from rea_hardware.cad.keyswitch_model()
+- refs:
+  - SW15
+  - SW28
+  - SW55
+  - SW57
+  role: keyswitch_1.50u
+  mpn: CPG151101D06
+  lcsc: C49234237
+  footprint: Button_Switch_Keyboard:SW_Cherry_MX_1.50u_PCB
+  description: Kailh Brown tactile MX mechanical keyswitch (1.50u footprint) with 3D model from rea_hardware.cad.keyswitch_model()
+- refs:
+  - SW29
+  role: keyswitch_1.75u
+  mpn: CPG151101D06
+  lcsc: C49234237
+  footprint: Button_Switch_Keyboard:SW_Cherry_MX_1.75u_PCB
+  description: Kailh Brown tactile MX mechanical keyswitch (1.75u footprint) with 3D model from rea_hardware.cad.keyswitch_model()
+- refs:
+  - SW14
+  role: keyswitch_2.00u
+  mpn: CPG151101D06
+  lcsc: C49234237
+  footprint: Button_Switch_Keyboard:SW_Cherry_MX_2.00u_PCB
+  description: Kailh Brown tactile MX mechanical keyswitch (2.00u footprint) with 3D model from rea_hardware.cad.keyswitch_model()
+- refs:
+  - SW41
+  - SW42
+  role: keyswitch_2.25u
+  mpn: CPG151101D06
+  lcsc: C49234237
+  footprint: Button_Switch_Keyboard:SW_Cherry_MX_2.25u_PCB
+  description: Kailh Brown tactile MX mechanical keyswitch (2.25u footprint) with 3D model from rea_hardware.cad.keyswitch_model()
+- refs:
+  - SW53
+  role: keyswitch_2.75u
+  mpn: CPG151101D06
+  lcsc: C49234237
+  footprint: Button_Switch_Keyboard:SW_Cherry_MX_2.75u_PCB
+  description: Kailh Brown tactile MX mechanical keyswitch (2.75u footprint) with 3D model from rea_hardware.cad.keyswitch_model()
+- refs:
+  - SW56
+  role: keyswitch_6.25u
+  mpn: CPG151101D06
+  lcsc: C49234237
+  footprint: Button_Switch_Keyboard:SW_Cherry_MX_6.25u_PCB
+  description: Kailh Brown tactile MX mechanical keyswitch (6.25u footprint) with 3D model from rea_hardware.cad.keyswitch_model()
+- refs:
+  - D1
+  - D2
+  - D3
+  - D4
+  - D5
+  - D6
+  - D7
+  - D8
+  - D9
+  - D10
+  - D11
+  - D12
+  - D13
+  - D14
+  - D15
+  - D16
+  - D17
+  - D18
+  - D19
+  - D20
+  - D21
+  - D22
+  - D23
+  - D24
+  - D25
+  - D26
+  - D27
+  - D28
+  - D29
+  - D30
+  - D31
+  - D32
+  - D33
+  - D34
+  - D35
+  - D36
+  - D37
+  - D38
+  - D39
+  - D40
+  - D41
+  - D42
+  - D43
+  - D44
+  - D45
+  - D46
+  - D47
+  - D48
+  - D49
+  - D50
+  - D51
+  - D52
+  - D53
+  - D54
+  - D55
+  - D56
+  - D57
+  - D58
+  role: matrix_diode
+  mpn: 1N4148W
+  lcsc: C81598
+  footprint: Diode_SMD:D_SOD-123
+  description: High-speed switching diode for 5x14 anti-ghosting key matrix
+- refs:
+  - U1
+  role: mcu
+  mpn: RP2040
+  lcsc: C2040
+  footprint: Package_DFN_QFN:QFN-56-1EP_7x7mm_P0.4mm_EP3.2x3.2mm
+  description: Raspberry Pi RP2040 dual-core Cortex-M0+ USB HID keyboard controller
+- refs:
+  - U2
+  role: qspi_flash
+  mpn: W25Q128JVSIQ
+  lcsc: C97521
+  footprint: Package_SO:SOIC-8_5.3x5.3mm_P1.27mm
+  description: 128 Mbit (16 MB) 3.3 V QSPI NOR flash for RP2040 firmware
+- refs:
+  - U3
+  role: ldo_3v3
+  mpn: LDL1117S33R
+  lcsc: C435835
+  footprint: lcsc:SOT-223-4_L6.5-W3.5-P2.30-LS7.0-BR
+  description: 18 V operating / 20 V abs-max, low-IQ (250 uA typ), low-dropout (350 mV typ at 1.2 A) 3.3
+    V 1.2 A SOT-223-4 LDO regulator from 5V_USB_KB
+- refs:
+  - D60
+  role: vbus_tvs_diode
+  mpn: PTVS5V0S1UR-FS
+  lcsc: C5380694
+  footprint: lcsc:SOD-123FL_L2.7-W1.8-LS3.8-RD
+  description: 400 W 43.6 A 5.0 V unidirectional low-clamping TVS diode (V_BR=6.4V, V_CL<=9.2V) on 5V_USB_KB
+    downstream of F1 for fuse-coordinated overvoltage, reverse-polarity, and ESD clamping
+- refs:
+  - F1
+  role: vbus_ptc_fuse
+  mpn: BSMD0805-050-24V
+  lcsc: C910822
+  footprint: lcsc:F0805
+  description: 500 mA hold / 1.0 A trip 24 V 0805 PTC resettable fuse in series with J1 VBUS
+- refs:
+  - U4
+  role: usb_esd
+  mpn: USBLC6-2SC6
+  lcsc: C2827654
+  footprint: Package_TO_SOT_SMD:SOT-23-6
+  description: Low-capacitance USB 2.0 D+/D- and VBUS ESD protection array
+- refs:
+  - Y1
+  role: crystal_12mhz
+  mpn: ABM8-272-T3
+  lcsc: C20625731
+  footprint: Crystal:Crystal_SMD_3225-4Pin_3.2x2.5mm
+  description: 12.000 MHz SMD3225-4P crystal (CL=10pF, ESR<=50Ohm) for RP2040 XOSC and USB PLL
+- refs:
+  - J1
+  role: usb_c_port
+  mpn: TYPE-C-31-M-12
+  lcsc: C165948
+  footprint: Connector_USB:USB_C_Receptacle_HRO_TYPE-C-31-M-12
+  description: 16-pin USB-C 2.0 right-angle SMD receptacle on rear edge (+Y)
+- refs:
+  - SW59
+  role: bootsel_switch
+  mpn: TS-1187A-B-A-B
+  lcsc: C318884
+  footprint: Button_Switch_SMD:SW_SPST_SKQG_WithStem
+  description: Bottom-mounted SMD tactile switch for RP2040 BOOTSEL flashing
+- refs:
+  - R1
+  - R2
+  role: usb_cc_pulldown
+  mpn: 0402WGF5101TCE
+  lcsc: C25905
+  footprint: Resistor_SMD:R_0402_1005Metric
+  description: 5.1 kOhm 1% CC1/CC2 pull-down resistors for USB-C UFP sink
+- refs:
+  - R3
+  - R4
+  role: usb_series_term
+  mpn: 0402WGJ0270TCE
+  lcsc: C25156
+  footprint: Resistor_SMD:R_0402_1005Metric
+  description: 27 Ohm USB D+/D- series termination resistors for RP2040
+- refs:
+  - R5
+  - R6
+  role: crystal_and_bootsel_resistors
+  mpn: 0402WGF1001TCE
+  lcsc: C11702
+  footprint: Resistor_SMD:R_0402_1005Metric
+  description: 1 kOhm resistors for XOUT crystal damping and BOOTSEL/QSPI_SS isolation
+- refs:
+  - R7
+  - R8
+  role: qspi_ss_and_run_pullup
+  mpn: 0402WGF1002TCE
+  lcsc: C25744
+  footprint: Resistor_SMD:R_0402_1005Metric
+  description: 10 kOhm 1% pull-up resistors on QSPI_SS_N (U2.1 ~{CS}) and RUN (U1.26) to 3V3_KB
+- refs:
+  - C1
+  role: vbus_decoupling_2u2
+  mpn: CL21B225KAFNNNE
+  lcsc: C19110
+  footprint: Capacitor_SMD:C_0805_2012Metric
+  description: 2.2 uF 25 V X7R 0805 input decoupling capacitor on 5V_USB_KB (within 10 uF USB 2.0 hot-plug
+    limit)
+- refs:
+  - C2
+  role: ldo_out_decoupling_4u7
+  mpn: CL21A475KAQNNNE
+  lcsc: C1779
+  footprint: Capacitor_SMD:C_0805_2012Metric
+  description: 4.7 uF 25 V X5R 0805 output decoupling capacitor on 3V3_KB for LDL1117S33R LDO
+- refs:
+  - C3
+  - C4
+  role: decoupling_1uf
+  mpn: CL05A105KA5NQNC
+  lcsc: C52923
+  footprint: Capacitor_SMD:C_0402_1005Metric
+  description: 1 uF 25 V X5R 0402 decoupling capacitors for RP2040 VREG_VOUT (1.1 V) and IOVDD
+- refs:
+  - C5
+  - C6
+  - C7
+  - C8
+  - C9
+  - C10
+  - C11
+  - C12
+  - C13
+  - C14
+  - C17
+  role: decoupling_100nf
+  mpn: CL05B104KO5NNNC
+  lcsc: C1525
+  footprint: Capacitor_SMD:C_0402_1005Metric
+  description: 100 nF 16 V X7R 0402 local decoupling capacitors for RP2040 power pins, QSPI flash, and
+    U4 VBUS ESD clamp
+- refs:
+  - C15
+  - C16
+  role: crystal_load_12pf
+  mpn: 0402CG120J500NT
+  lcsc: C1547
+  footprint: Capacitor_SMD:C_0402_1005Metric
+  description: 12 pF 50 V C0G 0402 load capacitors for 12 MHz crystal Y1
+purchased: []
+enclosure:
+  process: mjf
+  wall_mm: 2.5
+  clearance_floor_mm: 0.2
+  parts:
+  - id: bottom_shell
+    file: case/out/bottom_shell.stl
+    role: shell
+    process: mjf
+    material: PA12
+    finish: matte warm-grey / beige
+    color: '#d8d0c0'
+    description: 'Stepped wedge lower chassis pan (X: -14..324, Y: -146..2, Z: -14..0+walls) with 6 PCB
+      mounting bosses, rear USB-C port cutout, and bottom BOOTSEL button aperture'
+  - id: bootsel_button
+    file: case/out/bootsel_button.stl
+    role: button
+    process: mjf
+    material: PA12
+    finish: matte dark grey
+    color: '#5a5852'
+    description: Captive bottom-accessible push button actuator cap at world XY=(155.0, -18.0) aligned
+      under SW59 for RP2040 BOOTSEL mode
+  - id: top_shell
+    file: case/out/top_shell.stl
+    role: shell
+    process: mjf
+    material: PA12
+    finish: matte warm-grey / beige
+    color: '#e5dec9'
+    description: Classic stepped beige upper bezel framing the 5-row 58-key well with raised rear ledge
+      reaching Z=34.0 mm
+  - id: keycaps
+    file: case/out/keycaps.stl
+    role: button
+    process: mjf
+    material: PA12
+    finish: matte warm-beige sculpted keycaps
+    color: '#cbc2b0'
+    decor: case/out/keycaps_legends.stl
+    decor_color: '#2b2927'
+    description: 58 sculpted mechanical keycaps generated with rea_hardware.cad.keycap(width_u, legend)
+      seated on the 58 switch stems at Z=6.6 mm with contrasting dark legends
+assembly:
+- part: bottom_shell
+  travel_mm: 0
+  held_by: base
+  note: Base lower chassis resting on desk (Z=-14.0 mm floor)
+- part: bootsel_button
+  direction:
+  - 0
+  - 0
+  - -1
+  travel_mm: 20
+  may_touch:
+  - bottom_shell
+  held_by: captured
+  note: Flanged BOOTSEL button cap dropped into bottom shell aperture from inside before PCB installation
+- part: pcba
+  direction:
+  - 0
+  - 0
+  - -1
+  travel_mm: 30
+  may_touch:
+  - bottom_shell
+  - bootsel_button
+  held_by: captured
+  note: Main 310x132 mm keyboard PCBA lowered onto bottom shell standoffs (Z=0..1.6 mm) with rear USB-C
+    J1 aligned to P_KB_DEV opening
+- part: top_shell
+  direction:
+  - 0
+  - 0
+  - -1
+  travel_mm: 35
+  may_touch:
+  - bottom_shell
+  - pcba
+  held_by: snap
+  held_with:
+  - bottom_shell
+  note: Stepped beige top bezel lowered over switch cluster and snapped onto bottom shell perimeter
+- part: keycaps
+  direction:
+  - 0
+  - 0
+  - -1
+  travel_mm: 35
+  may_touch:
+  - pcba
+  held_by: press_fit
+  held_with:
+  - pcba
+  note: 58 sculpted keycaps pressed straight down (-Z) onto the 58 Cherry MX switch stems at Z=6.6 mm
+actuators:
+- id: A_K01
+  feature: F_K01
+  case_part: keycaps
+  target:
+    part: pcba
+    ref: SW1
+  kind: push
+  element_axis:
+  - 0
+  - 0
+  - -1
+  travel_mm: 2.0
+  source: 'Kailh CPG151101D06 / Cherry MX datasheet: top-actuated (-Z), 2.0 mm pre-travel (4.0 mm total
+    travel)'
+- id: A_K02
+  feature: F_K02
+  case_part: keycaps
+  target:
+    part: pcba
+    ref: SW2
+  kind: push
+  element_axis:
+  - 0
+  - 0
+  - -1
+  travel_mm: 2.0
+  source: 'Kailh CPG151101D06 / Cherry MX datasheet: top-actuated (-Z), 2.0 mm pre-travel (4.0 mm total
+    travel)'
+- id: A_K03
+  feature: F_K03
+  case_part: keycaps
+  target:
+    part: pcba
+    ref: SW3
+  kind: push
+  element_axis:
+  - 0
+  - 0
+  - -1
+  travel_mm: 2.0
+  source: 'Kailh CPG151101D06 / Cherry MX datasheet: top-actuated (-Z), 2.0 mm pre-travel (4.0 mm total
+    travel)'
+- id: A_K04
+  feature: F_K04
+  case_part: keycaps
+  target:
+    part: pcba
+    ref: SW4
+  kind: push
+  element_axis:
+  - 0
+  - 0
+  - -1
+  travel_mm: 2.0
+  source: 'Kailh CPG151101D06 / Cherry MX datasheet: top-actuated (-Z), 2.0 mm pre-travel (4.0 mm total
+    travel)'
+- id: A_K05
+  feature: F_K05
+  case_part: keycaps
+  target:
+    part: pcba
+    ref: SW5
+  kind: push
+  element_axis:
+  - 0
+  - 0
+  - -1
+  travel_mm: 2.0
+  source: 'Kailh CPG151101D06 / Cherry MX datasheet: top-actuated (-Z), 2.0 mm pre-travel (4.0 mm total
+    travel)'
+- id: A_K06
+  feature: F_K06
+  case_part: keycaps
+  target:
+    part: pcba
+    ref: SW6
+  kind: push
+  element_axis:
+  - 0
+  - 0
+  - -1
+  travel_mm: 2.0
+  source: 'Kailh CPG151101D06 / Cherry MX datasheet: top-actuated (-Z), 2.0 mm pre-travel (4.0 mm total
+    travel)'
+- id: A_K07
+  feature: F_K07
+  case_part: keycaps
+  target:
+    part: pcba
+    ref: SW7
+  kind: push
+  element_axis:
+  - 0
+  - 0
+  - -1
+  travel_mm: 2.0
+  source: 'Kailh CPG151101D06 / Cherry MX datasheet: top-actuated (-Z), 2.0 mm pre-travel (4.0 mm total
+    travel)'
+- id: A_K08
+  feature: F_K08
+  case_part: keycaps
+  target:
+    part: pcba
+    ref: SW8
+  kind: push
+  element_axis:
+  - 0
+  - 0
+  - -1
+  travel_mm: 2.0
+  source: 'Kailh CPG151101D06 / Cherry MX datasheet: top-actuated (-Z), 2.0 mm pre-travel (4.0 mm total
+    travel)'
+- id: A_K09
+  feature: F_K09
+  case_part: keycaps
+  target:
+    part: pcba
+    ref: SW9
+  kind: push
+  element_axis:
+  - 0
+  - 0
+  - -1
+  travel_mm: 2.0
+  source: 'Kailh CPG151101D06 / Cherry MX datasheet: top-actuated (-Z), 2.0 mm pre-travel (4.0 mm total
+    travel)'
+- id: A_K10
+  feature: F_K10
+  case_part: keycaps
+  target:
+    part: pcba
+    ref: SW10
+  kind: push
+  element_axis:
+  - 0
+  - 0
+  - -1
+  travel_mm: 2.0
+  source: 'Kailh CPG151101D06 / Cherry MX datasheet: top-actuated (-Z), 2.0 mm pre-travel (4.0 mm total
+    travel)'
+- id: A_K11
+  feature: F_K11
+  case_part: keycaps
+  target:
+    part: pcba
+    ref: SW11
+  kind: push
+  element_axis:
+  - 0
+  - 0
+  - -1
+  travel_mm: 2.0
+  source: 'Kailh CPG151101D06 / Cherry MX datasheet: top-actuated (-Z), 2.0 mm pre-travel (4.0 mm total
+    travel)'
+- id: A_K12
+  feature: F_K12
+  case_part: keycaps
+  target:
+    part: pcba
+    ref: SW12
+  kind: push
+  element_axis:
+  - 0
+  - 0
+  - -1
+  travel_mm: 2.0
+  source: 'Kailh CPG151101D06 / Cherry MX datasheet: top-actuated (-Z), 2.0 mm pre-travel (4.0 mm total
+    travel)'
+- id: A_K13
+  feature: F_K13
+  case_part: keycaps
+  target:
+    part: pcba
+    ref: SW13
+  kind: push
+  element_axis:
+  - 0
+  - 0
+  - -1
+  travel_mm: 2.0
+  source: 'Kailh CPG151101D06 / Cherry MX datasheet: top-actuated (-Z), 2.0 mm pre-travel (4.0 mm total
+    travel)'
+- id: A_K14
+  feature: F_K14
+  case_part: keycaps
+  target:
+    part: pcba
+    ref: SW14
+  kind: push
+  element_axis:
+  - 0
+  - 0
+  - -1
+  travel_mm: 2.0
+  source: 'Kailh CPG151101D06 / Cherry MX datasheet: top-actuated (-Z), 2.0 mm pre-travel (4.0 mm total
+    travel)'
+- id: A_K15
+  feature: F_K15
+  case_part: keycaps
+  target:
+    part: pcba
+    ref: SW15
+  kind: push
+  element_axis:
+  - 0
+  - 0
+  - -1
+  travel_mm: 2.0
+  source: 'Kailh CPG151101D06 / Cherry MX datasheet: top-actuated (-Z), 2.0 mm pre-travel (4.0 mm total
+    travel)'
+- id: A_K16
+  feature: F_K16
+  case_part: keycaps
+  target:
+    part: pcba
+    ref: SW16
+  kind: push
+  element_axis:
+  - 0
+  - 0
+  - -1
+  travel_mm: 2.0
+  source: 'Kailh CPG151101D06 / Cherry MX datasheet: top-actuated (-Z), 2.0 mm pre-travel (4.0 mm total
+    travel)'
+- id: A_K17
+  feature: F_K17
+  case_part: keycaps
+  target:
+    part: pcba
+    ref: SW17
+  kind: push
+  element_axis:
+  - 0
+  - 0
+  - -1
+  travel_mm: 2.0
+  source: 'Kailh CPG151101D06 / Cherry MX datasheet: top-actuated (-Z), 2.0 mm pre-travel (4.0 mm total
+    travel)'
+- id: A_K18
+  feature: F_K18
+  case_part: keycaps
+  target:
+    part: pcba
+    ref: SW18
+  kind: push
+  element_axis:
+  - 0
+  - 0
+  - -1
+  travel_mm: 2.0
+  source: 'Kailh CPG151101D06 / Cherry MX datasheet: top-actuated (-Z), 2.0 mm pre-travel (4.0 mm total
+    travel)'
+- id: A_K19
+  feature: F_K19
+  case_part: keycaps
+  target:
+    part: pcba
+    ref: SW19
+  kind: push
+  element_axis:
+  - 0
+  - 0
+  - -1
+  travel_mm: 2.0
+  source: 'Kailh CPG151101D06 / Cherry MX datasheet: top-actuated (-Z), 2.0 mm pre-travel (4.0 mm total
+    travel)'
+- id: A_K20
+  feature: F_K20
+  case_part: keycaps
+  target:
+    part: pcba
+    ref: SW20
+  kind: push
+  element_axis:
+  - 0
+  - 0
+  - -1
+  travel_mm: 2.0
+  source: 'Kailh CPG151101D06 / Cherry MX datasheet: top-actuated (-Z), 2.0 mm pre-travel (4.0 mm total
+    travel)'
+- id: A_K21
+  feature: F_K21
+  case_part: keycaps
+  target:
+    part: pcba
+    ref: SW21
+  kind: push
+  element_axis:
+  - 0
+  - 0
+  - -1
+  travel_mm: 2.0
+  source: 'Kailh CPG151101D06 / Cherry MX datasheet: top-actuated (-Z), 2.0 mm pre-travel (4.0 mm total
+    travel)'
+- id: A_K22
+  feature: F_K22
+  case_part: keycaps
+  target:
+    part: pcba
+    ref: SW22
+  kind: push
+  element_axis:
+  - 0
+  - 0
+  - -1
+  travel_mm: 2.0
+  source: 'Kailh CPG151101D06 / Cherry MX datasheet: top-actuated (-Z), 2.0 mm pre-travel (4.0 mm total
+    travel)'
+- id: A_K23
+  feature: F_K23
+  case_part: keycaps
+  target:
+    part: pcba
+    ref: SW23
+  kind: push
+  element_axis:
+  - 0
+  - 0
+  - -1
+  travel_mm: 2.0
+  source: 'Kailh CPG151101D06 / Cherry MX datasheet: top-actuated (-Z), 2.0 mm pre-travel (4.0 mm total
+    travel)'
+- id: A_K24
+  feature: F_K24
+  case_part: keycaps
+  target:
+    part: pcba
+    ref: SW24
+  kind: push
+  element_axis:
+  - 0
+  - 0
+  - -1
+  travel_mm: 2.0
+  source: 'Kailh CPG151101D06 / Cherry MX datasheet: top-actuated (-Z), 2.0 mm pre-travel (4.0 mm total
+    travel)'
+- id: A_K25
+  feature: F_K25
+  case_part: keycaps
+  target:
+    part: pcba
+    ref: SW25
+  kind: push
+  element_axis:
+  - 0
+  - 0
+  - -1
+  travel_mm: 2.0
+  source: 'Kailh CPG151101D06 / Cherry MX datasheet: top-actuated (-Z), 2.0 mm pre-travel (4.0 mm total
+    travel)'
+- id: A_K26
+  feature: F_K26
+  case_part: keycaps
+  target:
+    part: pcba
+    ref: SW26
+  kind: push
+  element_axis:
+  - 0
+  - 0
+  - -1
+  travel_mm: 2.0
+  source: 'Kailh CPG151101D06 / Cherry MX datasheet: top-actuated (-Z), 2.0 mm pre-travel (4.0 mm total
+    travel)'
+- id: A_K27
+  feature: F_K27
+  case_part: keycaps
+  target:
+    part: pcba
+    ref: SW27
+  kind: push
+  element_axis:
+  - 0
+  - 0
+  - -1
+  travel_mm: 2.0
+  source: 'Kailh CPG151101D06 / Cherry MX datasheet: top-actuated (-Z), 2.0 mm pre-travel (4.0 mm total
+    travel)'
+- id: A_K28
+  feature: F_K28
+  case_part: keycaps
+  target:
+    part: pcba
+    ref: SW28
+  kind: push
+  element_axis:
+  - 0
+  - 0
+  - -1
+  travel_mm: 2.0
+  source: 'Kailh CPG151101D06 / Cherry MX datasheet: top-actuated (-Z), 2.0 mm pre-travel (4.0 mm total
+    travel)'
+- id: A_K29
+  feature: F_K29
+  case_part: keycaps
+  target:
+    part: pcba
+    ref: SW29
+  kind: push
+  element_axis:
+  - 0
+  - 0
+  - -1
+  travel_mm: 2.0
+  source: 'Kailh CPG151101D06 / Cherry MX datasheet: top-actuated (-Z), 2.0 mm pre-travel (4.0 mm total
+    travel)'
+- id: A_K30
+  feature: F_K30
+  case_part: keycaps
+  target:
+    part: pcba
+    ref: SW30
+  kind: push
+  element_axis:
+  - 0
+  - 0
+  - -1
+  travel_mm: 2.0
+  source: 'Kailh CPG151101D06 / Cherry MX datasheet: top-actuated (-Z), 2.0 mm pre-travel (4.0 mm total
+    travel)'
+- id: A_K31
+  feature: F_K31
+  case_part: keycaps
+  target:
+    part: pcba
+    ref: SW31
+  kind: push
+  element_axis:
+  - 0
+  - 0
+  - -1
+  travel_mm: 2.0
+  source: 'Kailh CPG151101D06 / Cherry MX datasheet: top-actuated (-Z), 2.0 mm pre-travel (4.0 mm total
+    travel)'
+- id: A_K32
+  feature: F_K32
+  case_part: keycaps
+  target:
+    part: pcba
+    ref: SW32
+  kind: push
+  element_axis:
+  - 0
+  - 0
+  - -1
+  travel_mm: 2.0
+  source: 'Kailh CPG151101D06 / Cherry MX datasheet: top-actuated (-Z), 2.0 mm pre-travel (4.0 mm total
+    travel)'
+- id: A_K33
+  feature: F_K33
+  case_part: keycaps
+  target:
+    part: pcba
+    ref: SW33
+  kind: push
+  element_axis:
+  - 0
+  - 0
+  - -1
+  travel_mm: 2.0
+  source: 'Kailh CPG151101D06 / Cherry MX datasheet: top-actuated (-Z), 2.0 mm pre-travel (4.0 mm total
+    travel)'
+- id: A_K34
+  feature: F_K34
+  case_part: keycaps
+  target:
+    part: pcba
+    ref: SW34
+  kind: push
+  element_axis:
+  - 0
+  - 0
+  - -1
+  travel_mm: 2.0
+  source: 'Kailh CPG151101D06 / Cherry MX datasheet: top-actuated (-Z), 2.0 mm pre-travel (4.0 mm total
+    travel)'
+- id: A_K35
+  feature: F_K35
+  case_part: keycaps
+  target:
+    part: pcba
+    ref: SW35
+  kind: push
+  element_axis:
+  - 0
+  - 0
+  - -1
+  travel_mm: 2.0
+  source: 'Kailh CPG151101D06 / Cherry MX datasheet: top-actuated (-Z), 2.0 mm pre-travel (4.0 mm total
+    travel)'
+- id: A_K36
+  feature: F_K36
+  case_part: keycaps
+  target:
+    part: pcba
+    ref: SW36
+  kind: push
+  element_axis:
+  - 0
+  - 0
+  - -1
+  travel_mm: 2.0
+  source: 'Kailh CPG151101D06 / Cherry MX datasheet: top-actuated (-Z), 2.0 mm pre-travel (4.0 mm total
+    travel)'
+- id: A_K37
+  feature: F_K37
+  case_part: keycaps
+  target:
+    part: pcba
+    ref: SW37
+  kind: push
+  element_axis:
+  - 0
+  - 0
+  - -1
+  travel_mm: 2.0
+  source: 'Kailh CPG151101D06 / Cherry MX datasheet: top-actuated (-Z), 2.0 mm pre-travel (4.0 mm total
+    travel)'
+- id: A_K38
+  feature: F_K38
+  case_part: keycaps
+  target:
+    part: pcba
+    ref: SW38
+  kind: push
+  element_axis:
+  - 0
+  - 0
+  - -1
+  travel_mm: 2.0
+  source: 'Kailh CPG151101D06 / Cherry MX datasheet: top-actuated (-Z), 2.0 mm pre-travel (4.0 mm total
+    travel)'
+- id: A_K39
+  feature: F_K39
+  case_part: keycaps
+  target:
+    part: pcba
+    ref: SW39
+  kind: push
+  element_axis:
+  - 0
+  - 0
+  - -1
+  travel_mm: 2.0
+  source: 'Kailh CPG151101D06 / Cherry MX datasheet: top-actuated (-Z), 2.0 mm pre-travel (4.0 mm total
+    travel)'
+- id: A_K40
+  feature: F_K40
+  case_part: keycaps
+  target:
+    part: pcba
+    ref: SW40
+  kind: push
+  element_axis:
+  - 0
+  - 0
+  - -1
+  travel_mm: 2.0
+  source: 'Kailh CPG151101D06 / Cherry MX datasheet: top-actuated (-Z), 2.0 mm pre-travel (4.0 mm total
+    travel)'
+- id: A_K41
+  feature: F_K41
+  case_part: keycaps
+  target:
+    part: pcba
+    ref: SW41
+  kind: push
+  element_axis:
+  - 0
+  - 0
+  - -1
+  travel_mm: 2.0
+  source: 'Kailh CPG151101D06 / Cherry MX datasheet: top-actuated (-Z), 2.0 mm pre-travel (4.0 mm total
+    travel)'
+- id: A_K42
+  feature: F_K42
+  case_part: keycaps
+  target:
+    part: pcba
+    ref: SW42
+  kind: push
+  element_axis:
+  - 0
+  - 0
+  - -1
+  travel_mm: 2.0
+  source: 'Kailh CPG151101D06 / Cherry MX datasheet: top-actuated (-Z), 2.0 mm pre-travel (4.0 mm total
+    travel)'
+- id: A_K43
+  feature: F_K43
+  case_part: keycaps
+  target:
+    part: pcba
+    ref: SW43
+  kind: push
+  element_axis:
+  - 0
+  - 0
+  - -1
+  travel_mm: 2.0
+  source: 'Kailh CPG151101D06 / Cherry MX datasheet: top-actuated (-Z), 2.0 mm pre-travel (4.0 mm total
+    travel)'
+- id: A_K44
+  feature: F_K44
+  case_part: keycaps
+  target:
+    part: pcba
+    ref: SW44
+  kind: push
+  element_axis:
+  - 0
+  - 0
+  - -1
+  travel_mm: 2.0
+  source: 'Kailh CPG151101D06 / Cherry MX datasheet: top-actuated (-Z), 2.0 mm pre-travel (4.0 mm total
+    travel)'
+- id: A_K45
+  feature: F_K45
+  case_part: keycaps
+  target:
+    part: pcba
+    ref: SW45
+  kind: push
+  element_axis:
+  - 0
+  - 0
+  - -1
+  travel_mm: 2.0
+  source: 'Kailh CPG151101D06 / Cherry MX datasheet: top-actuated (-Z), 2.0 mm pre-travel (4.0 mm total
+    travel)'
+- id: A_K46
+  feature: F_K46
+  case_part: keycaps
+  target:
+    part: pcba
+    ref: SW46
+  kind: push
+  element_axis:
+  - 0
+  - 0
+  - -1
+  travel_mm: 2.0
+  source: 'Kailh CPG151101D06 / Cherry MX datasheet: top-actuated (-Z), 2.0 mm pre-travel (4.0 mm total
+    travel)'
+- id: A_K47
+  feature: F_K47
+  case_part: keycaps
+  target:
+    part: pcba
+    ref: SW47
+  kind: push
+  element_axis:
+  - 0
+  - 0
+  - -1
+  travel_mm: 2.0
+  source: 'Kailh CPG151101D06 / Cherry MX datasheet: top-actuated (-Z), 2.0 mm pre-travel (4.0 mm total
+    travel)'
+- id: A_K48
+  feature: F_K48
+  case_part: keycaps
+  target:
+    part: pcba
+    ref: SW48
+  kind: push
+  element_axis:
+  - 0
+  - 0
+  - -1
+  travel_mm: 2.0
+  source: 'Kailh CPG151101D06 / Cherry MX datasheet: top-actuated (-Z), 2.0 mm pre-travel (4.0 mm total
+    travel)'
+- id: A_K49
+  feature: F_K49
+  case_part: keycaps
+  target:
+    part: pcba
+    ref: SW49
+  kind: push
+  element_axis:
+  - 0
+  - 0
+  - -1
+  travel_mm: 2.0
+  source: 'Kailh CPG151101D06 / Cherry MX datasheet: top-actuated (-Z), 2.0 mm pre-travel (4.0 mm total
+    travel)'
+- id: A_K50
+  feature: F_K50
+  case_part: keycaps
+  target:
+    part: pcba
+    ref: SW50
+  kind: push
+  element_axis:
+  - 0
+  - 0
+  - -1
+  travel_mm: 2.0
+  source: 'Kailh CPG151101D06 / Cherry MX datasheet: top-actuated (-Z), 2.0 mm pre-travel (4.0 mm total
+    travel)'
+- id: A_K51
+  feature: F_K51
+  case_part: keycaps
+  target:
+    part: pcba
+    ref: SW51
+  kind: push
+  element_axis:
+  - 0
+  - 0
+  - -1
+  travel_mm: 2.0
+  source: 'Kailh CPG151101D06 / Cherry MX datasheet: top-actuated (-Z), 2.0 mm pre-travel (4.0 mm total
+    travel)'
+- id: A_K52
+  feature: F_K52
+  case_part: keycaps
+  target:
+    part: pcba
+    ref: SW52
+  kind: push
+  element_axis:
+  - 0
+  - 0
+  - -1
+  travel_mm: 2.0
+  source: 'Kailh CPG151101D06 / Cherry MX datasheet: top-actuated (-Z), 2.0 mm pre-travel (4.0 mm total
+    travel)'
+- id: A_K53
+  feature: F_K53
+  case_part: keycaps
+  target:
+    part: pcba
+    ref: SW53
+  kind: push
+  element_axis:
+  - 0
+  - 0
+  - -1
+  travel_mm: 2.0
+  source: 'Kailh CPG151101D06 / Cherry MX datasheet: top-actuated (-Z), 2.0 mm pre-travel (4.0 mm total
+    travel)'
+- id: A_K54
+  feature: F_K54
+  case_part: keycaps
+  target:
+    part: pcba
+    ref: SW54
+  kind: push
+  element_axis:
+  - 0
+  - 0
+  - -1
+  travel_mm: 2.0
+  source: 'Kailh CPG151101D06 / Cherry MX datasheet: top-actuated (-Z), 2.0 mm pre-travel (4.0 mm total
+    travel)'
+- id: A_K55
+  feature: F_K55
+  case_part: keycaps
+  target:
+    part: pcba
+    ref: SW55
+  kind: push
+  element_axis:
+  - 0
+  - 0
+  - -1
+  travel_mm: 2.0
+  source: 'Kailh CPG151101D06 / Cherry MX datasheet: top-actuated (-Z), 2.0 mm pre-travel (4.0 mm total
+    travel)'
+- id: A_K56
+  feature: F_K56
+  case_part: keycaps
+  target:
+    part: pcba
+    ref: SW56
+  kind: push
+  element_axis:
+  - 0
+  - 0
+  - -1
+  travel_mm: 2.0
+  source: 'Kailh CPG151101D06 / Cherry MX datasheet: top-actuated (-Z), 2.0 mm pre-travel (4.0 mm total
+    travel)'
+- id: A_K57
+  feature: F_K57
+  case_part: keycaps
+  target:
+    part: pcba
+    ref: SW57
+  kind: push
+  element_axis:
+  - 0
+  - 0
+  - -1
+  travel_mm: 2.0
+  source: 'Kailh CPG151101D06 / Cherry MX datasheet: top-actuated (-Z), 2.0 mm pre-travel (4.0 mm total
+    travel)'
+- id: A_K58
+  feature: F_K58
+  case_part: keycaps
+  target:
+    part: pcba
+    ref: SW58
+  kind: push
+  element_axis:
+  - 0
+  - 0
+  - -1
+  travel_mm: 2.0
+  source: 'Kailh CPG151101D06 / Cherry MX datasheet: top-actuated (-Z), 2.0 mm pre-travel (4.0 mm total
+    travel)'
+- id: A_BOOTSEL
+  feature: F_BOOTSEL
+  case_part: bootsel_button
+  target:
+    part: pcba
+    ref: SW59
+  kind: push
+  element_axis:
+  - 0
+  - 0
+  - 1
+  travel_mm: 0.25
+  source: 'XKB TS-1187A-B-A-B / ALPS SKQG datasheet: bottom-mounted switch pressed upward (+Z) from underside,
+    0.25 mm travel'
+requirements:
+- id: R1
+  text: 'Stepped beige/warm-grey compact 58-key mechanical desktop keyboard (338x148x48 mm) with view
+    {up: [0,0,1], front: [0,-1,0]}'
+  how_met: 'Envelope 338.0 x 148.0 x 48.0 mm with desk orientation view {up: [0,0,1], front: [0,-1,0]}
+    and two-piece stepped beige enclosure (#e5dec9 / #d8d0c0)'
+  quantity: 338.0 x 148.0 x 48.0 mm
+- id: R2
+  text: 58 Cherry MX-style mechanical keyswitches (stock Button_Switch_Keyboard:SW_Cherry_MX_*_PCB footprints
+    with 3D models generated by rea_hardware.cad.keyswitch_model()) in classic 5-row 58-key layout
+  how_met: SW1..SW58 using Kailh CPG151101D06 (C49234237) on stock Button_Switch_Keyboard:SW_Cherry_MX_{1.00u,1.25u,1.50u,1.75u,2.00u,2.25u,2.75u,6.25u}_PCB
+    footprints across 5 rows (14+14+13+12+5 = 58 keys)
+  quantity: 58 switches, 5 rows
+- id: R3
+  text: Sculpted keycaps and legends (rea_hardware.cad.keycap(width_u, legend)) and one push actuator
+    per key
+  how_met: 58 keycaps in case/out/keycaps.stl with legends in case/out/keycaps_legends.stl and 58 push
+    actuators A_K01..A_K58 along [0, 0, -1]
+  quantity: 58 keycaps + 58 push actuators
+- id: R4
+  text: Full row/column diode matrix into an RP2040 MCU (with external QSPI flash, 12 MHz crystal, 3.3
+    V LDO from 5 V VBUS, and bottom-accessible BOOTSEL flashing button)
+  how_met: 5x14 diode matrix (58x 1N4148W C81598) into RP2040 (U1, C2040) with W25Q128JVSIQ 16 MB QSPI
+    flash (U2, C97521) and 10k QSPI_SS_N pull-up (R7, C25744), 12 MHz crystal (Y1, ABM8-272-T3, C20625731),
+    LDL1117S33R 18V-input low-IQ SOT-223-4 LDO (U3, C435835), 500 mA VBUS PTC fuse (F1, C910822) with
+    fuse-coordinated PTVS5V0S1UR-FS TVS clamp (D60, C5380694), and bottom tactile switch SW59 (C318884)
+    with actuator A_BOOTSEL
+  quantity: 1x RP2040, 58x 1N4148W, 1x 16MB QSPI, 1x 12MHz XTAL, 1x 3.3V LDO, 1x BOOTSEL button
+- id: R5
+  text: Connects to the desktop via a rear-edge USB-C receptacle (port P_KB_DEV) with 5.1k CC1/CC2 pull-downs,
+    ESD protection, and 90-ohm differential USB D+/D- routing
+  how_met: TYPE-C-31-M-12 (J1, C165948) on rear edge (+Y, feature P_KB_DEV) with 2x 5.1 kOhm pull-downs
+    (R1/R2, C25905), 100 nF high-frequency ESD decoupling on VBUS_RAW at J1 (C17, C1525), 500 mA PTC fuse
+    (F1, C910822), fuse-coordinated PTVS5V0S1UR-FS 5.0 V unidirectional TVS clamp on 5V_USB_KB (D60, C5380694),
+    USBLC6-2SC6 ESD array (U4, C2827654) immediately adjacent to J1 with pin 5 on 5V_USB_KB, 27 Ohm series
+    terminations (R3/R4, C25156), and 90 Ohm usb_dp_dm diff_pairs rule
+  quantity: 1x USB-C port (P_KB_DEV), 90 Ohm diff pair
+decisions:
+- question: Exact 5-row 58-key layout and unit widths?
+  choice: 'Row 1 (14 keys, 15u): 13x 1.0u (`~`, `1`..`0`, `-`, `=`) + 1x 2.0u (`Backspace`); Row 2 (14
+    keys, 15u): 1.5u `Tab` + 12x 1.0u (`Q`..`]`) + 1.5u `\`; Row 3 (13 keys, 15u): 1.75u `Caps Lock` +
+    11x 1.0u (`A`..`''`) + 2.25u `Return`; Row 4 (12 keys, 15u): 2.25u `Shift` + 10x 1.0u (`Z`..`/`) +
+    2.75u `Shift`; Row 5 (5 keys, indented 1.25u from left): 1.25u `Option` + 1.5u `Command` + 6.25u `Space`
+    + 1.5u `Enter` + 1.25u `Option`.'
+  reason: Matches the 58 keys and seam alignments visible in inputs/front.jpg and inputs/three_quarter_dark.jpg
+    while using stock KiCad Button_Switch_Keyboard:SW_Cherry_MX_*_PCB footprints.
+- question: Cherry MX footprint origin vs physical stem center alignment?
+  choice: In stock KiCad Button_Switch_Keyboard:SW_Cherry_MX_*_PCB footprints (and rea_hardware.cad.keyswitch_model()),
+    origin (0,0) is Pad 1 while the switch stem and 3D body center is at (-2.54, +5.08) mm in board coordinates
+    (rot_deg=0). Therefore board.placement sets (x_mm, y_mm) = (x_stem + 2.54, y_stem - 5.08) so that
+    the physical switch stem and 3D model center land exactly on each key's must_match feature center.
+  reason: Ensures zero XY offset between the 3D switch stems on the PCBA and the keycaps/openings centered
+    on fidelity.must_match.
+- question: Power budget and regulator thermal margin?
+  choice: 'VBUS_RAW (5.0 V from J1 with direct 5.1 kOhm 1% CC1/CC2 pull-downs R1/R2 C25905 to GND on F.Cu
+    with 0 vias and local 100 nF 16V X7R high-frequency ESD decoupling capacitor C17 C1525 placed immediately
+    adjacent to J1 ahead of F1) -> F1 (BSMD0805-050-24V 500 mA 24 V PTC resettable fuse, C910822, with
+    R_cold = 0.15-0.85 Ohm providing overcurrent limiting, series hot-plug LC damping, and fault isolation
+    for downstream shunt clamps) -> 5V_USB_KB (fused 5.0 V up to 0.5 A rail with USBLC6-2SC6 ESD array
+    U4 pin 5 VBUS reference, fuse-coordinated PTVS5V0S1UR-FS 400 W unidirectional TVS diode D60 C5380694
+    clamping overvoltage, reverse-polarity, and ESD transients downstream of F1 to <= 9.2 V, plus C1 =
+    2.2 uF 25V X7R C19110 adjacent to U3) -> LDL1117S33R SOT-223-4 LDO (U3, C435835, V_IN operating up
+    to 18 V / 20 V abs max >> 9.2 V ESD clamping transients, IQ = 250 uA typ / 500 uA max << 2.5 mA USB
+    suspend limit, V_DO = 350 mV typ at 1.2 A / < 150 mV at 250 mA so even at 4.40 V min USB VBUS and
+    0.25 A across post-trip F1 R_1max = 0.85 Ohm, V_IN = 4.188 V >> 3.55 V dropout threshold, and SOT-223-4
+    R_thetaJA ~ 60 C/W supporting the full 0.25 A continuous 3V3_KB specification with T_J < 65 C) ->
+    3V3_KB (C2 = 4.7 uF 25V X5R C1779 adjacent to U3). U3, C1, C2 sit in the monotonic power-entry path
+    between J1/U4/F1/D60 and U2/U1, while C3/C4 sit immediately adjacent to U1 pins 44/45 on F.Cu with
+    0 vias.'
+  reason: Retains C17 (100 nF) at J1 on VBUS_RAW for high-frequency ESD decoupling while placing both
+    D60 (PTVS5V0S1UR-FS) and U4.5 (USBLC6-2SC6 VBUS reference) downstream of PTC fuse F1 on 5V_USB_KB
+    for fuse-coordinated overvoltage/reverse-polarity clamping alongside 20 V abs-max LDO U3 (LDL1117S33R).
+- question: Firmware flashing mechanism?
+  choice: Bottom-accessible tactile button SW59 (feature F_BOOTSEL, actuator A_BOOTSEL) pulling QSPI_SS_N
+    low via 1 kOhm resistor R6 against 10 kOhm pull-up resistor R7 (C25744 to 3V3_KB) while plugging in
+    rear USB-C port P_KB_DEV.
+  reason: R7 keeps U2 ~{CS} pulled high to 3V3_KB during power-up/reset while SW59 + R6 divides QSPI_SS_N
+    to 0.30 V (< V_IL) when held to enter the RP2040 ROM UF2 USB mass-storage bootloader over P_KB_DEV.

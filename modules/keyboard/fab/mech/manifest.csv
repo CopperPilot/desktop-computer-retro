@@ -1,0 +1,5 @@
+part,files,process,material,finish,qty,bbox_mm,volume_cm3,mass_g,service
+bottom_shell,bottom_shell.stl,mjf,PA12,matte warm-grey / beige,1,338.0x148.0x16.5,187.68,189.6,JLC3DP MJF PA12
+bootsel_button,bootsel_button.stl,mjf,PA12,matte dark grey,1,7.4x7.4x12.2,0.27,0.3,JLC3DP MJF PA12
+top_shell,top_shell.stl,mjf,PA12,matte warm-grey / beige,1,338.0x148.0x27.5,146.93,148.4,JLC3DP MJF PA12
+keycaps,keycaps.stl,mjf,PA12,matte warm-beige sculpted keycaps,1,284.8x94.2x20.4,319.17,322.4,JLC3DP MJF PA12

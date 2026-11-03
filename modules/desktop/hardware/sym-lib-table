@@ -1,0 +1,5 @@
+(sym_lib_table
+  (version 7)
+  (lib (name "rea_refs")(type "KiCad")(uri "${KIPRJMOD}/rea_refs.kicad_sym")(options "")(descr "rea verified reference parts"))
+  (lib (name "lcsc")(type "KiCad")(uri "${KIPRJMOD}/lcsc.kicad_sym")(options "")(descr "parts from their LCSC/EasyEDA library entry"))
+)
