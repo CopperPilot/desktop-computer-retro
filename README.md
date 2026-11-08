@@ -64,7 +64,7 @@ Three separately built modules on one desk, joined by USB-C cables:
 
 ## Build film
 
-[docs/build-film.mp4](docs/build-film.mp4) (155 s, 1080p). Every part moves in the assembly order and along the insertion path that the collision gates checked, and every cable is drawn along its real route.
+[docs/build-film.mp4](docs/build-film.mp4) (155 s, 1080p). Every part backs out along the direction it was fitted and goes back in assembly order, and every cable is drawn along its real route. Every frame is replayed against the 3D models (no part passes through another, the camera stays outside, the product stays in frame and faces you, no flicker), and a separate critic watches the film ([notes](reviews/film.md)).
 
 ## Renders
 
