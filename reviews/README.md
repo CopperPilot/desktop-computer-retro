@@ -6,4 +6,5 @@
 - [Compact 58-key mechanical desktop keyboard: main board](review-keyboard-main.md): 0 P0, 0 P1, 1 P2
 - [Single-button rectangular optical USB mouse: main board](review-mouse-main.md): 0 P0, 0 P1, 0 P2
 - [Independent judge](judge.md): the build compared with the reference photos.
+- [Build film review](film.md): the film watched frame by frame by a separate critic.
 - [KiCad ERC and DRC](kicad): the raw JSON reports for every board.
